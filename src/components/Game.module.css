@@ -1,0 +1,56 @@
+.game{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    height:   100%;
+    width: 100%;
+}
+.cell1 { grid-column: 1; grid-row: 1; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell2 { grid-column: 1; grid-row: 2; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell3 { grid-column: 1; grid-row: 3; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell4 { grid-column: 1; grid-row: 4; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell5 { grid-column: 2; grid-row: 1; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell6 { grid-column: 2; grid-row: 2; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell7 { grid-column: 2; grid-row: 3; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell8 { grid-column: 2; grid-row: 4; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell9 { grid-column: 3; grid-row: 1; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell10{ grid-column: 3; grid-row: 2; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell11{ grid-column: 3; grid-row: 3; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell12{ grid-column: 3; grid-row: 4; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell13{ grid-column: 4; grid-row: 1; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell14{ grid-column: 4; grid-row: 2; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell15{ grid-column: 4; grid-row: 3; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.cell16{ grid-column: 4; grid-row: 4; background: antiquewhite; border: 3px solid beige; text-align: center;vertical-align: middle; padding-top: 30px}
+.bg2{
+    background:blue;
+}
+.bg4{
+    background: green;
+}
+.bg8{
+    background: hotpink;
+}
+.bg16{
+    background: chartreuse;
+}
+.bg32{
+    background: yellow;
+}
+.bg64{
+    background: lightblue;
+}
+.bg128{
+    background: orange;
+}
+.bg256{
+    background: indianred;
+}
+.bg512{
+    background: brown;
+}
+.bg1024{
+    background: fuchsia;
+}
+.bg2048{
+    background: chocolate;
+}
