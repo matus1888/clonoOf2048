@@ -1,7 +1,11 @@
 import {combineReducers, createStore} from "redux";
-import MainReducer from "../components/logic/mainReducer";
+import mainReducer from "./mainReducer";
 
-let reducers=combineReducers( {main:MainReducer})
-let store= createStore(reducers)
-window.store= store
-export default store
+let reducers=combineReducers({
+    main: mainReducer
+})
+let store=createStore(reducers);
+
+window.store= store;
+
+export default store;

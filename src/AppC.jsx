@@ -1,6 +1,8 @@
 import App from "./App";
 import {connect} from "react-redux";
-import {actCrDOWN, actCrLEFT, actCrRIGHT, actCrUP} from "./components/logic/mainReducer";
+import {actionCreatorDown, actionCreatorLeft, actionCreatorRight, actionCreatorUp} from "./redux/mainReducer";
+
+
 let mapStateToProps=(state)=>{
     return{
 
@@ -8,10 +10,10 @@ let mapStateToProps=(state)=>{
 }
 let mapDispatchToProps=(dispatch)=>{
     return{
-        up: ()=>dispatch(actCrUP()),
-        down: ()=>dispatch(actCrDOWN()),
-        left: ()=>dispatch(actCrLEFT()),
-        right: ()=>dispatch(actCrRIGHT()),
+        UP: ()=>dispatch(actionCreatorUp()),
+        DOWN: ()=>dispatch(actionCreatorDown()),
+        LEFT: ()=>dispatch(actionCreatorLeft()),
+        RIGHT: ()=>dispatch(actionCreatorRight()),
     }
 }
 

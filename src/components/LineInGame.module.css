@@ -1,0 +1,51 @@
+.b {
+    margin-top: 20px;
+    grid-area: b;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    background-color: yellow;
+    display: grid;
+    grid-template-areas: 'head' 'bodyField' 'leg';
+    grid-template-rows: 20% 80%;
+}
+
+.head {
+    grid-area: head;
+    background-color: pink;
+}
+
+.bodyField {
+    grid-area: bodyField;
+    width: 500px;
+    height: 500px;
+    background-color: chocolate;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.rowStyle {
+    background-color: #ff821c;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.cellStyle {
+    background-color: indianred;
+    border: 5px solid black;
+    border-radius: 10px;
+    display: flex;
+    font-weight: bold;
+    font-size: 200%;
+    transition: all 0.15s;
+}
+.p{
+   margin: auto;
+}
+.anime{
+    font-size: 100%;
+    margin: 10px;
+    transform:translate(125px, 0px);
+    transform-origin: 0px 0px 0px;
+    transform-origin: bottom;
+}
