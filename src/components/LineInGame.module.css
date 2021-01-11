@@ -37,15 +37,21 @@
     display: flex;
     font-weight: bold;
     font-size: 200%;
-    transition: all 0.15s;
+    transition: none ;
 }
 .p{
    margin: auto;
 }
 .anime{
     font-size: 100%;
-    margin: 10px;
     transform:translate(125px, 0px);
     transform-origin: 0px 0px 0px;
     transform-origin: bottom;
+    transition: all 0.15s;
+}
+
+.magic{
+    font-size: 100%;
+    margin: 40px;
+    transition: all 0.15s;
 }

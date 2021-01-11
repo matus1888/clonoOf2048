@@ -26,7 +26,9 @@ const Cell=(props)=>{
             }
         }
 return(
-    <div className={`${s.cellStyle} ${getColor(props.value)} ${props.animation&&s.anime}`}><p className={s.p}>{props.value}</p></div>
+    <div className={`   ${s.cellStyle} ${getColor(props.value)} 
+                        ${props.animation.changed&&props.animation.effect}`}>
+        <p className={s.p}>{props.value}</p></div>
 )
 }
 export default Cell

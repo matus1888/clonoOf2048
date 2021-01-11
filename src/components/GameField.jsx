@@ -1,35 +1,61 @@
 import s from "./LineInGame.module.css";
 import Cell from "./Cell";
 import React from "react";
+import {getAnimationEffect} from "./GameFieldLogic";
 
-const GameField=(props)=>{
-            return (<div className={s.bodyField}>
-                <div className={s.rowStyle}>
-                    <Cell value={props.currentState.oneRaw.one} animation={props.animationObject.oneRaw.one===1?true:false}/>
-                    <Cell value={props.currentState.oneRaw.two} animation={props.animationObject.oneRaw.two===1?true:false}/>
-                    <Cell value={props.currentState.oneRaw.three} animation={props.animationObject.oneRaw.three===1?true:false}/>
-                    <Cell value={props.currentState.oneRaw.four} animation={props.animationObject.oneRaw.four===1?true:false}/>
-                </div>
-                <div className={s.rowStyle}>
-                    <Cell value={props.currentState.twoRaw.one} animation={props.animationObject.twoRaw.one===1?true:false}/>
-                    <Cell value={props.currentState.twoRaw.two} animation={props.animationObject.twoRaw.two===1?true:false}/>
-                    <Cell value={props.currentState.twoRaw.three} animation={props.animationObject.twoRaw.three===1?true:false}/>
-                    <Cell value={props.currentState.twoRaw.four} animation={props.animationObject.twoRaw.four===1?true:false}/>
-                </div>
-                <div className={s.rowStyle}>
-                    <Cell value={props.currentState.threeRaw.one} animation={props.animationObject.threeRaw.one===1?true:false}/>
-                    <Cell value={props.currentState.threeRaw.two} animation={props.animationObject.threeRaw.two===1?true:false}/>
-                    <Cell value={props.currentState.threeRaw.three} animation={props.animationObject.threeRaw.three===1?true:false}/>
-                    <Cell value={props.currentState.threeRaw.four} animation={props.animationObject.threeRaw.four===1?true:false}/>
-                </div>
-                <div className={s.rowStyle}>
-                    <Cell value={props.currentState.fourRaw.one} animation={props.animationObject.fourRaw.one===1?true:false}/>
-                    <Cell value={props.currentState.fourRaw.two} animation={props.animationObject.fourRaw.two===1?true:false}/>
-                    <Cell value={props.currentState.fourRaw.three} animation={props.animationObject.fourRaw.three===1?true:false}/>
-                    <Cell value={props.currentState.fourRaw.four} animation={props.animationObject.fourRaw.four===1?true:false}/>
-                </div>
-            </div>)
+
+class GameField extends React.Component {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.animationObject.changed!==false) {
+           setTimeout(this.props.resetAnimation, 100)
+            console.log('componentDidUpdate')
         }
+    }
+    render() {
+        return (<div className={s.bodyField}>
+            <div className={s.rowStyle}>
+                <Cell value={this.props.currentState.oneRaw.one}
+                      animation={getAnimationEffect(this.props.animationObject.oneRaw.one)}/>
+                <Cell value={this.props.currentState.oneRaw.two}
+                      animation={getAnimationEffect(this.props.animationObject.oneRaw.two)}/>
+                <Cell value={this.props.currentState.oneRaw.three}
+                      animation={getAnimationEffect(this.props.animationObject.oneRaw.three)}/>
+                <Cell value={this.props.currentState.oneRaw.four}
+                      animation={getAnimationEffect(this.props.animationObject.oneRaw.four)}/>
+            </div>
+            <div className={s.rowStyle}>
+                <Cell value={this.props.currentState.twoRaw.one}
+                      animation={getAnimationEffect(this.props.animationObject.twoRaw.one) }/>
+                <Cell value={this.props.currentState.twoRaw.two}
+                      animation={getAnimationEffect(this.props.animationObject.twoRaw.two) }/>
+                <Cell value={this.props.currentState.twoRaw.three}
+                      animation={getAnimationEffect(this.props.animationObject.twoRaw.three)}/>
+                <Cell value={this.props.currentState.twoRaw.four}
+                      animation={getAnimationEffect(this.props.animationObject.twoRaw.four) }/>
+            </div>
+            <div className={s.rowStyle}>
+                <Cell value={this.props.currentState.threeRaw.one}
+                      animation={getAnimationEffect(this.props.animationObject.threeRaw.one) }/>
+                <Cell value={this.props.currentState.threeRaw.two}
+                      animation={getAnimationEffect(this.props.animationObject.threeRaw.two) }/>
+                <Cell value={this.props.currentState.threeRaw.three}
+                      animation={getAnimationEffect(this.props.animationObject.threeRaw.three)}/>
+                <Cell value={this.props.currentState.threeRaw.four}
+                      animation={getAnimationEffect(this.props.animationObject.threeRaw.four)}/>
+            </div>
+            <div className={s.rowStyle}>
+                <Cell value={this.props.currentState.fourRaw.one}
+                      animation={getAnimationEffect(this.props.animationObject.fourRaw.one) }/>
+                <Cell value={this.props.currentState.fourRaw.two}
+                      animation={getAnimationEffect(this.props.animationObject.fourRaw.one) }/>
+                <Cell value={this.props.currentState.fourRaw.three}
+                      animation={getAnimationEffect(this.props.animationObject.fourRaw.three)}/>
+                <Cell value={this.props.currentState.fourRaw.four}
+                      animation={getAnimationEffect(this.props.animationObject.fourRaw.four)}/>
+            </div>
+        </div>)
+    }
+}
 
 
 export default GameField
