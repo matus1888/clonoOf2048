@@ -6,6 +6,7 @@ const Cell=(props)=>{
     let getColor=(val)=>{
         let x= Math.log2(val)
             switch (x){
+                case 0:{return f.undefined}
                 case 1:{return f.one}
                 case 2:{return f.two}
                 case 3:{return f.three}

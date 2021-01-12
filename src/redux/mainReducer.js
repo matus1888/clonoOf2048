@@ -5,8 +5,9 @@ const RIGHT = 'right';
 const UP = 'up';
 const DOWN = 'down';
 const ANIME = 'anime';
-const ANIME_RESET = 'reset';
-const ANIME_RESET_EFFECT = 'resetEffect'
+const RESET_ALL = 'reset';
+const ANIME_RESET_EFFECT = 'resetEffect';
+const SET_CURRENT_STATE= 'setCurrentState';
 
 let initialState = {
     currentState:
@@ -46,14 +47,14 @@ let mainReducer = (state = initialState, action) => {
                 animationObject:
                     {
                         changed: true,
-                        oneRaw: {one: 2, two: 1, three: null, four: null},
-                        twoRaw: {one: 2, two: 1, three: null, four: null},
+                        oneRaw: {one: 1, two: 1, three: null, four: null},
+                        twoRaw: {one: 1, two: 1, three: null, four: null},
                         threeRaw: {one: null, two: null, three: null, four: null},
                         fourRaw: {one: null, two: null, three: null, four: null}
                     }
             }
         }
-        case ANIME_RESET: {
+        case RESET_ALL: {
             return initialState
         }
         case ANIME_RESET_EFFECT: {
@@ -68,7 +69,23 @@ let mainReducer = (state = initialState, action) => {
 
             }
         }
-
+        case SET_CURRENT_STATE: {
+            return {
+                ...state,
+                currentState: {
+                    oneRaw: {one: 0, two: 0, three: 4, four: 4},
+                    twoRaw: {one: 0, two: 32, three: 128, four: 128},
+                    threeRaw: {one: 512, two: 1024, three: 2048, four: 4096},
+                    fourRaw: {one: 8192, two: 16384, three: 32768, four: 65536}
+                },animationObject: {
+                    changed: true,
+                    oneRaw: {one: 2, two: null, three: null, four: null},
+                    twoRaw: {one: 2, two: null, three: null, four: null},
+                    threeRaw: {one: null, two: null, three: null, four: null},
+                    fourRaw: {one: null, two: null, three: null, four: null}
+                }
+            }
+        }
         default :
             return state
 
@@ -78,8 +95,9 @@ export const actionCreatorLeft = () => ({type: LEFT})
 export const actionCreatorRight = () => ({type: RIGHT})
 export const actionCreatorUp = () => ({type: UP})
 export const actionCreatorDown = () => ({type: DOWN})
-export const ACsetAnimation = () => ({type: ANIME})
-export const ACresetState = () => ({type: ANIME_RESET})
-export const ACresetAnimation = () => ({type: ANIME_RESET_EFFECT})
+export const ACSetAnimation = () => ({type: ANIME})
+export const ACResetState = () => ({type: RESET_ALL})
+export const ACResetAnimation = () => ({type: ANIME_RESET_EFFECT})
+export const ACSetCurrentState = () => ({type: SET_CURRENT_STATE})
 
 export default mainReducer;
