@@ -1,7 +1,8 @@
-import s from './LineInGame.module.css';
-const SLIDE = s.anime
+import s from "./cell/Cell.module.css"
+const SLIDE = s.slide
 const MAGIC = s.magic
-
+const S_SLIDE=s.slideAndDissolution
+const MINI=s.mini
 export let getAnimationEffect = (value) => {
     switch (value) {
         case 1: {
@@ -14,6 +15,18 @@ export let getAnimationEffect = (value) => {
             return {
                 changed: true,
                 effect: MAGIC
+            }
+        }
+        case 3:{
+            return {
+                changed: true,
+                effect: S_SLIDE
+            }
+        }
+        case 4:{
+            return {
+                changed: true,
+                effect: MINI
             }
         }
         default :

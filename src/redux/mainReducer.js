@@ -8,25 +8,35 @@ const ANIME = 'anime';
 const RESET_ALL = 'reset';
 const ANIME_RESET_EFFECT = 'resetEffect';
 const SET_CURRENT_STATE= 'setCurrentState';
+const SET_TIMEOUT='setTIMEOUT';
 
 let initialState = {
-    currentState:
-        {
-            oneRaw: {one: 2, two: 2, three: 2, four: 4},
-            twoRaw: {one: 32, two: 64, three: 64, four: 128},
-            threeRaw: {one: 512, two: 1024, three: 2048, four: 4096},
-            fourRaw: {one: 8192, two: 16384, three: 32768, four: 65536}
-        },
-    animationObject:
-        {
-            changed: false,
-            oneRaw: {one: null, two: null, three: null, four: null},
-            twoRaw: {one: null, two: null, three: null, four: null},
-            threeRaw: {one: null, two: null, three: null, four: null},
-            fourRaw: {one: null, two: null, three: null, four: null}
-        }
-}
 
+    oneRaw: {
+        one: {value: 2, anime: null, timeout:false},
+        two: {value: 2, anime: null, timeout:false},
+        three: {value: 2, anime: null,timeout:false},
+        four: {value: 4, anime: null,timeout:false}
+    },
+    twoRaw: {
+        one: {value: 32, anime: null, timeout:false},
+        two: {value: 64, anime: null, timeout:false},
+        three: {value: 64, anime: null, timeout:false},
+        four: {value: 128, anime: null, timeout:false}
+    },
+    threeRaw: {
+        one: {value: 256, anime: null, timeout:false},
+        two: {value: 512, anime:  null, timeout:false},
+        three: {value: 1024, anime: null, timeout:false},
+        four: {value: 2048, anime: null, timeout:false}
+    },
+    fourRaw: {
+        one: {value: 8192, anime:  null, timeout:false},
+        two: {value: 16384, anime:  null, timeout:false},
+        three: {value: 32768, anime: null, timeout:false},
+        four: {value: 65536, anime: null, timeout:false}
+    },
+}
 let mainReducer = (state = initialState, action) => {
     switch (action.type) {
         case LEFT: {
@@ -44,14 +54,30 @@ let mainReducer = (state = initialState, action) => {
         case ANIME: {
             return {
                 ...state,
-                animationObject:
-                    {
-                        changed: true,
-                        oneRaw: {one: 1, two: 1, three: null, four: null},
-                        twoRaw: {one: 1, two: 1, three: null, four: null},
-                        threeRaw: {one: null, two: null, three: null, four: null},
-                        fourRaw: {one: null, two: null, three: null, four: null}
-                    }
+                oneRaw: {
+                    one: {value: 2, anime: 1, timeout:false},
+                    two: {value: 2, anime: 1, timeout:false},
+                    three: {value: 2, anime: null,timeout:false},
+                    four: {value: 4, anime: null,timeout:false}
+                },
+                twoRaw: {
+                    one: {value: 32, anime: 1, timeout:false},
+                    two: {value: 64, anime: 1, timeout:false},
+                    three: {value: 64, anime: null, timeout:false},
+                    four: {value: 128, anime: null, timeout:false}
+                },
+                threeRaw: {
+                    one: {value: 256, anime: null, timeout:false},
+                    two: {value: 512, anime:  null, timeout:false},
+                    three: {value: 1024, anime: null, timeout:false},
+                    four: {value: 2048, anime: null, timeout:false}
+                },
+                fourRaw: {
+                    one: {value: 8192, anime:  null, timeout:false},
+                    two: {value: 16384, anime:  null, timeout:false},
+                    three: {value: 32768, anime: null, timeout:false},
+                    four: {value: 65536, anime: null, timeout:false}
+                }
             }
         }
         case RESET_ALL: {
@@ -59,30 +85,82 @@ let mainReducer = (state = initialState, action) => {
         }
         case ANIME_RESET_EFFECT: {
             return {
-                ...state, animationObject: {
-                    changed: false,
-                    oneRaw: {one: null, two: null, three: null, four: null},
-                    twoRaw: {one: null, two: null, three: null, four: null},
-                    threeRaw: {one: null, two: null, three: null, four: null},
-                    fourRaw: {one: null, two: null, three: null, four: null}
+                ...state,
+                oneRaw: {
+                    one:    {value: state.oneRaw.one.value,     anime: null, timeout:state.oneRaw.one.timeout},
+                    two:    {value: state.oneRaw.two.value,     anime: null, timeout:state.oneRaw.two.timeout},
+                    three:  {value: state.oneRaw.three.value,   anime: null, timeout:state.oneRaw.three.timeout},
+                    four:   {value: state.oneRaw.four.value,    anime: null, timeout:state.oneRaw.four.timeout}
+                },twoRaw: {
+                    one:    {value: state.twoRaw.one.value,     anime: null, timeout:state.twoRaw.one.timeout},
+                    two:    {value: state.twoRaw.two.value,     anime: null, timeout:state.twoRaw.two.timeout},
+                    three:  {value: state.twoRaw.three.value,   anime: null, timeout:state.twoRaw.three.timeout},
+                    four:   {value: state.twoRaw.four.value,    anime: null, timeout:state.twoRaw.four.timeout}
+                },threeRaw: {
+                    one:    {value: state.threeRaw.one.value,     anime: null, timeout:state.threeRaw.one.timeout},
+                    two:    {value: state.threeRaw.two.value,     anime: null, timeout:state.threeRaw.two.timeout},
+                    three:  {value: state.threeRaw.three.value,   anime: null, timeout:state.threeRaw.three.timeout},
+                    four:   {value: state.threeRaw.four.value,    anime: null, timeout:state.threeRaw.four.timeout}
+                },fourRaw: {
+                    one:    {value: state.fourRaw.one.value,     anime: null, timeout:state.fourRaw.one.timeout},
+                    two:    {value: state.fourRaw.two.value,     anime: null, timeout:state.fourRaw.two.timeout},
+                    three:  {value: state.fourRaw.three.value,   anime: null, timeout:state.fourRaw.three.timeout},
+                    four:   {value: state.fourRaw.four.value,    anime: null, timeout:state.fourRaw.four.timeout}
                 }
-
             }
         }
         case SET_CURRENT_STATE: {
             return {
                 ...state,
-                currentState: {
-                    oneRaw: {one: 0, two: 0, three: 4, four: 4},
-                    twoRaw: {one: 0, two: 32, three: 128, four: 128},
-                    threeRaw: {one: 512, two: 1024, three: 2048, four: 4096},
-                    fourRaw: {one: 8192, two: 16384, three: 32768, four: 65536}
-                },animationObject: {
-                    changed: true,
-                    oneRaw: {one: 2, two: null, three: null, four: null},
-                    twoRaw: {one: 2, two: null, three: null, four: null},
-                    threeRaw: {one: null, two: null, three: null, four: null},
-                    fourRaw: {one: null, two: null, three: null, four: null}
+                oneRaw: {
+                    one: {value: 0, anime: null, timeout:false},
+                    two: {value: 2, anime: null, timeout:true},
+                    three: {value: 4, anime: 2,timeout:false},
+                    four: {value: 4, anime: null,timeout:false}
+                },
+                twoRaw: {
+                    one: {value: 0, anime: null, timeout:false},
+                    two: {value: 32, anime: null, timeout:false},
+                    three: {value: 128, anime: 2, timeout:false},
+                    four: {value: 128, anime: null, timeout:false}
+                },
+                threeRaw: {
+                    one: {value: 256, anime: null, timeout:false},
+                    two: {value: 512, anime:  null, timeout:false},
+                    three: {value: 1024, anime: null, timeout:false},
+                    four: {value: 2048, anime: null, timeout:false}
+                },
+                fourRaw: {
+                    one: {value: 8192, anime:  null, timeout:false},
+                    two: {value: 16384, anime:  null, timeout:false},
+                    three: {value: 32768, anime: null, timeout:false},
+                    four: {value: 65536, anime: null, timeout:false}
+                }
+            }
+        }
+        case SET_TIMEOUT: {
+            return {
+                ...state, ...state,
+                oneRaw: {
+                    one:    {value: state.oneRaw.one.value,     anime: state.oneRaw.one.anime, timeout:null},
+                    two:    {value: state.oneRaw.two.value,     anime: state.oneRaw.two.anime, timeout:null},
+                    three:  {value: state.oneRaw.three.value,   anime: state.oneRaw.three.anime, timeout:null},
+                    four:   {value: state.oneRaw.four.value,    anime: state.oneRaw.four.anime, timeout:null}
+                },twoRaw: {
+                    one:    {value: state.twoRaw.one.value,     anime: state.twoRaw.one.anime, timeout:null},
+                    two:    {value: state.twoRaw.two.value,     anime: state.twoRaw.two.anime, timeout:null},
+                    three:  {value: state.twoRaw.three.value,   anime: state.twoRaw.three.anime, timeout:null},
+                    four:   {value: state.twoRaw.four.value,    anime: state.twoRaw.four.anime, timeout:null}
+                },threeRaw: {
+                    one:    {value: state.threeRaw.one.value,     anime: state.threeRaw.one.anime, timeout:null},
+                    two:    {value: state.threeRaw.two.value,     anime: state.threeRaw.two.anime, timeout:null},
+                    three:  {value: state.threeRaw.three.value,   anime: state.threeRaw.three.anime, timeout:null},
+                    four:   {value: state.threeRaw.four.value,    anime: state.threeRaw.four.anime, timeout:null}
+                },fourRaw: {
+                    one:    {value: state.fourRaw.one.value,     anime: state.fourRaw.one.anime, timeout:null},
+                    two:    {value: state.fourRaw.two.value,     anime: state.fourRaw.two.anime, timeout:null},
+                    three:  {value: state.fourRaw.three.value,   anime: state.fourRaw.three.anime, timeout:null},
+                    four:   {value: state.fourRaw.four.value,    anime: state.fourRaw.four.anime, timeout:null}
                 }
             }
         }
@@ -99,5 +177,6 @@ export const ACSetAnimation = () => ({type: ANIME})
 export const ACResetState = () => ({type: RESET_ALL})
 export const ACResetAnimation = () => ({type: ANIME_RESET_EFFECT})
 export const ACSetCurrentState = () => ({type: SET_CURRENT_STATE})
+export const ACSetTimeout=()=>({type: SET_TIMEOUT})
 
 export default mainReducer;

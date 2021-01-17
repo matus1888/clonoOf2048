@@ -19,39 +19,24 @@
     grid-area: bodyField;
     width: 500px;
     height: 500px;
-    background-color: chocolate;
     display: grid;
     grid-template-rows: repeat(4, 1fr);
+    background: url('../images/fon.jpg');
 }
 
 .rowStyle {
-    background-color: #ff821c;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
 
 .cellStyle {
-    background-color: indianred;
-    border: 5px solid black;
+    border: 3px solid #a19e9e;
     border-radius: 10px;
     display: flex;
     font-weight: bold;
-    font-size: 200%;
-    transition: none ;
+    margin: 2px;
+    font-size: 200%
 }
 .p{
    margin: auto;
-}
-.anime{
-    font-size: 100%;
-    transform:translate(125px, 0px);
-    transform-origin: 0px 0px 0px;
-    transform-origin: bottom;
-    transition: all 0.15s;
-}
-
-.magic{
-    font-size: 100%;
-    margin: 40px;
-    transition: all 0.15s;
 }

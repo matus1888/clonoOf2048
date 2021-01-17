@@ -1,18 +1,16 @@
 import {connect} from "react-redux";
 import GameField from "./GameField";
-import {ACResetAnimation} from "../redux/mainReducer";
+import {ACResetAnimation} from "../../redux/mainReducer";
 
 
 let mapStateToProps = (state) => {
     return {
-        currentState: state.main.currentState,
-        animationObject: state.main.animationObject
-
+        state: state.main,
     }
 }
 let mapDispatchToProps = (dispatch) => {
     return{
-        resetAnimation: ()=>dispatch(ACResetAnimation())
+        resetAnimation: ()=>dispatch(ACResetAnimation()),
     }
 }
 
