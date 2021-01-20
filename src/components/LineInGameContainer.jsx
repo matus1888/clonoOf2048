@@ -3,14 +3,16 @@ import {connect} from "react-redux";
 import {ACResetAnimation, ACResetState, ACSetAnimation, ACSetCurrentState, ACSetTimeout} from "../redux/mainReducer";
 
 let mapStateToProps=(state)=>{
-    return{}
+    return{
+        main: state.main
+    }
 }
 let mapDispatchToProps=(dispatch)=>{
     return{
         setAnimation:()=>dispatch(ACSetAnimation()),
         reset :()=>dispatch(ACResetState()),
         resetAnimation: ()=>dispatch(ACResetAnimation()),
-        setCurrentState: ()=>dispatch(ACSetCurrentState()),
+        setCurrentState: (newState)=>dispatch(ACSetCurrentState(newState)),
         setTimeout: ()=>dispatch(ACSetTimeout())
     }
 }

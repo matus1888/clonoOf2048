@@ -19,22 +19,22 @@ let initialState = {
         four: {value: 4, anime: null,timeout:false}
     },
     twoRaw: {
-        one: {value: 32, anime: null, timeout:false},
-        two: {value: 64, anime: null, timeout:false},
-        three: {value: 64, anime: null, timeout:false},
-        four: {value: 128, anime: null, timeout:false}
+        one: {value: 2, anime: null, timeout:false},
+        two: {value: 2, anime: null, timeout:false},
+        three: {value: 2, anime: null, timeout:false},
+        four: {value: 2, anime: null, timeout:false}
     },
     threeRaw: {
-        one: {value: 256, anime: null, timeout:false},
-        two: {value: 512, anime:  null, timeout:false},
-        three: {value: 1024, anime: null, timeout:false},
-        four: {value: 2048, anime: null, timeout:false}
+        one: {value: 2, anime: null, timeout:false},
+        two: {value: 2, anime:  null, timeout:false},
+        three: {value: 2, anime: null, timeout:false},
+        four: {value: 2, anime: null, timeout:false}
     },
     fourRaw: {
-        one: {value: 8192, anime:  null, timeout:false},
-        two: {value: 16384, anime:  null, timeout:false},
-        three: {value: 32768, anime: null, timeout:false},
-        four: {value: 65536, anime: null, timeout:false}
+        one: {value: 4, anime:  null, timeout:false},
+        two: {value: 4, anime:  null, timeout:false},
+        three: {value: 4, anime: null, timeout:false},
+        four: {value: 4, anime: null, timeout:false}
     },
 }
 let mainReducer = (state = initialState, action) => {
@@ -113,28 +113,28 @@ let mainReducer = (state = initialState, action) => {
             return {
                 ...state,
                 oneRaw: {
-                    one: {value: 0, anime: null, timeout:false},
-                    two: {value: 2, anime: null, timeout:true},
-                    three: {value: 4, anime: 2,timeout:false},
-                    four: {value: 4, anime: null,timeout:false}
+                    one: {value: action.newState.oneRaw.one.value, anime: action.newState.oneRaw.one.anime, timeout:action.newState.oneRaw.one.timeout},
+                    two: {value: action.newState.oneRaw.two.value, anime: action.newState.oneRaw.one.anime, timeout:action.newState.oneRaw.one.timeout},
+                    three: {value: action.newState.oneRaw.three.value, anime: action.newState.oneRaw.three.anime, timeout:action.newState.oneRaw.three.timeout},
+                    four: {value: action.newState.oneRaw.four.value, anime: action.newState.oneRaw.four.anime, timeout:action.newState.oneRaw.four.timeout}
                 },
                 twoRaw: {
-                    one: {value: 0, anime: null, timeout:false},
-                    two: {value: 32, anime: null, timeout:false},
-                    three: {value: 128, anime: 2, timeout:false},
-                    four: {value: 128, anime: null, timeout:false}
+                    one: {value: action.newState.twoRaw.one.value, anime: action.newState.twoRaw.one.anime, timeout:action.newState.twoRaw.one.timeout},
+                    two: {value: action.newState.twoRaw.two.value, anime: action.newState.twoRaw.two.anime, timeout:action.newState.twoRaw.two.timeout},
+                    three:{value: action.newState.twoRaw.three.value, anime: action.newState.twoRaw.three.anime, timeout:action.newState.twoRaw.three.timeout},
+                    four: {value: action.newState.twoRaw.four.value, anime:action.newState.twoRaw.four.anime, timeout:action.newState.twoRaw.four.timeout}
                 },
                 threeRaw: {
-                    one: {value: 256, anime: null, timeout:false},
-                    two: {value: 512, anime:  null, timeout:false},
-                    three: {value: 1024, anime: null, timeout:false},
-                    four: {value: 2048, anime: null, timeout:false}
+                    one: {value: action.newState.threeRaw.one.value, anime: action.newState.threeRaw.one.anime, timeout:action.newState.threeRaw.one.timeout},
+                    two: {value: action.newState.threeRaw.two.value, anime: action.newState.threeRaw.two.anime, timeout:action.newState.threeRaw.two.timeout},
+                    three:{value: action.newState.threeRaw.three.value, anime: action.newState.threeRaw.three.anime, timeout:action.newState.threeRaw.three.timeout},
+                    four: {value: action.newState.threeRaw.four.value, anime:action.newState.threeRaw.four.anime, timeout:action.newState.threeRaw.four.timeout}
                 },
                 fourRaw: {
-                    one: {value: 8192, anime:  null, timeout:false},
-                    two: {value: 16384, anime:  null, timeout:false},
-                    three: {value: 32768, anime: null, timeout:false},
-                    four: {value: 65536, anime: null, timeout:false}
+                    one: {value: action.newState.fourRaw.one.value, anime: action.newState.fourRaw.one.anime, timeout:action.newState.fourRaw.one.timeout},
+                    two: {value: action.newState.fourRaw.two.value, anime: action.newState.fourRaw.two.anime, timeout:action.newState.fourRaw.two.timeout},
+                    three:{value: action.newState.fourRaw.three.value, anime: action.newState.fourRaw.three.anime, timeout:action.newState.fourRaw.three.timeout},
+                    four: {value: action.newState.fourRaw.four.value, anime:action.newState.fourRaw.four.anime, timeout:action.newState.fourRaw.four.timeout}
                 }
             }
         }
@@ -176,7 +176,7 @@ export const actionCreatorDown = () => ({type: DOWN})
 export const ACSetAnimation = () => ({type: ANIME})
 export const ACResetState = () => ({type: RESET_ALL})
 export const ACResetAnimation = () => ({type: ANIME_RESET_EFFECT})
-export const ACSetCurrentState = () => ({type: SET_CURRENT_STATE})
+export const ACSetCurrentState = (newState) => ({type: SET_CURRENT_STATE, newState:newState})
 export const ACSetTimeout=()=>({type: SET_TIMEOUT})
 
 export default mainReducer;
