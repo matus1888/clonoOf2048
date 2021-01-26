@@ -40,11 +40,7 @@ export let getMatrixOnState = (state) => {
 
 }
 //сдвинуть строку
-export let rowSlide = (row) => {
-    console.log('input raw is')
-    console.log(row)
-
-//Сдвиг элементов,  если есть нули
+export let shiftRow= (row)=>{
     let thisRow = {
         one: 0, two: 0, three: 0, four: 0
     }
@@ -75,7 +71,16 @@ export let rowSlide = (row) => {
     } else {
         thisRow = {one: row.one, two: row.two, three: row.three, four: row.four}
     }
+    return thisRow
+}
+export let rowSlide = (row) => {
+    console.log('input raw is')
+    console.log(row)
+
+//Сдвиг элементов,  если есть нули
+
     //Объявление исходного ВАРИАНТА(он же ОТВЕТ если никакие условия НЕ сработают)
+    let thisRow=shiftRow(row)
     let returnedRow = {
         one: thisRow.one,
         two: thisRow.two,

@@ -2,12 +2,16 @@ import React from 'react'
 import s from './LineInGame.module.css';
 import GameFieldContainer from "./gameField/GameFieldContainer";
 import {DOWN, getMatrixOnState, LEFT, RIGHT, testRowSlide, UP} from "../redux/logic";
+import {testRowAnimationSlidePhaseOne} from "../redux/animationLogic";
 
 const LineInGame = (props) => {
-let SideEffect=()=> {
-    props.setAnimation()
-    setTimeout(() => props.setCurrentState(), 100)
-}
+    let testAnimationPhaseOne=()=>{
+        testRowAnimationSlidePhaseOne()
+    }
+// let SideEffect=()=> {
+//     props.setAnimation()
+//     setTimeout(() => props.setCurrentState(), 100)
+// }
  let rightKey=()=>{
     props.setCurrentState(RIGHT(props.main))
 }
@@ -24,7 +28,7 @@ let downKey=()=>{
     return (<div>
             <div className={s.b}>
                 <div className={s.head}>Header
-                    <button onClick={SideEffect}>animation phase1</button>
+                    <button onClick={testAnimationPhaseOne}>animationOneTestConsole</button>
                     <button onClick={rightKey}>test on RIGHT KEY</button>
                     <button onClick={leftKey}>test on LEFT KEY</button>
                     <button onClick={upKey}>test on UP KEY</button>
