@@ -7,7 +7,7 @@ import {getAnimationEffect} from "../GetAnimationEffect";
 class Cell extends React.Component {
 
 componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.animation===2){
+        if(this.props.animation===15){
             setTimeout(()=> {
                 console.log("сработал таймаут")
                 this.props.resetTimeout()

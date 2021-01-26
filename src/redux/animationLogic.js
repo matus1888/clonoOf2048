@@ -114,7 +114,7 @@ export let shiftRowGetAnimationOnePhase=(row)=> {
         //{x,x,x,x}
     } else {
         if((row.one===row.two)&&(row.three===row.four)){
-            thisAnimeRow = {one: 1, two: 0, three: 1, four: 0}
+            thisAnimeRow = {one: 2, two: 1, three: 1, four: 0}
         }else if(row.three===row.two){
             thisAnimeRow = {one: 1, two: 1, three: 0, four: 0}
         }

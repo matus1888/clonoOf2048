@@ -1,7 +1,7 @@
 import s from "./cell/Cell.module.css"
 const SLIDE = s.slide
-const MAGIC = s.magic
-const S_SLIDE=s.slideAndDissolution
+const SLIDE_2 = s.slide2
+const SLIDE_3 = s.slide3
 const MINI=s.mini
 export let getAnimationEffect = (value) => {
     switch (value) {
@@ -14,13 +14,13 @@ export let getAnimationEffect = (value) => {
         case 2: {
             return {
                 changed: true,
-                effect: MAGIC
+                effect: SLIDE_2
             }
         }
         case 3:{
             return {
                 changed: true,
-                effect: S_SLIDE
+                effect: SLIDE_3
             }
         }
         case 4:{

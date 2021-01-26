@@ -1,3 +1,5 @@
+import {shiftRowGetAnimationOnePhase} from './animationLogic';
+
 export let logicLeft = (matrix) => {
 
     return null;
@@ -251,7 +253,71 @@ let getUpRowsOutMatrix = (matrix) => {
     }
     return upMatrix
 }
-
+export let RIGHT_ANAMATION_STEP_ONE=(state)=>{
+    //1) get matrix animations:
+    let animationMatrix={
+        oneRaw:shiftRowGetAnimationOnePhase(
+            {
+                one: state.oneRaw.one.value,
+                two: state.oneRaw.two.value,
+                three: state.oneRaw.three.value,
+                four: state.oneRaw.four.value
+            }
+        ),
+        twoRaw:shiftRowGetAnimationOnePhase(
+            {
+                one: state.twoRaw.one.value,
+                two: state.twoRaw.two.value,
+                three: state.twoRaw.three.value,
+                four: state.twoRaw.four.value
+            }
+        ),
+        threeRaw:shiftRowGetAnimationOnePhase(
+            {
+                one: state.threeRaw.one.value,
+                two: state.threeRaw.two.value,
+                three: state.threeRaw.three.value,
+                four: state.threeRaw.four.value
+            }
+        ),
+        fourRaw:shiftRowGetAnimationOnePhase(
+            {
+                one: state.fourRaw.one.value,
+                two: state.fourRaw.two.value,
+                three: state.fourRaw.three.value,
+                four: state.fourRaw.four.value
+            }
+        )
+    }
+    //2)return state in matrix
+    return {
+        ...state,
+        oneRaw: {
+            one: {value: state.oneRaw.one.value,     anime: animationMatrix.oneRaw.one,  timeout: state.oneRaw.one.timeout},
+            two: {value: state.oneRaw.two.value,     anime:animationMatrix.oneRaw.two,   timeout: state.oneRaw.two.timeout},
+            three: {value: state.oneRaw.three.value, anime:animationMatrix.oneRaw.three, timeout: state.oneRaw.three.timeout},
+            four: {value: state.oneRaw.four.value,   anime:animationMatrix.oneRaw.four,  timeout: state.oneRaw.four.timeout}
+        },
+        twoRaw: {
+            one: {value: state.twoRaw.one.value,     anime: animationMatrix.twoRaw.one,  timeout: state.twoRaw.one.timeout},
+            two: {value: state.twoRaw.two.value,     anime:animationMatrix.twoRaw.two,   timeout: state.twoRaw.two.timeout},
+            three: {value: state.twoRaw.three.value, anime:animationMatrix.twoRaw.three, timeout: state.twoRaw.three.timeout},
+            four: {value: state.twoRaw.four.value,   anime:animationMatrix.twoRaw.four,  timeout: state.twoRaw.four.timeout}
+        },
+        threeRaw: {
+            one: {value: state.threeRaw.one.value,       anime: animationMatrix.threeRaw.one,  timeout: state.threeRaw.one.timeout},
+            two: {value: state.threeRaw.two.value,       anime:animationMatrix.threeRaw.two,   timeout: state.threeRaw.two.timeout},
+            three: {value: state.threeRaw.three.value,   anime:animationMatrix.threeRaw.three, timeout: state.threeRaw.three.timeout},
+            four: {value: state.threeRaw.four.value,     anime:animationMatrix.threeRaw.four,  timeout: state.threeRaw.four.timeout}
+        },
+        fourRaw: {
+            one: {value: state.fourRaw.one.value,        anime: animationMatrix.fourRaw.one,  timeout: state.fourRaw.one.timeout},
+            two: {value: state.fourRaw.two.value,        anime:animationMatrix.fourRaw.two,   timeout: state.fourRaw.two.timeout},
+            three: {value: state.fourRaw.three.value,    anime:animationMatrix.fourRaw.three, timeout: state.fourRaw.three.timeout},
+            four: {value: state.fourRaw.four.value,      anime:animationMatrix.fourRaw.four,  timeout: state.fourRaw.four.timeout}
+        }
+    }
+}
 export let RIGHT = (state) => {
     //1)get matrix  on state:
     let matrixOnState = getMatrixOnState(state);
@@ -264,33 +330,35 @@ export let RIGHT = (state) => {
         threeRaw: rowSlide(rotateMatrix.threeRaw),
         fourRaw: rowSlide(rotateMatrix.fourRaw)
     }
+
+
     //4) unRotateMatrix
     let unRotateMatrix = slideRotateMatrix
     //5) return state in parent
     return {
         ...state, oneRaw: {
-            one: {value: unRotateMatrix.oneRaw.one, anime: state.oneRaw.one.anime, timeout: state.oneRaw.one.timeout},
-            two: {value: unRotateMatrix.oneRaw.two, anime:state.oneRaw.two.anime,   timeout: state.oneRaw.two.timeout},
-            three: {value: unRotateMatrix.oneRaw.three, anime:state.oneRaw.three.anime, timeout: state.oneRaw.three.timeout},
-            four: {value: unRotateMatrix.oneRaw.four, anime:state.oneRaw.four.anime, timeout: state.oneRaw.four.timeout}
+            one: {value: unRotateMatrix.oneRaw.one,      anime: state.oneRaw.one.anime, timeout: state.oneRaw.one.timeout},
+            two: {value: unRotateMatrix.oneRaw.two,      anime:state.oneRaw.two.anime,   timeout: state.oneRaw.two.timeout},
+            three: {value: unRotateMatrix.oneRaw.three,  anime:state.oneRaw.three.anime, timeout: state.oneRaw.three.timeout},
+            four: {value: unRotateMatrix.oneRaw.four,    anime:state.oneRaw.four.anime, timeout: state.oneRaw.four.timeout}
         },
         twoRaw: {
-            one: {value: unRotateMatrix.twoRaw.one, anime: state.twoRaw.one.anime, timeout: state.twoRaw.one.timeout},
-            two: {value: unRotateMatrix.twoRaw.two, anime:state.twoRaw.two.anime,   timeout: state.twoRaw.two.timeout},
+            one: {value: unRotateMatrix.twoRaw.one,     anime: state.twoRaw.one.anime, timeout: state.twoRaw.one.timeout},
+            two: {value: unRotateMatrix.twoRaw.two,     anime:state.twoRaw.two.anime,   timeout: state.twoRaw.two.timeout},
             three: {value: unRotateMatrix.twoRaw.three, anime:state.twoRaw.three.anime, timeout: state.twoRaw.three.timeout},
-            four: {value: unRotateMatrix.twoRaw.four, anime:state.twoRaw.four.anime, timeout: state.twoRaw.four.timeout}
+            four: {value: unRotateMatrix.twoRaw.four,   anime:state.twoRaw.four.anime, timeout: state.twoRaw.four.timeout}
         },
         threeRaw: {
-            one: {value: unRotateMatrix.threeRaw.one, anime: state.threeRaw.one.anime, timeout: state.threeRaw.one.timeout},
-            two: {value: unRotateMatrix.threeRaw.two, anime:state.threeRaw.two.anime,   timeout: state.threeRaw.two.timeout},
-            three: {value: unRotateMatrix.threeRaw.three, anime:state.threeRaw.three.anime, timeout: state.threeRaw.three.timeout},
-            four: {value: unRotateMatrix.threeRaw.four, anime:state.threeRaw.four.anime, timeout: state.threeRaw.four.timeout}
+            one: {value: unRotateMatrix.threeRaw.one,       anime: state.threeRaw.one.anime, timeout: state.threeRaw.one.timeout},
+            two: {value: unRotateMatrix.threeRaw.two,       anime:state.threeRaw.two.anime,   timeout: state.threeRaw.two.timeout},
+            three: {value: unRotateMatrix.threeRaw.three,   anime:state.threeRaw.three.anime, timeout: state.threeRaw.three.timeout},
+            four: {value: unRotateMatrix.threeRaw.four,     anime:state.threeRaw.four.anime, timeout: state.threeRaw.four.timeout}
         },
         fourRaw: {
-            one: {value: unRotateMatrix.fourRaw.one, anime: state.fourRaw.one.anime, timeout: state.fourRaw.one.timeout},
-            two: {value: unRotateMatrix.fourRaw.two, anime:state.fourRaw.two.anime,   timeout: state.fourRaw.two.timeout},
-            three: {value: unRotateMatrix.fourRaw.three, anime:state.fourRaw.three.anime, timeout: state.fourRaw.three.timeout},
-            four: {value: unRotateMatrix.fourRaw.four, anime:state.fourRaw.four.anime, timeout: state.fourRaw.four.timeout}
+            one: {value: unRotateMatrix.fourRaw.one,        anime: state.fourRaw.one.anime, timeout: state.fourRaw.one.timeout},
+            two: {value: unRotateMatrix.fourRaw.two,        anime:state.fourRaw.two.anime,   timeout: state.fourRaw.two.timeout},
+            three: {value: unRotateMatrix.fourRaw.three,    anime:state.fourRaw.three.anime, timeout: state.fourRaw.three.timeout},
+            four: {value: unRotateMatrix.fourRaw.four,      anime:state.fourRaw.four.anime, timeout: state.fourRaw.four.timeout}
         }
     }
 }

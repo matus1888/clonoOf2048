@@ -140,7 +140,7 @@ let mainReducer = (state = initialState, action) => {
         }
         case SET_TIMEOUT: {
             return {
-                ...state, ...state,
+                ...state,
                 oneRaw: {
                     one:    {value: state.oneRaw.one.value,     anime: state.oneRaw.one.anime, timeout:null},
                     two:    {value: state.oneRaw.two.value,     anime: state.oneRaw.two.anime, timeout:null},
