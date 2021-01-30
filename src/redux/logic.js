@@ -46,26 +46,32 @@ export let shiftRow= (row)=>{
     let thisRow = {
         one: 0, two: 0, three: 0, four: 0
     }
+    //{x,x,0,0}
     if ((row.four === 0) && (row.three === 0)) {
         thisRow = {
             one: 0, two: 0, three: row.one, four: row.two
         }
+    //    {0,x,x,0}
     } else if ((row.two === 0) && (row.three === 0)) {
         thisRow = {
             one: 0, two: 0, three: row.one, four: row.four
         }
+        // {0,x,0,x}
     } else if ((row.two === 0) && (row.four === 0)) {
         thisRow = {
             one: 0, two: 0, three: row.one, four: row.three
         }
+    //    {x,x,x,0}
     } else if (row.four === 0) {
         thisRow = {
             one: 0, two: row.one, three: row.two, four: row.three
         }
+    //    {x,x,0,x}
     } else if (row.three === 0) {
         thisRow = {
             one: 0, two: row.one, three: row.two, four: row.four
         }
+    //    {x,0,x,x}
     } else if (row.two === 0) {
         thisRow = {
             one: 0, two: row.one, three: row.three, four: row.four

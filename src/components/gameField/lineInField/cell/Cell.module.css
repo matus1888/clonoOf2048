@@ -1,24 +1,25 @@
 .zero{
     opacity: 0%;
     margin: 30px;
+    transition: none;
 
 }
-.one{background-color:#f4fff0           ; transition: all 0.4s; z-index:1 }
-.two{background-color: #70ff6d          ; transition: all 0.4s; z-index:1 }
-.three{background-color:#e6ff8d         ; transition: all 0.4s; z-index:1 }
-.four{background-color:#7fffe6          ; transition: all 0.4s; z-index:1 }
-.five{background-color:#ff9f8b          ; transition: all 0.4s; z-index:1 }
-.six{background-color:#ff4f3d           ; transition: all 0.4s; z-index:1 }
-.seven{background-color:#ff1405         ; transition: all 0.4s; z-index:1 }
-.eight{background-color:#7e80ff         ; transition: all 0.4s; z-index:1 }
-.nine{background-color:#364cff          ; transition: all 0.4s; z-index:1 }
-.ten{background-color:#0518ff           ; transition: all 0.4s; z-index:1 }
-.eleven{background-color:#a0f8ff        ; transition: all 0.4s; z-index:1 }
-.twelve{background-color:#54fdff        ; transition: all 0.4s; z-index:1 }
-.thirteen{background-color:#09fffd      ; transition: all 0.4s; z-index:1 }
-.fourteen{background-color:#7cff7b      ; transition: all 0.4s; z-index:1 }
-.fifteen{background-color: #36ff25      ; transition: all 0.4s; z-index:1 }
-.sixteen{background-color: white        ; transition: all 0.4s; z-index:1 }
+.one{background-color:#f4fff0           ; transition: none; z-index:1 }
+.two{background-color: #70ff6d          ; transition: none; z-index:1 }
+.three{background-color:#e6ff8d         ; transition: none; z-index:1 }
+.four{background-color:#7fffe6          ; transition: none; z-index:1 }
+.five{background-color:#ff9f8b          ; transition: none; z-index:1 }
+.six{background-color:#ff4f3d           ; transition: none; z-index:1 }
+.seven{background-color:#ff1405         ; transition: none; z-index:1 }
+.eight{background-color:#7e80ff         ; transition: none; z-index:1 }
+.nine{background-color:#364cff          ; transition: none; z-index:1 }
+.ten{background-color:#0518ff           ; transition: none; z-index:1 }
+.eleven{background-color:#a0f8ff        ; transition: none; z-index:1 }
+.twelve{background-color:#54fdff        ; transition: none; z-index:1 }
+.thirteen{background-color:#09fffd      ; transition: none; z-index:1 }
+.fourteen{background-color:#7cff7b      ; transition: none; z-index:1 }
+.fifteen{background-color: #36ff25      ; transition: none; z-index:1 }
+.sixteen{background-color: white        ; transition: none; z-index:1 }
 
 .slideAndDissolution{
     transform: translate(125px);
@@ -31,6 +32,11 @@
     transform: translate(125px);
     z-index: 0;
     transition: transform 1s;
+
+}.slide0{
+    transform: translate(0px);
+    z-index: 0;
+    transition: transform 0s;
 
 }
 .slide2{
@@ -52,5 +58,5 @@
 }
 .unSlide{
     transform: translate(0px);
-    transition: all 0.2s;
+    transition: none;
 }

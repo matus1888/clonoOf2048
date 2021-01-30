@@ -3,8 +3,14 @@ const SLIDE = s.slide
 const SLIDE_2 = s.slide2
 const SLIDE_3 = s.slide3
 const MINI=s.mini
+const SLIDE_0=s.slide0
 export let getAnimationEffect = (value) => {
     switch (value) {
+        case 0: {
+            return {
+                changed: true, effect: SLIDE_0
+            }
+        }
         case 1: {
             return {
                 changed: true,
@@ -32,7 +38,7 @@ export let getAnimationEffect = (value) => {
         default :
             return {
                 changed: true,
-                effect: null
+                effect: SLIDE_0
             }
 
     }

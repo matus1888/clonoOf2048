@@ -3,14 +3,98 @@ import s from './LineInGame.module.css';
 import GameFieldContainer from "./gameField/GameFieldContainer";
 import {DOWN, getMatrixOnState, LEFT, RIGHT, RIGHT_ANAMATION_STEP_ONE, testRowSlide, UP} from "../redux/logic";
 import {shiftRowGetAnimationOnePhase, testRowAnimationSlidePhaseOne} from "../redux/animationLogic";
+import testMassive from "./testMassive";
 
 class LineInGame extends React.Component {
+    constructor(props) {
+        super(props);
+        this.startTicker=this.startTicker.bind(this);
+        this.testAnimationOneRowVisible=this.testAnimationOneRowVisible.bind(this);
+        this.startTickerTwoPhase=this.startTickerTwoPhase.bind(this);
+        this.state={massive:testMassive(), step:false}
+    }
+    startTickerTwoPhase(){
+        if(this.state.step=true){
+            console.log('set nulls')
+                this.props.setCurrentState({
+                    ...this.props.main, oneRaw: {
+                        one: {
+                            value: 0,
+                            anime: 0,
+                            timeout: this.props.main.oneRaw.one.timeout
+                        },
+                        two: {
+                            value: 0,
+                            anime: 0,
+                            timeout: this.props.main.oneRaw.two.timeout
+                        },
+                        three: {
+                            value: 0,
+                            anime: 0,
+                            timeout: this.props.main.oneRaw.three.timeout
+                        },
+                        four: {
+                            value: 0,
+                            anime: 0,
+                            timeout: this.props.main.oneRaw.four.timeout
+                        },
+                    }
+                })
+        }
+    }
+    startTicker() {
+            this.ticker = setInterval(this.testAnimationOneRowVisible, 2000)
+    }
+
+    testAnimationOneRowVisible (){
+        const {massive}=this.state
+        if (massive.length) {
+            const next = massive.shift();
+            this.setState({
+                ...this.state, massive, step:!this.state.step
+            });
+            let animationRow = shiftRowGetAnimationOnePhase(next)
+            console.log(next)
+            console.log(animationRow)
+            if(next==={one:32,two:32, three:32,four:32}){
+                clearInterval(this.ticker)
+            }
+            this.props.setCurrentState({
+                ...this.props.main, oneRaw: {
+                    one: {
+                        value: next.one,
+                        anime: animationRow.one,
+                        timeout: this.props.main.oneRaw.one.timeout
+                    },
+                    two: {
+                        value: next.two,
+                        anime: animationRow.two,
+                        timeout: this.props.main.oneRaw.two.timeout
+                    },
+                    three: {
+                        value: next.three,
+                        anime: animationRow.three,
+                        timeout: this.props.main.oneRaw.three.timeout
+                    },
+                    four: {
+                        value: next.four,
+                        anime: animationRow.four,
+                        timeout: this.props.main.oneRaw.four.timeout
+                    },
+                }
+            })
+            setTimeout(this.startTickerTwoPhase, 1800)
+
+        }
+
+    }
 
     render() {
         let testAnimationPhaseOne = () => {
             testRowAnimationSlidePhaseOne()
         }
-// let SideEffect=()=> {
+
+        // let SideEffect=()=> {
 //     props.setAnimation()
 //     setTimeout(() => props.setCurrentState(), 100)
 // }
@@ -28,53 +112,11 @@ class LineInGame extends React.Component {
         let downKey = () => {
             this.props.setCurrentState(DOWN(this.props.main))
         }
-        let testAnimationOneRowVisible = () => {
-            for (let x = 0; x < 3; x++) {
-                for (let y = 0; y < 3; y++) {
-                    for (let z = 0; z < 3; z++) {
-                        for (let c = 0; c < 3; c++) {
-                            let rowTest = {
-                                one: x * 2,
-                                two: y * 2,
-                                three: z * 2,
-                                four: c * 2
-                            }
-                            let animationRow = shiftRowGetAnimationOnePhase(rowTest)
-                            console.log(rowTest)
-                            this.props.setCurrentState({
-                                ...this.props.main, oneRaw: {
-                                    one: {
-                                        value: rowTest.one,
-                                        anime: animationRow.one,
-                                        timeout: this.props.main.oneRaw.one.timeout
-                                    },
-                                    two: {
-                                        value: rowTest.two,
-                                        anime: animationRow.two,
-                                        timeout: this.props.main.oneRaw.two.timeout
-                                    },
-                                    three: {
-                                        value: rowTest.three,
-                                        anime: animationRow.three,
-                                        timeout: this.props.main.oneRaw.three.timeout
-                                    },
-                                    four: {
-                                        value: rowTest.four,
-                                        anime: animationRow.four,
-                                        timeout: this.props.main.oneRaw.four.timeout
-                                    },
-                                }
-                            })
 
-                        }
-                    }
-                }
-            }
-        }
         return (<div>
                 <div className={s.b}>
                     <div className={s.head}>Header
-                        <button onClick={testAnimationOneRowVisible}>testAnimationOneRowVisible</button>
+                        <button onClick={this.startTicker}>testAnimationOneRowVisible</button>
                         <button onClick={rightKey}>test on RIGHT KEY</button>
                         <button onClick={leftKey}>test on LEFT KEY</button>
                         <button onClick={upKey}>test on UP KEY</button>

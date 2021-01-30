@@ -8,8 +8,16 @@ export let shiftRowGetAnimationOnePhase=(row)=> {
         thisAnimeRow = {
             one: 3, two: 0, three: 0, four: 0
         }
-        //{0,x,0,0}
-    }else if((row.two!==0)&&(row.one===0)&&(row.three===0)&&(row.four===0)){
+    }
+    // {0,0,0,0}
+    else if ((row.one === 0) && (row.two === 0) && (row.four === 0) && (row.three === 0)){
+        thisAnimeRow={one:0, two: 0, three: 0, four: 0 }
+    }// {0,0,0,x}
+    else if ((row.one === 0) && (row.two === 0) && (row.four !== 0) && (row.three === 0)){
+        thisAnimeRow={one:0, two: 0, three: 0, four: 0 }
+    }
+    //{0,x,0,0}
+    else if((row.two!==0)&&(row.one===0)&&(row.three===0)&&(row.four===0)){
         thisAnimeRow={
             one:0,two: 2, three:0, four: 0
         }
