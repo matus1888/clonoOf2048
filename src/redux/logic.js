@@ -1,4 +1,6 @@
 import {shiftRowGetAnimationOnePhase} from './animationLogic';
+// основные элементы это 4 функции LEFT RIGHT UP DOWN
+// отдаем стейт, получаем измененный стейт
 
 export let logicLeft = (matrix) => {
 

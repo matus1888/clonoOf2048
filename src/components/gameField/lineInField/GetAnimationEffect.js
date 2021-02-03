@@ -8,7 +8,8 @@ export let getAnimationEffect = (value) => {
     switch (value) {
         case 0: {
             return {
-                changed: true, effect: SLIDE_0
+                changed: true,
+                effect: SLIDE_0
             }
         }
         case 1: {
@@ -36,6 +37,7 @@ export let getAnimationEffect = (value) => {
             }
         }
         default :
+
             return {
                 changed: true,
                 effect: SLIDE_0

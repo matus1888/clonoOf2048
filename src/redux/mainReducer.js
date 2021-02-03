@@ -35,7 +35,7 @@ let initialState = {
         two: {value: 4, anime:  null, timeout:false},
         three: {value: 4, anime: null, timeout:false},
         four: {value: 4, anime: null, timeout:false}
-    },
+    }
 }
 let mainReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -114,7 +114,7 @@ let mainReducer = (state = initialState, action) => {
                 ...state,
                 oneRaw: {
                     one: {value: action.newState.oneRaw.one.value, anime: action.newState.oneRaw.one.anime, timeout:action.newState.oneRaw.one.timeout},
-                    two: {value: action.newState.oneRaw.two.value, anime: action.newState.oneRaw.one.anime, timeout:action.newState.oneRaw.one.timeout},
+                    two: {value: action.newState.oneRaw.two.value, anime: action.newState.oneRaw.two.anime, timeout:action.newState.oneRaw.two.timeout},
                     three: {value: action.newState.oneRaw.three.value, anime: action.newState.oneRaw.three.anime, timeout:action.newState.oneRaw.three.timeout},
                     four: {value: action.newState.oneRaw.four.value, anime: action.newState.oneRaw.four.anime, timeout:action.newState.oneRaw.four.timeout}
                 },
