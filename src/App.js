@@ -1,6 +1,5 @@
 import React from "react";
 import LineInGameContainer from "./components/LineInGameContainer";
-import {rightKey} from "./components/LineInGame";
 
 
 class App extends React.Component {

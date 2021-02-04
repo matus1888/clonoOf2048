@@ -13,6 +13,7 @@ let mapDispatchToProps=(dispatch)=>{
         reset :()=>dispatch(ACResetState()),
         resetAnimation: ()=>dispatch(ACResetAnimation()),
         setCurrentState: (newState)=>dispatch(ACSetCurrentState(newState)),
+        resetState: ()=>()=>dispatch(ACResetState()),
         setTimeout: ()=>dispatch(ACSetTimeout())
     }
 }

@@ -31,7 +31,7 @@
 .slide{
     transform: translate(125px);
     z-index: 0;
-    transition: transform 1s;
+    transition: transform 0.5s;
 
 }
 .slide0{
@@ -43,18 +43,18 @@
 .slide2{
     transform: translate(250px);
     z-index: 0;
-    transition: transform 1s;
+    transition: transform 0.5s;
 
 }
 .slide3{
     transform: translate(375px);
     z-index: 0;
-    transition: transform 1s;
+    transition: transform 0.5s;
 
 }
 .mini{
-    margin: 30px;
-    transition: none;
+    margin: -7px;
+    transition: all 0.1s;
 
 }
 .unSlide{
