@@ -1,6 +1,6 @@
 import LineInGame from "./LineInGame";
 import {connect} from "react-redux";
-import {ACResetAnimation, ACResetState, ACSetAnimation, ACSetCurrentState, ACSetTimeout} from "../redux/mainReducer";
+import {ACResetAnimation, ACResetState, ACSetCurrentState} from "../redux/mainReducer";
 
 let mapStateToProps=(state)=>{
     return{
@@ -9,12 +9,9 @@ let mapStateToProps=(state)=>{
 }
 let mapDispatchToProps=(dispatch)=>{
     return{
-        setAnimation:()=>dispatch(ACSetAnimation()),
         reset :()=>dispatch(ACResetState()),
         resetAnimation: ()=>dispatch(ACResetAnimation()),
         setCurrentState: (newState)=>dispatch(ACSetCurrentState(newState)),
-        resetState: ()=>()=>dispatch(ACResetState()),
-        setTimeout: ()=>dispatch(ACSetTimeout())
     }
 }
 

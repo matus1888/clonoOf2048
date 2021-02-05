@@ -341,28 +341,28 @@ export let RIGHT = (state) => {
     //5) return state in parent
     return {
         ...state, oneRaw: {
-            one: {value: unRotateMatrix.oneRaw.one,      anime: state.oneRaw.one.anime, timeout: state.oneRaw.one.timeout},
-            two: {value: unRotateMatrix.oneRaw.two,      anime: state.oneRaw.two.anime,   timeout: state.oneRaw.two.timeout},
-            three: {value: unRotateMatrix.oneRaw.three,  anime: state.oneRaw.three.anime, timeout: state.oneRaw.three.timeout},
-            four: {value: unRotateMatrix.oneRaw.four,    anime: state.oneRaw.four.anime, timeout: state.oneRaw.four.timeout}
+            one: {value: unRotateMatrix.oneRaw.one,      anime: state.oneRaw.one.anime},
+            two: {value: unRotateMatrix.oneRaw.two,      anime: state.oneRaw.two.anime},
+            three: {value: unRotateMatrix.oneRaw.three,  anime: state.oneRaw.three.anime},
+            four: {value: unRotateMatrix.oneRaw.four,    anime: state.oneRaw.four.anime}
         },
         twoRaw: {
-            one: {value: unRotateMatrix.twoRaw.one,     anime: state.twoRaw.one.anime, timeout: state.twoRaw.one.timeout},
-            two: {value: unRotateMatrix.twoRaw.two,     anime:state.twoRaw.two.anime,   timeout: state.twoRaw.two.timeout},
-            three: {value: unRotateMatrix.twoRaw.three, anime:state.twoRaw.three.anime, timeout: state.twoRaw.three.timeout},
-            four: {value: unRotateMatrix.twoRaw.four,   anime:state.twoRaw.four.anime, timeout: state.twoRaw.four.timeout}
+            one: {value: unRotateMatrix.twoRaw.one,     anime: state.twoRaw.one.anime},
+            two: {value: unRotateMatrix.twoRaw.two,     anime:state.twoRaw.two.anime},
+            three: {value: unRotateMatrix.twoRaw.three, anime:state.twoRaw.three.anime},
+            four: {value: unRotateMatrix.twoRaw.four,   anime:state.twoRaw.four.anime}
         },
         threeRaw: {
-            one: {value: unRotateMatrix.threeRaw.one,       anime: state.threeRaw.one.anime, timeout: state.threeRaw.one.timeout},
-            two: {value: unRotateMatrix.threeRaw.two,       anime:state.threeRaw.two.anime,   timeout: state.threeRaw.two.timeout},
-            three: {value: unRotateMatrix.threeRaw.three,   anime:state.threeRaw.three.anime, timeout: state.threeRaw.three.timeout},
-            four: {value: unRotateMatrix.threeRaw.four,     anime:state.threeRaw.four.anime, timeout: state.threeRaw.four.timeout}
+            one: {value: unRotateMatrix.threeRaw.one,       anime: state.threeRaw.one.anime},
+            two: {value: unRotateMatrix.threeRaw.two,       anime:state.threeRaw.two.anime},
+            three: {value: unRotateMatrix.threeRaw.three,   anime:state.threeRaw.three.anime},
+            four: {value: unRotateMatrix.threeRaw.four,     anime:state.threeRaw.four.anime}
         },
         fourRaw: {
-            one: {value: unRotateMatrix.fourRaw.one,        anime: state.fourRaw.one.anime, timeout: state.fourRaw.one.timeout},
-            two: {value: unRotateMatrix.fourRaw.two,        anime:state.fourRaw.two.anime,   timeout: state.fourRaw.two.timeout},
-            three: {value: unRotateMatrix.fourRaw.three,    anime:state.fourRaw.three.anime, timeout: state.fourRaw.three.timeout},
-            four: {value: unRotateMatrix.fourRaw.four,      anime:state.fourRaw.four.anime, timeout: state.fourRaw.four.timeout}
+            one: {value: unRotateMatrix.fourRaw.one,        anime: state.fourRaw.one.anime},
+            two: {value: unRotateMatrix.fourRaw.two,        anime:state.fourRaw.two.anime},
+            three: {value: unRotateMatrix.fourRaw.three,    anime:state.fourRaw.three.anime},
+            four: {value: unRotateMatrix.fourRaw.four,      anime:state.fourRaw.four.anime}
         }
     }
 }
@@ -383,28 +383,28 @@ export let LEFT = (state) => {
     //5) return state in parent
     return {
         ...state, oneRaw: {
-            one: {value: unRotateMatrix.oneRaw.one, anime: state.oneRaw.one.anime, timeout: state.oneRaw.one.timeout},
-            two: {value: unRotateMatrix.oneRaw.two, anime:state.oneRaw.two.anime,   timeout: state.oneRaw.two.timeout},
-            three: {value: unRotateMatrix.oneRaw.three, anime:state.oneRaw.three.anime, timeout: state.oneRaw.three.timeout},
-            four: {value: unRotateMatrix.oneRaw.four, anime:state.oneRaw.four.anime, timeout: state.oneRaw.four.timeout}
+            one: {value: unRotateMatrix.oneRaw.one, anime: state.oneRaw.one.anime},
+            two: {value: unRotateMatrix.oneRaw.two, anime:state.oneRaw.two.anime},
+            three: {value: unRotateMatrix.oneRaw.three, anime:state.oneRaw.three.anime},
+            four: {value: unRotateMatrix.oneRaw.four, anime:state.oneRaw.four.anime}
         },
         twoRaw: {
-            one: {value: unRotateMatrix.twoRaw.one, anime: state.twoRaw.one.anime, timeout: state.twoRaw.one.timeout},
-            two: {value: unRotateMatrix.twoRaw.two, anime:state.twoRaw.two.anime,   timeout: state.twoRaw.two.timeout},
-            three: {value: unRotateMatrix.twoRaw.three, anime:state.twoRaw.three.anime, timeout: state.twoRaw.three.timeout},
-            four: {value: unRotateMatrix.twoRaw.four, anime:state.twoRaw.four.anime, timeout: state.twoRaw.four.timeout}
+            one: {value: unRotateMatrix.twoRaw.one, anime: state.twoRaw.one.anime},
+            two: {value: unRotateMatrix.twoRaw.two, anime:state.twoRaw.two.anime},
+            three: {value: unRotateMatrix.twoRaw.three, anime:state.twoRaw.three.anime},
+            four: {value: unRotateMatrix.twoRaw.four, anime:state.twoRaw.four.anime}
         },
         threeRaw: {
-            one: {value: unRotateMatrix.threeRaw.one, anime: state.threeRaw.one.anime, timeout: state.threeRaw.one.timeout},
-            two: {value: unRotateMatrix.threeRaw.two, anime:state.threeRaw.two.anime,   timeout: state.threeRaw.two.timeout},
-            three: {value: unRotateMatrix.threeRaw.three, anime:state.threeRaw.three.anime, timeout: state.threeRaw.three.timeout},
-            four: {value: unRotateMatrix.threeRaw.four, anime:state.threeRaw.four.anime, timeout: state.threeRaw.four.timeout}
+            one: {value: unRotateMatrix.threeRaw.one, anime: state.threeRaw.one.anime},
+            two: {value: unRotateMatrix.threeRaw.two, anime:state.threeRaw.two.anime},
+            three: {value: unRotateMatrix.threeRaw.three, anime:state.threeRaw.three.anime},
+            four: {value: unRotateMatrix.threeRaw.four, anime:state.threeRaw.four.anime}
         },
         fourRaw: {
-            one: {value: unRotateMatrix.fourRaw.one, anime: state.fourRaw.one.anime, timeout: state.fourRaw.one.timeout},
-            two: {value: unRotateMatrix.fourRaw.two, anime:state.fourRaw.two.anime,   timeout: state.fourRaw.two.timeout},
-            three: {value: unRotateMatrix.fourRaw.three, anime:state.fourRaw.three.anime, timeout: state.fourRaw.three.timeout},
-            four: {value: unRotateMatrix.fourRaw.four, anime:state.fourRaw.four.anime, timeout: state.fourRaw.four.timeout}
+            one: {value: unRotateMatrix.fourRaw.one, anime: state.fourRaw.one.anime},
+            two: {value: unRotateMatrix.fourRaw.two, anime:state.fourRaw.two.anime},
+            three: {value: unRotateMatrix.fourRaw.three, anime:state.fourRaw.three.anime},
+            four: {value: unRotateMatrix.fourRaw.four, anime:state.fourRaw.four.anime}
         }
     }
 }
@@ -424,28 +424,28 @@ export let UP = (state) => {
     //5) return state in parent
     return {
         ...state, oneRaw: {
-            one: {value: slideRotateMatrix.oneRaw.four, anime: state.oneRaw.one.anime, timeout: state.oneRaw.one.timeout},
-            two: {value: slideRotateMatrix.twoRaw.four, anime:state.oneRaw.two.anime,   timeout: state.oneRaw.two.timeout},
-            three: {value: slideRotateMatrix.threeRaw.four, anime:state.oneRaw.three.anime, timeout: state.oneRaw.three.timeout},
-            four: {value: slideRotateMatrix.fourRaw.four, anime:state.oneRaw.four.anime, timeout: state.oneRaw.four.timeout}
+            one: {value: slideRotateMatrix.oneRaw.four, anime: state.oneRaw.one.anime},
+            two: {value: slideRotateMatrix.twoRaw.four, anime:state.oneRaw.two.anime},
+            three: {value: slideRotateMatrix.threeRaw.four, anime:state.oneRaw.three.anime},
+            four: {value: slideRotateMatrix.fourRaw.four, anime:state.oneRaw.four.anime}
         },
         twoRaw: {
-            one: {value: slideRotateMatrix.oneRaw.three, anime: state.twoRaw.one.anime, timeout: state.twoRaw.one.timeout},
-            two: {value: slideRotateMatrix.twoRaw.three, anime:state.twoRaw.two.anime,   timeout: state.twoRaw.two.timeout},
-            three: {value: slideRotateMatrix.threeRaw.three, anime:state.twoRaw.three.anime, timeout: state.twoRaw.three.timeout},
-            four: {value: slideRotateMatrix.fourRaw.three, anime:state.twoRaw.four.anime, timeout: state.twoRaw.four.timeout}
+            one: {value: slideRotateMatrix.oneRaw.three, anime: state.twoRaw.one.anime},
+            two: {value: slideRotateMatrix.twoRaw.three, anime:state.twoRaw.two.anime},
+            three: {value: slideRotateMatrix.threeRaw.three, anime:state.twoRaw.three.anime},
+            four: {value: slideRotateMatrix.fourRaw.three, anime:state.twoRaw.four.anime}
         },
         threeRaw: {
-            one: {value: slideRotateMatrix.oneRaw.two, anime: state.threeRaw.one.anime, timeout: state.threeRaw.one.timeout},
-            two: {value: slideRotateMatrix.twoRaw.two, anime:state.threeRaw.two.anime,   timeout: state.threeRaw.two.timeout},
-            three: {value: slideRotateMatrix.threeRaw.two, anime:state.threeRaw.three.anime, timeout: state.threeRaw.three.timeout},
-            four: {value: slideRotateMatrix.fourRaw.two, anime:state.threeRaw.four.anime, timeout: state.threeRaw.four.timeout}
+            one: {value: slideRotateMatrix.oneRaw.two, anime: state.threeRaw.one.anime},
+            two: {value: slideRotateMatrix.twoRaw.two, anime:state.threeRaw.two.anime},
+            three: {value: slideRotateMatrix.threeRaw.two, anime:state.threeRaw.three.anime},
+            four: {value: slideRotateMatrix.fourRaw.two, anime:state.threeRaw.four.anime}
         },
         fourRaw: {
-            one: {value: slideRotateMatrix.oneRaw.one, anime: state.fourRaw.one.anime, timeout: state.fourRaw.one.timeout},
-            two: {value: slideRotateMatrix.twoRaw.one, anime:state.fourRaw.two.anime,   timeout: state.fourRaw.two.timeout},
-            three: {value: slideRotateMatrix.threeRaw.one, anime:state.fourRaw.three.anime, timeout: state.fourRaw.three.timeout},
-            four: {value: slideRotateMatrix.fourRaw.one, anime:state.fourRaw.four.anime, timeout: state.fourRaw.four.timeout}
+            one: {value: slideRotateMatrix.oneRaw.one, anime: state.fourRaw.one.anime},
+            two: {value: slideRotateMatrix.twoRaw.one, anime:state.fourRaw.two.anime},
+            three: {value: slideRotateMatrix.threeRaw.one, anime:state.fourRaw.three.anime},
+            four: {value: slideRotateMatrix.fourRaw.one, anime:state.fourRaw.four.anime}
         }
     }
 }
@@ -466,28 +466,28 @@ export let DOWN = (state) => {
     //5) return state in parent
     return {
         ...state, oneRaw: {
-            one: {value: unRotateMatrix.oneRaw.one, anime: state.oneRaw.one.anime, timeout: state.oneRaw.one.timeout},
-            two: {value: unRotateMatrix.oneRaw.two, anime:state.oneRaw.two.anime,   timeout: state.oneRaw.two.timeout},
-            three: {value: unRotateMatrix.oneRaw.three, anime:state.oneRaw.three.anime, timeout: state.oneRaw.three.timeout},
-            four: {value: unRotateMatrix.oneRaw.four, anime:state.oneRaw.four.anime, timeout: state.oneRaw.four.timeout}
+            one: {value: unRotateMatrix.oneRaw.one, anime: state.oneRaw.one.anime},
+            two: {value: unRotateMatrix.oneRaw.two, anime:state.oneRaw.two.anime},
+            three: {value: unRotateMatrix.oneRaw.three, anime:state.oneRaw.three.anime},
+            four: {value: unRotateMatrix.oneRaw.four, anime:state.oneRaw.four.anime}
         },
         twoRaw: {
-            one: {value: unRotateMatrix.twoRaw.one, anime: state.twoRaw.one.anime, timeout: state.twoRaw.one.timeout},
-            two: {value: unRotateMatrix.twoRaw.two, anime:state.twoRaw.two.anime,   timeout: state.twoRaw.two.timeout},
-            three: {value: unRotateMatrix.twoRaw.three, anime:state.twoRaw.three.anime, timeout: state.twoRaw.three.timeout},
-            four: {value: unRotateMatrix.twoRaw.four, anime:state.twoRaw.four.anime, timeout: state.twoRaw.four.timeout}
+            one: {value: unRotateMatrix.twoRaw.one, anime: state.twoRaw.one.anime},
+            two: {value: unRotateMatrix.twoRaw.two, anime:state.twoRaw.two.anime},
+            three: {value: unRotateMatrix.twoRaw.three, anime:state.twoRaw.three.anime},
+            four: {value: unRotateMatrix.twoRaw.four, anime:state.twoRaw.four.anime}
         },
         threeRaw: {
-            one: {value: unRotateMatrix.threeRaw.one, anime: state.threeRaw.one.anime, timeout: state.threeRaw.one.timeout},
-            two: {value: unRotateMatrix.threeRaw.two, anime:state.threeRaw.two.anime,   timeout: state.threeRaw.two.timeout},
-            three: {value: unRotateMatrix.threeRaw.three, anime:state.threeRaw.three.anime, timeout: state.threeRaw.three.timeout},
-            four: {value: unRotateMatrix.threeRaw.four, anime:state.threeRaw.four.anime, timeout: state.threeRaw.four.timeout}
+            one: {value: unRotateMatrix.threeRaw.one, anime: state.threeRaw.one.anime},
+            two: {value: unRotateMatrix.threeRaw.two, anime:state.threeRaw.two.anime},
+            three: {value: unRotateMatrix.threeRaw.three, anime:state.threeRaw.three.anime},
+            four: {value: unRotateMatrix.threeRaw.four, anime:state.threeRaw.four.anime}
         },
         fourRaw: {
-            one: {value: unRotateMatrix.fourRaw.one, anime: state.fourRaw.one.anime, timeout: state.fourRaw.one.timeout},
-            two: {value: unRotateMatrix.fourRaw.two, anime:state.fourRaw.two.anime,   timeout: state.fourRaw.two.timeout},
-            three: {value: unRotateMatrix.fourRaw.three, anime:state.fourRaw.three.anime, timeout: state.fourRaw.three.timeout},
-            four: {value: unRotateMatrix.fourRaw.four, anime:state.fourRaw.four.anime, timeout: state.fourRaw.four.timeout}
+            one: {value: unRotateMatrix.fourRaw.one, anime: state.fourRaw.one.anime},
+            two: {value: unRotateMatrix.fourRaw.two, anime:state.fourRaw.two.anime},
+            three: {value: unRotateMatrix.fourRaw.three, anime:state.fourRaw.three.anime},
+            four: {value: unRotateMatrix.fourRaw.four, anime:state.fourRaw.four.anime}
         }
     }
 }
