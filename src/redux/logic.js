@@ -1,4 +1,4 @@
-import {shiftRowGetAnimationOnePhase} from './animationLogic';
+import {shiftRowGetAnimationOnePhase, shiftRowGetAnimationTwoPhase} from './animationLogic';
 // основные элементы это 4 функции LEFT RIGHT UP DOWN
 // отдаем стейт, получаем измененный стейт
 export let logicLeft = (matrix) => {
@@ -39,7 +39,7 @@ export let getMatrixOnState = (state) => {
 
 }
 //сдвинуть строку
-export let shiftRow= (row)=>{
+export let shiftRow = (row) => {
     let thisRow = {
         one: 0, two: 0, three: 0, four: 0
     }
@@ -48,7 +48,7 @@ export let shiftRow= (row)=>{
         thisRow = {
             one: 0, two: 0, three: row.one, four: row.two
         }
-    //    {0,x,x,0}
+        //    {0,x,x,0}
     } else if ((row.two === 0) && (row.three === 0)) {
         thisRow = {
             one: 0, two: 0, three: row.one, four: row.four
@@ -58,17 +58,17 @@ export let shiftRow= (row)=>{
         thisRow = {
             one: 0, two: 0, three: row.one, four: row.three
         }
-    //    {x,x,x,0}
+        //    {x,x,x,0}
     } else if (row.four === 0) {
         thisRow = {
             one: 0, two: row.one, three: row.two, four: row.three
         }
-    //    {x,x,0,x}
+        //    {x,x,0,x}
     } else if (row.three === 0) {
         thisRow = {
             one: 0, two: row.one, three: row.two, four: row.four
         }
-    //    {x,0,x,x}
+        //    {x,0,x,x}
     } else if (row.two === 0) {
         thisRow = {
             one: 0, two: row.one, three: row.three, four: row.four
@@ -85,7 +85,7 @@ export let rowSlide = (row) => {
 //Сдвиг элементов,  если есть нули
 
     //Объявление исходного ВАРИАНТА(он же ОТВЕТ если никакие условия НЕ сработают)
-    let thisRow=shiftRow(row)
+    let thisRow = shiftRow(row)
     let returnedRow = {
         one: thisRow.one,
         two: thisRow.two,
@@ -129,9 +129,9 @@ export let rowSlide = (row) => {
     //                         output row is {x:0;y:1;z:1;c:2}
     let comparisonOfCentralMembers = (twoAndThree) => {
         console.log('по центральным')
-        if(twoAndThree.a===0){
-            returnedRow={one: 0, two: thisRow.one, three: twoAndThree.b, four: thisRow.four}
-        }else {
+        if (twoAndThree.a === 0) {
+            returnedRow = {one: 0, two: thisRow.one, three: twoAndThree.b, four: thisRow.four}
+        } else {
             returnedRow = {one: thisRow.one, two: twoAndThree.a, three: twoAndThree.b, four: thisRow.four}
         }
         console.log(returnedRow)
@@ -329,42 +329,87 @@ export let RIGHT = (state) => {
     //2)rotate on key
     let rotateMatrix = getRightRowsOutMatrix(matrixOnState);
     //3)slide all rows in matrix
-    console.log(rotateMatrix)
+    //получить матрицу из анимаций текущей матрицы
+    let oldAnimationMatrix = {
+        oneRaw: shiftRowGetAnimationOnePhase(rotateMatrix.oneRaw),
+        twoRaw: shiftRowGetAnimationOnePhase(rotateMatrix.twoRaw),
+        threeRaw: shiftRowGetAnimationOnePhase(rotateMatrix.threeRaw),
+        fourRaw: shiftRowGetAnimationOnePhase(rotateMatrix.fourRaw)
+    }
+    //получить матрицу из анимаций ВТОРАЯ ФАЗА!!!
+    let newAnimationMatrix = {
+        oneRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.oneRaw),
+        twoRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.twoRaw),
+        threeRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.threeRaw),
+        fourRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.fourRaw)
+    }
+    //создать объект Текущая матрица + анимация ПЕРВЫЙ ОБЪЕКТ
+    let oldMatrixOldAnimation = {
+        oneRaw: {
+            one: {value: rotateMatrix.oneRaw.one, anime: oldAnimationMatrix.oneRaw.one},
+            two: {value: rotateMatrix.oneRaw.two, anime: oldAnimationMatrix.oneRaw.two},
+            three: {value: rotateMatrix.oneRaw.three, anime: oldAnimationMatrix.oneRaw.three},
+            four: {value: rotateMatrix.oneRaw.four, anime: oldAnimationMatrix.oneRaw.four}
+        },
+        twoRaw: {
+            one: {value: rotateMatrix.twoRaw.one, anime: oldAnimationMatrix.twoRaw.one},
+            two: {value: rotateMatrix.twoRaw.two, anime: oldAnimationMatrix.twoRaw.two},
+            three: {value: rotateMatrix.twoRaw.three, anime: oldAnimationMatrix.twoRaw.three},
+            four: {value: rotateMatrix.twoRaw.four, anime: oldAnimationMatrix.twoRaw.four}
+        },
+        threeRaw: {
+            one: {value: rotateMatrix.threeRaw.one, anime: oldAnimationMatrix.threeRaw.one},
+            two: {value: rotateMatrix.threeRaw.two, anime: oldAnimationMatrix.threeRaw.two},
+            three: {value: rotateMatrix.threeRaw.three, anime: oldAnimationMatrix.threeRaw.three},
+            four: {value: rotateMatrix.threeRaw.four, anime: oldAnimationMatrix.threeRaw.four}
+        },
+        fourRaw: {
+            one: {value: rotateMatrix.fourRaw.one, anime: oldAnimationMatrix.fourRaw.one},
+            two: {value: rotateMatrix.fourRaw.two, anime: oldAnimationMatrix.fourRaw.two},
+            three: {value: rotateMatrix.fourRaw.three, anime: oldAnimationMatrix.fourRaw.three},
+            four: {value: rotateMatrix.fourRaw.four, anime: oldAnimationMatrix.fourRaw.four}
+        }
+    }
+
+    //сдвинутая матрица
     let slideRotateMatrix = {
         oneRaw: rowSlide(rotateMatrix.oneRaw),
         twoRaw: rowSlide(rotateMatrix.twoRaw),
         threeRaw: rowSlide(rotateMatrix.threeRaw),
         fourRaw: rowSlide(rotateMatrix.fourRaw)
     }
-    //4) unRotateMatrix
+    //4) unRotateMatrix (повернули матрицу обратно)
     let unRotateMatrix = slideRotateMatrix
     //5) return state in parent
-    return {
-        ...state, oneRaw: {
-            one: {value: unRotateMatrix.oneRaw.one,      anime: state.oneRaw.one.anime},
-            two: {value: unRotateMatrix.oneRaw.two,      anime: state.oneRaw.two.anime},
-            three: {value: unRotateMatrix.oneRaw.three,  anime: state.oneRaw.three.anime},
-            four: {value: unRotateMatrix.oneRaw.four,    anime: state.oneRaw.four.anime}
+    // создать объект новый стейт и новая анимация ВТОРОЙ ОБЪЕКТ
+    //todo  функцию которая склеит матрицу значений и матрицу анимаций в стейт
+    let newMatrixNewAnimation = {
+        oneRaw: {
+            one: {value: unRotateMatrix.oneRaw.one, anime: newAnimationMatrix.oneRaw.one},
+            two: {value: unRotateMatrix.oneRaw.two, anime: newAnimationMatrix.oneRaw.two},
+            three: {value: unRotateMatrix.oneRaw.three, anime: newAnimationMatrix.oneRaw.three},
+            four: {value: unRotateMatrix.oneRaw.four, anime: newAnimationMatrix.oneRaw.four}
         },
         twoRaw: {
-            one: {value: unRotateMatrix.twoRaw.one,     anime: state.twoRaw.one.anime},
-            two: {value: unRotateMatrix.twoRaw.two,     anime:state.twoRaw.two.anime},
-            three: {value: unRotateMatrix.twoRaw.three, anime:state.twoRaw.three.anime},
-            four: {value: unRotateMatrix.twoRaw.four,   anime:state.twoRaw.four.anime}
+            one: {value: unRotateMatrix.twoRaw.one, anime: newAnimationMatrix.twoRaw.one},
+            two: {value: unRotateMatrix.twoRaw.two, anime: newAnimationMatrix.twoRaw.two},
+            three: {value: unRotateMatrix.twoRaw.three, anime: newAnimationMatrix.twoRaw.three},
+            four: {value: unRotateMatrix.twoRaw.four, anime: newAnimationMatrix.twoRaw.four}
         },
         threeRaw: {
-            one: {value: unRotateMatrix.threeRaw.one,       anime: state.threeRaw.one.anime},
-            two: {value: unRotateMatrix.threeRaw.two,       anime:state.threeRaw.two.anime},
-            three: {value: unRotateMatrix.threeRaw.three,   anime:state.threeRaw.three.anime},
-            four: {value: unRotateMatrix.threeRaw.four,     anime:state.threeRaw.four.anime}
+            one: {value: unRotateMatrix.threeRaw.one, anime: newAnimationMatrix.threeRaw.one},
+            two: {value: unRotateMatrix.threeRaw.two, anime: newAnimationMatrix.threeRaw.two},
+            three: {value: unRotateMatrix.threeRaw.three, anime: newAnimationMatrix.threeRaw.three},
+            four: {value: unRotateMatrix.threeRaw.four, anime: newAnimationMatrix.threeRaw.four}
         },
         fourRaw: {
-            one: {value: unRotateMatrix.fourRaw.one,        anime: state.fourRaw.one.anime},
-            two: {value: unRotateMatrix.fourRaw.two,        anime:state.fourRaw.two.anime},
-            three: {value: unRotateMatrix.fourRaw.three,    anime:state.fourRaw.three.anime},
-            four: {value: unRotateMatrix.fourRaw.four,      anime:state.fourRaw.four.anime}
+            one: {value: unRotateMatrix.fourRaw.one, anime: newAnimationMatrix.fourRaw.one},
+            two: {value: unRotateMatrix.fourRaw.two, anime: newAnimationMatrix.fourRaw.two},
+            three: {value: unRotateMatrix.fourRaw.three, anime: newAnimationMatrix.fourRaw.three},
+            four: {value: unRotateMatrix.fourRaw.four, anime: newAnimationMatrix.fourRaw.four}
         }
     }
+    return {oneState: oldMatrixOldAnimation, twoState: newMatrixNewAnimation}
 }
 export let LEFT = (state) => {
     //1)get matrix  on state:
@@ -384,27 +429,27 @@ export let LEFT = (state) => {
     return {
         ...state, oneRaw: {
             one: {value: unRotateMatrix.oneRaw.one, anime: state.oneRaw.one.anime},
-            two: {value: unRotateMatrix.oneRaw.two, anime:state.oneRaw.two.anime},
-            three: {value: unRotateMatrix.oneRaw.three, anime:state.oneRaw.three.anime},
-            four: {value: unRotateMatrix.oneRaw.four, anime:state.oneRaw.four.anime}
+            two: {value: unRotateMatrix.oneRaw.two, anime: state.oneRaw.two.anime},
+            three: {value: unRotateMatrix.oneRaw.three, anime: state.oneRaw.three.anime},
+            four: {value: unRotateMatrix.oneRaw.four, anime: state.oneRaw.four.anime}
         },
         twoRaw: {
             one: {value: unRotateMatrix.twoRaw.one, anime: state.twoRaw.one.anime},
-            two: {value: unRotateMatrix.twoRaw.two, anime:state.twoRaw.two.anime},
-            three: {value: unRotateMatrix.twoRaw.three, anime:state.twoRaw.three.anime},
-            four: {value: unRotateMatrix.twoRaw.four, anime:state.twoRaw.four.anime}
+            two: {value: unRotateMatrix.twoRaw.two, anime: state.twoRaw.two.anime},
+            three: {value: unRotateMatrix.twoRaw.three, anime: state.twoRaw.three.anime},
+            four: {value: unRotateMatrix.twoRaw.four, anime: state.twoRaw.four.anime}
         },
         threeRaw: {
             one: {value: unRotateMatrix.threeRaw.one, anime: state.threeRaw.one.anime},
-            two: {value: unRotateMatrix.threeRaw.two, anime:state.threeRaw.two.anime},
-            three: {value: unRotateMatrix.threeRaw.three, anime:state.threeRaw.three.anime},
-            four: {value: unRotateMatrix.threeRaw.four, anime:state.threeRaw.four.anime}
+            two: {value: unRotateMatrix.threeRaw.two, anime: state.threeRaw.two.anime},
+            three: {value: unRotateMatrix.threeRaw.three, anime: state.threeRaw.three.anime},
+            four: {value: unRotateMatrix.threeRaw.four, anime: state.threeRaw.four.anime}
         },
         fourRaw: {
             one: {value: unRotateMatrix.fourRaw.one, anime: state.fourRaw.one.anime},
-            two: {value: unRotateMatrix.fourRaw.two, anime:state.fourRaw.two.anime},
-            three: {value: unRotateMatrix.fourRaw.three, anime:state.fourRaw.three.anime},
-            four: {value: unRotateMatrix.fourRaw.four, anime:state.fourRaw.four.anime}
+            two: {value: unRotateMatrix.fourRaw.two, anime: state.fourRaw.two.anime},
+            three: {value: unRotateMatrix.fourRaw.three, anime: state.fourRaw.three.anime},
+            four: {value: unRotateMatrix.fourRaw.four, anime: state.fourRaw.four.anime}
         }
     }
 }
@@ -425,27 +470,27 @@ export let UP = (state) => {
     return {
         ...state, oneRaw: {
             one: {value: slideRotateMatrix.oneRaw.four, anime: state.oneRaw.one.anime},
-            two: {value: slideRotateMatrix.twoRaw.four, anime:state.oneRaw.two.anime},
-            three: {value: slideRotateMatrix.threeRaw.four, anime:state.oneRaw.three.anime},
-            four: {value: slideRotateMatrix.fourRaw.four, anime:state.oneRaw.four.anime}
+            two: {value: slideRotateMatrix.twoRaw.four, anime: state.oneRaw.two.anime},
+            three: {value: slideRotateMatrix.threeRaw.four, anime: state.oneRaw.three.anime},
+            four: {value: slideRotateMatrix.fourRaw.four, anime: state.oneRaw.four.anime}
         },
         twoRaw: {
             one: {value: slideRotateMatrix.oneRaw.three, anime: state.twoRaw.one.anime},
-            two: {value: slideRotateMatrix.twoRaw.three, anime:state.twoRaw.two.anime},
-            three: {value: slideRotateMatrix.threeRaw.three, anime:state.twoRaw.three.anime},
-            four: {value: slideRotateMatrix.fourRaw.three, anime:state.twoRaw.four.anime}
+            two: {value: slideRotateMatrix.twoRaw.three, anime: state.twoRaw.two.anime},
+            three: {value: slideRotateMatrix.threeRaw.three, anime: state.twoRaw.three.anime},
+            four: {value: slideRotateMatrix.fourRaw.three, anime: state.twoRaw.four.anime}
         },
         threeRaw: {
             one: {value: slideRotateMatrix.oneRaw.two, anime: state.threeRaw.one.anime},
-            two: {value: slideRotateMatrix.twoRaw.two, anime:state.threeRaw.two.anime},
-            three: {value: slideRotateMatrix.threeRaw.two, anime:state.threeRaw.three.anime},
-            four: {value: slideRotateMatrix.fourRaw.two, anime:state.threeRaw.four.anime}
+            two: {value: slideRotateMatrix.twoRaw.two, anime: state.threeRaw.two.anime},
+            three: {value: slideRotateMatrix.threeRaw.two, anime: state.threeRaw.three.anime},
+            four: {value: slideRotateMatrix.fourRaw.two, anime: state.threeRaw.four.anime}
         },
         fourRaw: {
             one: {value: slideRotateMatrix.oneRaw.one, anime: state.fourRaw.one.anime},
-            two: {value: slideRotateMatrix.twoRaw.one, anime:state.fourRaw.two.anime},
-            three: {value: slideRotateMatrix.threeRaw.one, anime:state.fourRaw.three.anime},
-            four: {value: slideRotateMatrix.fourRaw.one, anime:state.fourRaw.four.anime}
+            two: {value: slideRotateMatrix.twoRaw.one, anime: state.fourRaw.two.anime},
+            three: {value: slideRotateMatrix.threeRaw.one, anime: state.fourRaw.three.anime},
+            four: {value: slideRotateMatrix.fourRaw.one, anime: state.fourRaw.four.anime}
         }
     }
 }
@@ -467,27 +512,27 @@ export let DOWN = (state) => {
     return {
         ...state, oneRaw: {
             one: {value: unRotateMatrix.oneRaw.one, anime: state.oneRaw.one.anime},
-            two: {value: unRotateMatrix.oneRaw.two, anime:state.oneRaw.two.anime},
-            three: {value: unRotateMatrix.oneRaw.three, anime:state.oneRaw.three.anime},
-            four: {value: unRotateMatrix.oneRaw.four, anime:state.oneRaw.four.anime}
+            two: {value: unRotateMatrix.oneRaw.two, anime: state.oneRaw.two.anime},
+            three: {value: unRotateMatrix.oneRaw.three, anime: state.oneRaw.three.anime},
+            four: {value: unRotateMatrix.oneRaw.four, anime: state.oneRaw.four.anime}
         },
         twoRaw: {
             one: {value: unRotateMatrix.twoRaw.one, anime: state.twoRaw.one.anime},
-            two: {value: unRotateMatrix.twoRaw.two, anime:state.twoRaw.two.anime},
-            three: {value: unRotateMatrix.twoRaw.three, anime:state.twoRaw.three.anime},
-            four: {value: unRotateMatrix.twoRaw.four, anime:state.twoRaw.four.anime}
+            two: {value: unRotateMatrix.twoRaw.two, anime: state.twoRaw.two.anime},
+            three: {value: unRotateMatrix.twoRaw.three, anime: state.twoRaw.three.anime},
+            four: {value: unRotateMatrix.twoRaw.four, anime: state.twoRaw.four.anime}
         },
         threeRaw: {
             one: {value: unRotateMatrix.threeRaw.one, anime: state.threeRaw.one.anime},
-            two: {value: unRotateMatrix.threeRaw.two, anime:state.threeRaw.two.anime},
-            three: {value: unRotateMatrix.threeRaw.three, anime:state.threeRaw.three.anime},
-            four: {value: unRotateMatrix.threeRaw.four, anime:state.threeRaw.four.anime}
+            two: {value: unRotateMatrix.threeRaw.two, anime: state.threeRaw.two.anime},
+            three: {value: unRotateMatrix.threeRaw.three, anime: state.threeRaw.three.anime},
+            four: {value: unRotateMatrix.threeRaw.four, anime: state.threeRaw.four.anime}
         },
         fourRaw: {
             one: {value: unRotateMatrix.fourRaw.one, anime: state.fourRaw.one.anime},
-            two: {value: unRotateMatrix.fourRaw.two, anime:state.fourRaw.two.anime},
-            three: {value: unRotateMatrix.fourRaw.three, anime:state.fourRaw.three.anime},
-            four: {value: unRotateMatrix.fourRaw.four, anime:state.fourRaw.four.anime}
+            two: {value: unRotateMatrix.fourRaw.two, anime: state.fourRaw.two.anime},
+            three: {value: unRotateMatrix.fourRaw.three, anime: state.fourRaw.three.anime},
+            four: {value: unRotateMatrix.fourRaw.four, anime: state.fourRaw.four.anime}
         }
     }
 }

@@ -172,6 +172,7 @@ export let shiftRowGetAnimationOnePhase=(row)=> {
     return thisAnimeRow
 }
 // for result state usability
+// входная строка  OLD !!!
 export let shiftRowGetAnimationTwoPhase=(row)=> {
 
     let thisAnimeRow = {

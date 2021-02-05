@@ -23,23 +23,33 @@ class LineInGame extends React.Component {
         this.ticker = setInterval(this.magic, 650)
     }
 
+    // magic() {
+    //     const {massive} = this.state
+    //     if (massive.length) {
+    //         const next = massive.shift();
+    //         let animationRow = shiftRowGetAnimationOnePhase(next)
+    //         console.log(next)
+    //         console.log(animationRow)
+    //         if (next === {one: 32, two: 32, three: 32, four: 32}) {
+    //             clearInterval(this.ticker)
+    //         }
+    //         this.setNullAnimation()
+    //         setTimeout(()=>this.setCurrentValueAndSlideAnimation(next), 100)
+    //         setTimeout(()=>this.setNewStateAndNewAnimation(next), 420)
+    //         setTimeout(()=>this.setNullAnimation(), 550)
+    //
+    //
+    //     }
+    // }
+
     magic() {
-        const {massive} = this.state
-        if (massive.length) {
-            const next = massive.shift();
-            let animationRow = shiftRowGetAnimationOnePhase(next)
-            console.log(next)
-            console.log(animationRow)
-            if (next === {one: 32, two: 32, three: 32, four: 32}) {
-                clearInterval(this.ticker)
-            }
-            this.setNullAnimation()
-            setTimeout(()=>this.setCurrentValueAndSlideAnimation(next), 100)
-            setTimeout(()=>this.setNewStateAndNewAnimation(next), 420)
-            setTimeout(()=>this.setNullAnimation(), 550)
-
-
-        }
+        let States=RIGHT(this.props.main)
+        let oneState=States.oneState
+        let twoState=States.twoState
+        this.setNullAnimation()
+        setTimeout(()=>this.setCurrentValueAndSlideAnimation(oneState), 100)
+        setTimeout(()=>this.setNewStateAndNewAnimation(twoState), 420)
+        setTimeout(()=>this.setNullAnimation(), 550)
     }
 
     setNullAnimation() {
@@ -47,68 +57,15 @@ class LineInGame extends React.Component {
     }
 
     setCurrentValueAndSlideAnimation(next) {
-        let animationRow = shiftRowGetAnimationOnePhase(next)
-        console.log('setCurrentValueAndSlideAnimation')
-        this.props.setCurrentState({
-            ...this.props.main, oneRaw: {
-                one: {
-                    value: next.one,
-                    anime: animationRow.one,
-                    timeout: this.props.main.oneRaw.one.timeout
-                },
-                two: {
-                    value: next.two,
-                    anime: animationRow.two,
-                    timeout: this.props.main.oneRaw.two.timeout
-                },
-                three: {
-                    value: next.three,
-                    anime: animationRow.three,
-                    timeout: this.props.main.oneRaw.three.timeout
-                },
-                four: {
-                    value: next.four,
-                    anime: animationRow.four,
-                    timeout: this.props.main.oneRaw.four.timeout
-                },
-            }
-        })
+        this.props.setCurrentState(
+            {...this.props.main, ...next}
+        )
     }
 
     setNewStateAndNewAnimation(next) {
-        console.log('setNewStateAndNewAnimation')
-        let newStateRow = rowSlide(next);
-        let newAnimationRow = shiftRowGetAnimationTwoPhase(next)
-        let setOne = () => {
-            this.props.setCurrentState(
-                {
-                    ...this.props.main, oneRaw: {
-                        one: {
-                            value: newStateRow.one,
-                            anime: newAnimationRow.one,
-                            timeout: this.props.main.oneRaw.one.timeout
-                        },
-                        two: {
-                            value: newStateRow.two,
-                            anime: newAnimationRow.two,
-                            timeout: this.props.main.oneRaw.two.timeout
-                        },
-                        three: {
-                            value: newStateRow.three,
-                            anime: newAnimationRow.three,
-                            timeout: this.props.main.oneRaw.three.timeout
-                        },
-                        four: {
-                            value: newStateRow.four,
-                            anime: newAnimationRow.four,
-                            timeout: this.props.main.oneRaw.four.timeout
-                        },
-                    }
-                }
-            )
-
-        }
-        setOne();
+        this.props.setCurrentState(
+            {...this.props.main, ...next}
+        )
     }
 
     setNewStateAndNullAnimation(next) {
@@ -206,8 +163,7 @@ class LineInGame extends React.Component {
             )
         }
         let rightKey = () => {
-            this.props.setCurrentState(RIGHT(this.props.main))
-            // props.setCurrentState(RIGHT(props.main))
+            this.magic()
         }
         let leftKey = () => {
             this.props.setCurrentState(LEFT(this.props.main))
