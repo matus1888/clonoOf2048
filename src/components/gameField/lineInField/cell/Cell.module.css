@@ -64,23 +64,35 @@
 }
 
 
-
+/*from LEFT METHOD*/
 .slide6{
     transform: translate(-125px);
     z-index: 0;
     transition: transform 0.5s;
-
 }
-
 .slide7{
     transform: translate(-250px);
     z-index: 0;
     transition: transform 0.5s;
-
 }
 .slide8{
     transform: translate(-375px);
     z-index: 0;
     transition: transform 0.5s;
-
+}
+/*FROM UP METHOD*/
+.slide10{
+    transform: translateY(-125px);
+    z-index: 0;
+    transition: transform 0.5s;
+}
+.slide11{
+    transform: translateY(-250px);
+    z-index: 0;
+    transition: transform 0.5s;
+}
+.slide12{
+    transform: translateY(-375px);
+    z-index: 0;
+    transition: transform 0.5s;
 }

@@ -12,20 +12,20 @@ let initialState = {
 
     oneRaw: {
         one: {value: 0, anime: null },
-        two: {value: 0, anime: null },
+        two: {value: 32, anime: null },
         three: {value: 0, anime: null},
-        four: {value: 0, anime: null}
+        four: {value: 6, anime: null}
     },
     twoRaw: {
         one: {value: 2, anime: null},
-        two: {value: 2, anime: null},
+        two: {value: 16, anime: null},
         three: {value: 2, anime: null},
         four: {value: 2, anime: null}
     },
     threeRaw: {
         one: {value: 2, anime: null},
         two: {value: 2, anime:  null},
-        three: {value: 2, anime: null},
+        three: {value: 8, anime: null},
         four: {value: 2, anime: null}
     },
     fourRaw: {

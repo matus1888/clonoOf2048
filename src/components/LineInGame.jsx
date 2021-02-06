@@ -169,8 +169,7 @@ class LineInGame extends React.Component {
             this.magic(LEFT(this.props.main))
         }
         let upKey = () => {
-            console.log('нажали up')
-            this.props.setCurrentState(UP(this.props.main))
+            this.magic(UP(this.props.main))
         }
         let downKey = () => {
             this.props.setCurrentState(DOWN(this.props.main))

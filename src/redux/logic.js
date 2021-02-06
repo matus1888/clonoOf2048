@@ -228,6 +228,35 @@ let getDownRowsOutMatrix = (matrix) => {
     }
     return downMatrix
 }
+let getUnDownRowsOutMatrix = (matrix) => {
+    let unDownMatrix = {
+        oneRaw: {
+            one: matrix.oneRaw.four,
+            two: matrix.twoRaw.four,
+            three: matrix.threeRaw.four,
+            four: matrix.fourRaw.four
+        },
+        twoRaw: {
+            one: matrix.oneRaw.three,
+            two: matrix.twoRaw.three,
+            three: matrix.threeRaw.three,
+            four: matrix.fourRaw.three
+        },
+        threeRaw: {
+            one: matrix.oneRaw.two,
+            two: matrix.twoRaw.two,
+            three: matrix.threeRaw.two,
+            four: matrix.fourRaw.two
+        },
+        fourRaw: {
+            one: matrix.oneRaw.one,
+            two: matrix.twoRaw.one,
+            three: matrix.threeRaw.one,
+            four: matrix.fourRaw.one
+        }
+    }
+    return unDownMatrix
+}
 let getUpRowsOutMatrix = (matrix) => {
     let upMatrix = {
         oneRaw: {
@@ -258,72 +287,36 @@ let getUpRowsOutMatrix = (matrix) => {
     }
     return upMatrix
 }
-//
-// export let RIGHT_ANAMATION_STEP_ONE=(state)=>{
-//     //1) get matrix animations:
-//     let animationMatrix={
-//         oneRaw:shiftRowGetAnimationOnePhase(
-//             {
-//                 one: state.oneRaw.one.value,
-//                 two: state.oneRaw.two.value,
-//                 three: state.oneRaw.three.value,
-//                 four: state.oneRaw.four.value
-//             }
-//         ),
-//         twoRaw:shiftRowGetAnimationOnePhase(
-//             {
-//                 one: state.twoRaw.one.value,
-//                 two: state.twoRaw.two.value,
-//                 three: state.twoRaw.three.value,
-//                 four: state.twoRaw.four.value
-//             }
-//         ),
-//         threeRaw:shiftRowGetAnimationOnePhase(
-//             {
-//                 one: state.threeRaw.one.value,
-//                 two: state.threeRaw.two.value,
-//                 three: state.threeRaw.three.value,
-//                 four: state.threeRaw.four.value
-//             }
-//         ),
-//         fourRaw:shiftRowGetAnimationOnePhase(
-//             {
-//                 one: state.fourRaw.one.value,
-//                 two: state.fourRaw.two.value,
-//                 three: state.fourRaw.three.value,
-//                 four: state.fourRaw.four.value
-//             }
-//         )
-//     }
-//     //2)return state in matrix
-//     return {
-//         ...state,
-//         oneRaw: {
-//             one: {value: state.oneRaw.one.value,     anime: animationMatrix.oneRaw.one,  timeout: state.oneRaw.one.timeout},
-//             two: {value: state.oneRaw.two.value,     anime:animationMatrix.oneRaw.two,   timeout: state.oneRaw.two.timeout},
-//             three: {value: state.oneRaw.three.value, anime:animationMatrix.oneRaw.three, timeout: state.oneRaw.three.timeout},
-//             four: {value: state.oneRaw.four.value,   anime:animationMatrix.oneRaw.four,  timeout: state.oneRaw.four.timeout}
-//         },
-//         twoRaw: {
-//             one: {value: state.twoRaw.one.value,     anime: animationMatrix.twoRaw.one,  timeout: state.twoRaw.one.timeout},
-//             two: {value: state.twoRaw.two.value,     anime:animationMatrix.twoRaw.two,   timeout: state.twoRaw.two.timeout},
-//             three: {value: state.twoRaw.three.value, anime:animationMatrix.twoRaw.three, timeout: state.twoRaw.three.timeout},
-//             four: {value: state.twoRaw.four.value,   anime:animationMatrix.twoRaw.four,  timeout: state.twoRaw.four.timeout}
-//         },
-//         threeRaw: {
-//             one: {value: state.threeRaw.one.value,       anime: animationMatrix.threeRaw.one,  timeout: state.threeRaw.one.timeout},
-//             two: {value: state.threeRaw.two.value,       anime:animationMatrix.threeRaw.two,   timeout: state.threeRaw.two.timeout},
-//             three: {value: state.threeRaw.three.value,   anime:animationMatrix.threeRaw.three, timeout: state.threeRaw.three.timeout},
-//             four: {value: state.threeRaw.four.value,     anime:animationMatrix.threeRaw.four,  timeout: state.threeRaw.four.timeout}
-//         },
-//         fourRaw: {
-//             one: {value: state.fourRaw.one.value,        anime: animationMatrix.fourRaw.one,  timeout: state.fourRaw.one.timeout},
-//             two: {value: state.fourRaw.two.value,        anime:animationMatrix.fourRaw.two,   timeout: state.fourRaw.two.timeout},
-//             three: {value: state.fourRaw.three.value,    anime:animationMatrix.fourRaw.three, timeout: state.fourRaw.three.timeout},
-//             four: {value: state.fourRaw.four.value,      anime:animationMatrix.fourRaw.four,  timeout: state.fourRaw.four.timeout}
-//         }
-//     }
-// }
+let getUnUpRowsOutMatrix = (matrix) => {
+    let unUpMatrix = {
+        oneRaw: {
+            one: matrix.oneRaw.one,
+            two: matrix.oneRaw.two,
+            three: matrix.oneRaw.three,
+            four: matrix.oneRaw.four
+        },
+        twoRaw: {
+            one: matrix.twoRaw.one,
+            two: matrix.twoRaw.two,
+            three: matrix.twoRaw.three,
+            four: matrix.twoRaw.four
+        },
+        threeRaw: {
+            one: matrix.threeRaw.one,
+            two: matrix.threeRaw.two,
+            three: matrix.threeRaw.three,
+            four: matrix.threeRaw.four
+        },
+        fourRaw: {
+            one: matrix.fourRaw.one,
+            two: matrix.fourRaw.two,
+            three: matrix.fourRaw.three,
+            four: matrix.fourRaw.four
+
+        }
+    }
+    return unUpMatrix
+}
 export let RIGHT = (state) => {
     //1)get matrix  on state:
     let matrixOnState = getMatrixOnState(state);
@@ -462,40 +455,51 @@ export let UP = (state) => {
     let matrixOnState = getMatrixOnState(state);
     //2)rotate on key
     let rotateMatrix = getUpRowsOutMatrix(matrixOnState);
+    // получим матрицу анимаций для первой фазы:
+    let x=9;
+    let oldAnimationMatrix=
+        getUnDownRowsOutMatrix({
+         oneRaw:Object.fromEntries(
+             Object.entries(shiftRowGetAnimationOnePhase(rotateMatrix.oneRaw))
+                 .map(([key, value])=>[key,value+x])
+         ),
+         twoRaw: Object.fromEntries(
+             Object.entries(shiftRowGetAnimationOnePhase(rotateMatrix.twoRaw))
+                 .map(([key, value])=>[key,value+x])
+         ),
+         threeRaw:Object.fromEntries(
+             Object.entries(shiftRowGetAnimationOnePhase(rotateMatrix.threeRaw))
+                 .map(([key, value])=>[key,value+x])
+         ),
+         fourRaw: Object.fromEntries(
+             Object.entries(shiftRowGetAnimationOnePhase(rotateMatrix.fourRaw))
+                 .map(([key, value])=>[key,value+x])
+         )
+                         })
+    //готовый стейт для ПЕРВОЙ ФАЗЫ
+    let oldMatrixOldAnimation=gluingMatrix(matrixOnState,oldAnimationMatrix )
     //3)slide all rows in matrix
+    // Получим матрицу новых анимаций
+    let newAnimationMatrix=
+        getUnDownRowsOutMatrix({
+            oneRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.oneRaw),
+            twoRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.twoRaw),
+            threeRaw:shiftRowGetAnimationTwoPhase(rotateMatrix.threeRaw),
+            fourRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.fourRaw)
+        })
     let slideRotateMatrix = {
         oneRaw: rowSlide(rotateMatrix.oneRaw),
         twoRaw: rowSlide(rotateMatrix.twoRaw),
         threeRaw: rowSlide(rotateMatrix.threeRaw),
         fourRaw: rowSlide(rotateMatrix.fourRaw)
     }
-    //4) unRo
-    //5) return state in parent
+    //получим матрицу новых значений:
+    let newValuesMatrix=getUnDownRowsOutMatrix(slideRotateMatrix)
+    //Получим стейт для ВТОРОЙ ФАЗЫ
+    let newMatrixNewAnimation=gluingMatrix(newValuesMatrix, newAnimationMatrix)
     return {
-        ...state, oneRaw: {
-            one: {value: slideRotateMatrix.oneRaw.four, anime: state.oneRaw.one.anime},
-            two: {value: slideRotateMatrix.twoRaw.four, anime: state.oneRaw.two.anime},
-            three: {value: slideRotateMatrix.threeRaw.four, anime: state.oneRaw.three.anime},
-            four: {value: slideRotateMatrix.fourRaw.four, anime: state.oneRaw.four.anime}
-        },
-        twoRaw: {
-            one: {value: slideRotateMatrix.oneRaw.three, anime: state.twoRaw.one.anime},
-            two: {value: slideRotateMatrix.twoRaw.three, anime: state.twoRaw.two.anime},
-            three: {value: slideRotateMatrix.threeRaw.three, anime: state.twoRaw.three.anime},
-            four: {value: slideRotateMatrix.fourRaw.three, anime: state.twoRaw.four.anime}
-        },
-        threeRaw: {
-            one: {value: slideRotateMatrix.oneRaw.two, anime: state.threeRaw.one.anime},
-            two: {value: slideRotateMatrix.twoRaw.two, anime: state.threeRaw.two.anime},
-            three: {value: slideRotateMatrix.threeRaw.two, anime: state.threeRaw.three.anime},
-            four: {value: slideRotateMatrix.fourRaw.two, anime: state.threeRaw.four.anime}
-        },
-        fourRaw: {
-            one: {value: slideRotateMatrix.oneRaw.one, anime: state.fourRaw.one.anime},
-            two: {value: slideRotateMatrix.twoRaw.one, anime: state.fourRaw.two.anime},
-            three: {value: slideRotateMatrix.threeRaw.one, anime: state.fourRaw.three.anime},
-            four: {value: slideRotateMatrix.fourRaw.one, anime: state.fourRaw.four.anime}
-        }
+        oneState: oldMatrixOldAnimation,
+        twoState: newMatrixNewAnimation
     }
 }
 export let DOWN = (state) => {
