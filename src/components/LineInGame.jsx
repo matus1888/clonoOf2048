@@ -1,9 +1,8 @@
 import React from 'react'
 import s from './LineInGame.module.css';
 import GameFieldContainer from "./gameField/GameFieldContainer";
-import {LEFT, RIGHT, rowSlide, UP} from "../redux/logic";
+import {DOWN, LEFT, RIGHT, rowSlide, UP} from "../redux/logic";
 import testMassive from "./testMassive";
-import {DOWN  as D} from '../redux/keyPressReducer'
 
 
 //todo   на основе имеющихся данных и logics реализовать полностью рабочие кнопки
@@ -23,7 +22,6 @@ class LineInGame extends React.Component {
     keyFunction(event) {
         if (event.keyCode === 40) {
             this.props.down()
-            console.log(" DOWN PRESS")
         } else if (event.keyCode === 38) {
            this.props.up()
         } else if (event.keyCode === 37) {
@@ -31,21 +29,22 @@ class LineInGame extends React.Component {
         } else if (event.keyCode === 39) {
            this.props.right()
         }
-    }
-
-    componentDidMount() {
-        document.title = "2048";
-        document.addEventListener("keydown", this.keyFunction, false);
         if(this.props.keys==='left'){
             this.magic(LEFT(this.props.main))
         }else if(this.props.keys==='right'){
             this.magic(RIGHT(this.props.main))
         }else if(this.props.keys==='up'){
             this.magic(UP(this.props.main))
-        }else if(this.props.keys===D){
-            console.log('iam here')
-            this.magic(this.props.main)
+        }else if(this.props.keys==='down'){
+            this.magic(DOWN(this.props.main))
         }
+    }
+
+
+    componentDidMount() {
+        document.title = "2048";
+        document.addEventListener("keydown", this.keyFunction, false);
+
         // console.log(this.props)
     }
 

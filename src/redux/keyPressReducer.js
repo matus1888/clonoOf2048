@@ -1,7 +1,7 @@
  const LEFT = 'left';
  const RIGHT = 'right';
  const UP = 'up';
-export const DOWN = 'down';
+ const DOWN = 'down';
  const NULL= 'null'
 
 
