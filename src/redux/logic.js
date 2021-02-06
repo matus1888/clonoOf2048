@@ -168,6 +168,7 @@ let getRightRowsOutMatrix = (matrix) => {
     return matrix
 }
 let getLeftRowsOutMatrix = (matrix) => {
+    console.log(matrix)
     let leftMatrix = {
         oneRaw: {
             one: matrix.oneRaw.four,
@@ -416,7 +417,31 @@ export let LEFT = (state) => {
     let matrixOnState = getMatrixOnState(state);
     //2)rotate on key
     let rotateMatrix = getLeftRowsOutMatrix(matrixOnState);
+    //получить матрицу анимаций СДВИГИ ВПРАВО
+    let oldAnimationMatrixRight=getLeftRowsOutMatrix({
+        oneRaw: shiftRowGetAnimationOnePhase(rotateMatrix.oneRaw),
+        twoRaw: shiftRowGetAnimationOnePhase(rotateMatrix.twoRaw),
+        threeRaw: shiftRowGetAnimationOnePhase(rotateMatrix.threeRaw),
+        fourRaw: shiftRowGetAnimationOnePhase(rotateMatrix.fourRaw)
+    })
+    let x= 5;
+    let oldAnimationMatrix={
+        oneRaw:{one:oldAnimationMatrixRight.oneRaw.one+x ,      two:oldAnimationMatrixRight.oneRaw.two+x,   three: oldAnimationMatrixRight.oneRaw.three+x,     four: oldAnimationMatrixRight.oneRaw.four+x},
+        twoRaw:{one: oldAnimationMatrixRight.twoRaw.one+x ,     two:oldAnimationMatrixRight.twoRaw.two+x,   three: oldAnimationMatrixRight.twoRaw.three+x,     four: oldAnimationMatrixRight.twoRaw.four+x},
+        threeRaw:{one: oldAnimationMatrixRight.threeRaw.one+x , two:oldAnimationMatrixRight.threeRaw.two+x, three: oldAnimationMatrixRight.threeRaw.three+x,   four: oldAnimationMatrixRight.threeRaw.four+x},
+        fourRaw:{one: oldAnimationMatrixRight.fourRaw.one+x ,   two:oldAnimationMatrixRight.fourRaw.two+x,  three: oldAnimationMatrixRight.fourRaw.three+x,    four: oldAnimationMatrixRight.fourRaw.four+x},
+    }
+    //анимация для второй фазы
+    let newAnimationMatrix=getLeftRowsOutMatrix({
+        oneRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.oneRaw),
+        twoRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.twoRaw),
+        threeRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.threeRaw),
+        fourRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.fourRaw)
+    })
+    // получить стейт для ПЕРВОЙ ФАЗЫ
+    let oldMatrixOldAnimation=gluingMatrix(matrixOnState, oldAnimationMatrix)
     //3)slide all rows in matrix
+    //Сдвиг перевернутой матрицы
     let slideRotateMatrix = {
         oneRaw: rowSlide(rotateMatrix.oneRaw),
         twoRaw: rowSlide(rotateMatrix.twoRaw),
@@ -424,34 +449,13 @@ export let LEFT = (state) => {
         fourRaw: rowSlide(rotateMatrix.fourRaw)
     }
     //4) unRotateMatrix
+    // развернуть сдвинутую матрицу обратно 1для 2-ой фазы
     let unRotateMatrix = getLeftRowsOutMatrix(slideRotateMatrix)
     //5) return state in parent
-    return {
-        ...state, oneRaw: {
-            one: {value: unRotateMatrix.oneRaw.one, anime: state.oneRaw.one.anime},
-            two: {value: unRotateMatrix.oneRaw.two, anime: state.oneRaw.two.anime},
-            three: {value: unRotateMatrix.oneRaw.three, anime: state.oneRaw.three.anime},
-            four: {value: unRotateMatrix.oneRaw.four, anime: state.oneRaw.four.anime}
-        },
-        twoRaw: {
-            one: {value: unRotateMatrix.twoRaw.one, anime: state.twoRaw.one.anime},
-            two: {value: unRotateMatrix.twoRaw.two, anime: state.twoRaw.two.anime},
-            three: {value: unRotateMatrix.twoRaw.three, anime: state.twoRaw.three.anime},
-            four: {value: unRotateMatrix.twoRaw.four, anime: state.twoRaw.four.anime}
-        },
-        threeRaw: {
-            one: {value: unRotateMatrix.threeRaw.one, anime: state.threeRaw.one.anime},
-            two: {value: unRotateMatrix.threeRaw.two, anime: state.threeRaw.two.anime},
-            three: {value: unRotateMatrix.threeRaw.three, anime: state.threeRaw.three.anime},
-            four: {value: unRotateMatrix.threeRaw.four, anime: state.threeRaw.four.anime}
-        },
-        fourRaw: {
-            one: {value: unRotateMatrix.fourRaw.one, anime: state.fourRaw.one.anime},
-            two: {value: unRotateMatrix.fourRaw.two, anime: state.fourRaw.two.anime},
-            three: {value: unRotateMatrix.fourRaw.three, anime: state.fourRaw.three.anime},
-            four: {value: unRotateMatrix.fourRaw.four, anime: state.fourRaw.four.anime}
-        }
-    }
+    //получить стейт для ВТОРОЙ ФАЗЫ
+    let newAnimationNewMatrix=gluingMatrix(unRotateMatrix, newAnimationMatrix)
+
+    return {oneState: oldMatrixOldAnimation, twoState: newAnimationNewMatrix}
 }
 export let UP = (state) => {
     //1)get matrix  on state:
@@ -536,3 +540,34 @@ export let DOWN = (state) => {
         }
     }
 }
+
+
+//склеиватель матрицы данных и матрицы анимаций
+let gluingMatrix=(valMatrix, animeMatrix)=> {
+    return {
+        oneRaw: {
+            one: {value: valMatrix.oneRaw.one, anime: animeMatrix.oneRaw.one},
+            two: {value: valMatrix.oneRaw.two, anime: animeMatrix.oneRaw.two},
+            three: {value: valMatrix.oneRaw.three, anime: animeMatrix.oneRaw.three},
+            four: {value: valMatrix.oneRaw.four, anime: animeMatrix.oneRaw.four}
+        },
+        twoRaw: {
+            one: {value: valMatrix.twoRaw.one, anime: animeMatrix.twoRaw.one},
+            two: {value: valMatrix.twoRaw.two, anime: animeMatrix.twoRaw.two},
+            three: {value: valMatrix.twoRaw.three, anime: animeMatrix.twoRaw.three},
+            four: {value: valMatrix.twoRaw.four, anime: animeMatrix.twoRaw.four}
+        },
+        threeRaw: {
+            one: {value: valMatrix.threeRaw.one, anime: animeMatrix.threeRaw.one},
+            two: {value: valMatrix.threeRaw.two, anime: animeMatrix.threeRaw.two},
+            three: {value: valMatrix.threeRaw.three, anime: animeMatrix.threeRaw.three},
+            four: {value: valMatrix.threeRaw.four, anime: animeMatrix.threeRaw.four}
+        },
+        fourRaw: {
+            one: {value: valMatrix.fourRaw.one, anime: animeMatrix.fourRaw.one},
+            two: {value: valMatrix.fourRaw.two, anime: animeMatrix.fourRaw.two},
+            three: {value: valMatrix.fourRaw.three, anime: animeMatrix.fourRaw.three},
+            four: {value: valMatrix.fourRaw.four, anime: animeMatrix.fourRaw.four}
+        }
+    }
+    }

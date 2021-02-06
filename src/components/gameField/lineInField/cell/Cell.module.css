@@ -28,18 +28,19 @@
     z-index: -1;
 
 }
-.slide{
-    transform: translate(125px);
-    z-index: 0;
-    transition: transform 0.5s;
-
-}
 .slide0{
     transform: translate(0px);
     z-index: 0;
     transition: transform 0s;
 
 }
+.slide{
+    transform: translate(125px);
+    z-index: 0;
+    transition: transform 0.5s;
+
+}
+
 .slide2{
     transform: translate(250px);
     z-index: 0;
@@ -60,4 +61,26 @@
 .unSlide{
     transform: translate(0px);
     transition: none;
+}
+
+
+
+.slide6{
+    transform: translate(-125px);
+    z-index: 0;
+    transition: transform 0.5s;
+
+}
+
+.slide7{
+    transform: translate(-250px);
+    z-index: 0;
+    transition: transform 0.5s;
+
+}
+.slide8{
+    transform: translate(-375px);
+    z-index: 0;
+    transition: transform 0.5s;
+
 }

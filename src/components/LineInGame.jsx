@@ -42,14 +42,14 @@ class LineInGame extends React.Component {
     //     }
     // }
 
-    magic() {
-        let States=RIGHT(this.props.main)
+    magic(twoStates) {
+        let States=twoStates
         let oneState=States.oneState
         let twoState=States.twoState
         this.setNullAnimation()
         setTimeout(()=>this.setCurrentValueAndSlideAnimation(oneState), 100)
-        setTimeout(()=>this.setNewStateAndNewAnimation(twoState), 420)
-        setTimeout(()=>this.setNullAnimation(), 550)
+        setTimeout(()=>this.setNewStateAndNewAnimation(twoState), 500)
+        setTimeout(()=>this.setNullAnimation(), 600)
     }
 
     setNullAnimation() {
@@ -163,10 +163,10 @@ class LineInGame extends React.Component {
             )
         }
         let rightKey = () => {
-            this.magic()
+            this.magic(RIGHT(this.props.main))
         }
         let leftKey = () => {
-            this.props.setCurrentState(LEFT(this.props.main))
+            this.magic(LEFT(this.props.main))
         }
         let upKey = () => {
             console.log('нажали up')
