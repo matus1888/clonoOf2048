@@ -96,3 +96,19 @@
     z-index: 0;
     transition: transform 0.5s;
 }
+/*FROM DOWN METHOD*/
+.slide14{
+    transform: translateY(125px);
+    z-index: 0;
+    transition: transform 0.5s;
+}
+.slide15{
+    transform: translateY(250px);
+    z-index: 0;
+    transition: transform 0.5s;
+}
+.slide16{
+    transform: translateY(375px);
+    z-index: 0;
+    transition: transform 0.5s;
+}

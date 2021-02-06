@@ -11,7 +11,9 @@ const SLIDE_10 = s.slide10
 const SLIDE_11 = s.slide11
 const SLIDE_12 = s.slide12
 //FROM DOWN
-
+const SLIDE_14 = s.slide14
+const SLIDE_15 = s.slide15
+const SLIDE_16 = s.slide16
 //FROM ALL
 const MINI=s.mini
 const SLIDE_0=s.slide0
@@ -89,6 +91,28 @@ export let getAnimationEffect = (value) => {
             return {
                 changed: true,
                 effect: SLIDE_12
+            }
+        }
+        // FROM DOWN METHODS
+        case 13:{
+            return {
+                changed: true,
+                effect: SLIDE_0
+            }
+        }case 14:{
+            return {
+                changed: true,
+                effect: SLIDE_14
+            }
+        }case 15:{
+            return {
+                changed: true,
+                effect: SLIDE_15
+            }
+        }case 16:{
+            return {
+                changed: true,
+                effect: SLIDE_16
             }
         }
         default :

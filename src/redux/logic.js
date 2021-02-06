@@ -508,6 +508,28 @@ export let DOWN = (state) => {
     //2)rotate on key
     let rotateMatrix = getDownRowsOutMatrix(matrixOnState);
     //3)slide all rows in matrix
+    //получим матрицу анимаций сдвигов
+    let x = 13
+    let oldAnimationMatrix = getUnUpRowsOutMatrix(getDownRowsOutMatrix({
+        oneRaw: Object.fromEntries(
+            Object.entries(shiftRowGetAnimationOnePhase(rotateMatrix.oneRaw))
+                .map(([key, value]) => [key, value + x])
+        ),
+        twoRaw: Object.fromEntries(
+            Object.entries(shiftRowGetAnimationOnePhase(rotateMatrix.twoRaw))
+                .map(([key, value]) => [key, value + x])
+        ),
+        threeRaw: Object.fromEntries(
+            Object.entries(shiftRowGetAnimationOnePhase(rotateMatrix.threeRaw))
+                .map(([key, value]) => [key, value + x])
+        ),
+        fourRaw: Object.fromEntries(
+            Object.entries(shiftRowGetAnimationOnePhase(rotateMatrix.fourRaw))
+                .map(([key, value]) => [key, value + x])
+        )
+    }))
+    //получим стейт ПЕРВОЙ ФАЗЫ
+    let oldMatrixOldAnimation = gluingMatrix(matrixOnState, oldAnimationMatrix)
     let slideRotateMatrix = {
         oneRaw: rowSlide(rotateMatrix.oneRaw),
         twoRaw: rowSlide(rotateMatrix.twoRaw),
@@ -517,35 +539,24 @@ export let DOWN = (state) => {
     //4) unRotateMatrix
     let unRotateMatrix = getDownRowsOutMatrix(slideRotateMatrix)
     //5) return state in parent
-    return {
-        ...state, oneRaw: {
-            one: {value: unRotateMatrix.oneRaw.one, anime: state.oneRaw.one.anime},
-            two: {value: unRotateMatrix.oneRaw.two, anime: state.oneRaw.two.anime},
-            three: {value: unRotateMatrix.oneRaw.three, anime: state.oneRaw.three.anime},
-            four: {value: unRotateMatrix.oneRaw.four, anime: state.oneRaw.four.anime}
-        },
-        twoRaw: {
-            one: {value: unRotateMatrix.twoRaw.one, anime: state.twoRaw.one.anime},
-            two: {value: unRotateMatrix.twoRaw.two, anime: state.twoRaw.two.anime},
-            three: {value: unRotateMatrix.twoRaw.three, anime: state.twoRaw.three.anime},
-            four: {value: unRotateMatrix.twoRaw.four, anime: state.twoRaw.four.anime}
-        },
-        threeRaw: {
-            one: {value: unRotateMatrix.threeRaw.one, anime: state.threeRaw.one.anime},
-            two: {value: unRotateMatrix.threeRaw.two, anime: state.threeRaw.two.anime},
-            three: {value: unRotateMatrix.threeRaw.three, anime: state.threeRaw.three.anime},
-            four: {value: unRotateMatrix.threeRaw.four, anime: state.threeRaw.four.anime}
-        },
-        fourRaw: {
-            one: {value: unRotateMatrix.fourRaw.one, anime: state.fourRaw.one.anime},
-            two: {value: unRotateMatrix.fourRaw.two, anime: state.fourRaw.two.anime},
-            three: {value: unRotateMatrix.fourRaw.three, anime: state.fourRaw.three.anime},
-            four: {value: unRotateMatrix.fourRaw.four, anime: state.fourRaw.four.anime}
+    // получим матрицу значений после преобразовния
+    let newValuesMatrix = getUnUpRowsOutMatrix(unRotateMatrix)
+    // получим матрицу анимаций после преобразования
+    let newAnimationMatrix = getUnUpRowsOutMatrix(getDownRowsOutMatrix(
+        {
+            oneRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.oneRaw),
+            twoRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.twoRaw),
+            threeRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.threeRaw),
+            fourRaw: shiftRowGetAnimationTwoPhase(rotateMatrix.fourRaw)
         }
+    ))
+    //получим стей ВТОРОЙ ФАЗЫ
+    let newMatrixNewAnimation = gluingMatrix(newValuesMatrix, newAnimationMatrix)
+    return {
+        oneState: oldMatrixOldAnimation,
+        twoState: newMatrixNewAnimation
     }
 }
-
-
 //склеиватель матрицы данных и матрицы анимаций
 let gluingMatrix=(valMatrix, animeMatrix)=> {
     return {

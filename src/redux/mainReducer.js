@@ -1,7 +1,3 @@
-const LEFT = 'left';
-const RIGHT = 'right';
-const UP = 'up';
-const DOWN = 'down';
 const ANIME = 'anime';
 const RESET_ALL = 'reset';
 const ANIME_RESET_EFFECT = 'resetEffect';
@@ -37,18 +33,7 @@ let initialState = {
 }
 let mainReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LEFT: {
-            return
-        }
-        case RIGHT: {
-            return
-        }
-        case UP: {
-            return
-        }
-        case DOWN: {
-            return
-        }
+
         case ANIME: {
             return {
                 ...state,
@@ -142,10 +127,6 @@ let mainReducer = (state = initialState, action) => {
 
     }
 }
-export const actionCreatorLeft = () => ({type: LEFT})
-export const actionCreatorRight = () => ({type: RIGHT})
-export const actionCreatorUp = () => ({type: UP})
-export const actionCreatorDown = () => ({type: DOWN})
 export const ACSetAnimation = () => ({type: ANIME})
 export const ACResetState = () => ({type: RESET_ALL})
 export const ACResetAnimation = () => ({type: ANIME_RESET_EFFECT})

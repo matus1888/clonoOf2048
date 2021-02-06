@@ -1,9 +1,9 @@
 import React from 'react'
 import s from './LineInGame.module.css';
 import GameFieldContainer from "./gameField/GameFieldContainer";
-import {DOWN, LEFT, RIGHT, rowSlide, UP} from "../redux/logic";
-import {shiftRowGetAnimationOnePhase, shiftRowGetAnimationTwoPhase} from "../redux/animationLogic";
+import {LEFT, RIGHT, rowSlide, UP} from "../redux/logic";
 import testMassive from "./testMassive";
+import {DOWN  as D} from '../redux/keyPressReducer'
 
 
 //todo   на основе имеющихся данных и logics реализовать полностью рабочие кнопки
@@ -15,41 +15,56 @@ class LineInGame extends React.Component {
         this.setNewStateAndNewAnimation = this.setNewStateAndNewAnimation.bind(this)
         this.setNewStateAndNullAnimation = this.setNewStateAndNullAnimation.bind(this)
         this.setNullAnimation = this.setNullAnimation.bind(this)
+        this.keyFunction = this.keyFunction.bind(this);
         this.state = {massive: testMassive(), step: true}
+        this.keyFunction=this.keyFunction.bind(this)
     }
 
+    keyFunction(event) {
+        if (event.keyCode === 40) {
+            this.props.down()
+            console.log(" DOWN PRESS")
+        } else if (event.keyCode === 38) {
+           this.props.up()
+        } else if (event.keyCode === 37) {
+            this.props.left()
+        } else if (event.keyCode === 39) {
+           this.props.right()
+        }
+    }
+
+    componentDidMount() {
+        document.title = "2048";
+        document.addEventListener("keydown", this.keyFunction, false);
+        if(this.props.keys==='left'){
+            this.magic(LEFT(this.props.main))
+        }else if(this.props.keys==='right'){
+            this.magic(RIGHT(this.props.main))
+        }else if(this.props.keys==='up'){
+            this.magic(UP(this.props.main))
+        }else if(this.props.keys===D){
+            console.log('iam here')
+            this.magic(this.props.main)
+        }
+        // console.log(this.props)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.keyFunction, false);
+        this.props.setNull()
+    }
     //1)  в порядке отработки
     startTicker() {
         this.ticker = setInterval(this.magic, 650)
     }
-
-    // magic() {
-    //     const {massive} = this.state
-    //     if (massive.length) {
-    //         const next = massive.shift();
-    //         let animationRow = shiftRowGetAnimationOnePhase(next)
-    //         console.log(next)
-    //         console.log(animationRow)
-    //         if (next === {one: 32, two: 32, three: 32, four: 32}) {
-    //             clearInterval(this.ticker)
-    //         }
-    //         this.setNullAnimation()
-    //         setTimeout(()=>this.setCurrentValueAndSlideAnimation(next), 100)
-    //         setTimeout(()=>this.setNewStateAndNewAnimation(next), 420)
-    //         setTimeout(()=>this.setNullAnimation(), 550)
-    //
-    //
-    //     }
-    // }
-
     magic(twoStates) {
-        let States=twoStates
-        let oneState=States.oneState
-        let twoState=States.twoState
+        let States = twoStates
+        let oneState = States.oneState
+        let twoState = States.twoState
         this.setNullAnimation()
-        setTimeout(()=>this.setCurrentValueAndSlideAnimation(oneState), 100)
-        setTimeout(()=>this.setNewStateAndNewAnimation(twoState), 500)
-        setTimeout(()=>this.setNullAnimation(), 600)
+        setTimeout(() => this.setCurrentValueAndSlideAnimation(oneState), 100)
+        setTimeout(() => this.setNewStateAndNewAnimation(twoState), 500)
+        setTimeout(() => this.setNullAnimation(), 600)
     }
 
     setNullAnimation() {
@@ -71,7 +86,6 @@ class LineInGame extends React.Component {
     setNewStateAndNullAnimation(next) {
         console.log('setNewStateAndNewAnimation')
         let newStateRow = rowSlide(next);
-        let newAnimationRow = shiftRowGetAnimationTwoPhase(next)
         this.props.setCurrentState(
             {
                 ...this.props.main, oneRaw: {
@@ -162,29 +176,9 @@ class LineInGame extends React.Component {
                 }
             )
         }
-        let rightKey = () => {
-            this.magic(RIGHT(this.props.main))
-        }
-        let leftKey = () => {
-            this.magic(LEFT(this.props.main))
-        }
-        let upKey = () => {
-            this.magic(UP(this.props.main))
-        }
-        let downKey = () => {
-            this.props.setCurrentState(DOWN(this.props.main))
-        }
-
         return (<div>
                 <div className={s.b}>
                     <div className={s.head}>Header
-                        <button onClick={this.startTicker}>testAnimationOneRowVisible</button>
-                        <button onClick={problemSituation}>problemTest</button>
-                        <button onClick={noProblemSituation}>noProblemTest</button>
-                        <button onClick={rightKey}>test on RIGHT KEY</button>
-                        <button onClick={leftKey}>test on LEFT KEY</button>
-                        <button onClick={upKey}>test on UP KEY</button>
-                        <button onClick={downKey}>test on Down KEY</button>
                         <button onClick={this.props.reset}>Reset animation</button>
                     </div>
                     <GameFieldContainer/>
