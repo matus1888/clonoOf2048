@@ -15,19 +15,23 @@ class LineInGame extends React.Component {
         this.setNewStateAndNullAnimation = this.setNewStateAndNullAnimation.bind(this)
         this.setNullAnimation = this.setNullAnimation.bind(this)
         this.keyFunction = this.keyFunction.bind(this);
-        this.state = {massive: testMassive(), step: true}
+        this.state = {massive: testMassive(), step: true, pressingLock:false}
         this.keyFunction=this.keyFunction.bind(this)
     }
 
-    keyFunction(event) {
+    keyFunction(event) {if(!this.state.pressingLock){
         if (event.keyCode === 40) {
+            this.setState({...this.state, pressingLock: true})
             this.props.down()
         } else if (event.keyCode === 38) {
-           this.props.up()
+            this.setState({...this.state, pressingLock: true})
+            this.props.up()
         } else if (event.keyCode === 37) {
+            this.setState({...this.state, pressingLock: true})
             this.props.left()
         } else if (event.keyCode === 39) {
-           this.props.right()
+            this.setState({...this.state, pressingLock: true})
+            this.props.right()
         }
         if(this.props.keys==='left'){
             this.magic(LEFT(this.props.main))
@@ -38,6 +42,7 @@ class LineInGame extends React.Component {
         }else if(this.props.keys==='down'){
             this.magic(DOWN(this.props.main))
         }
+    }
     }
 
 
@@ -61,9 +66,10 @@ class LineInGame extends React.Component {
         let oneState = States.oneState
         let twoState = States.twoState
         this.setNullAnimation()
-        setTimeout(() => this.setCurrentValueAndSlideAnimation(oneState), 100)
-        setTimeout(() => this.setNewStateAndNewAnimation(twoState), 500)
-        setTimeout(() => this.setNullAnimation(), 600)
+        setTimeout(() => this.setCurrentValueAndSlideAnimation(oneState), 50)
+        setTimeout(() => this.setNewStateAndNewAnimation(twoState), 200)
+        setTimeout(() => this.setNullAnimation(), 250)
+        setTimeout(()=>this.setState({...this.state, pressingLock: false}), 250)
     }
 
     setNullAnimation() {

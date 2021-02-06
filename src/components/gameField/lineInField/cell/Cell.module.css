@@ -37,25 +37,25 @@
 .slide{
     transform: translate(125px);
     z-index: 0;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 
 }
 
 .slide2{
     transform: translate(250px);
     z-index: 0;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 
 }
 .slide3{
     transform: translate(375px);
     z-index: 0;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 
 }
 .mini{
     margin: -7px;
-    transition: all 0.1s;
+    transition: all 0.05s;
 
 }
 .unSlide{
@@ -68,47 +68,47 @@
 .slide6{
     transform: translate(-125px);
     z-index: 0;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 }
 .slide7{
     transform: translate(-250px);
     z-index: 0;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 }
 .slide8{
     transform: translate(-375px);
     z-index: 0;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 }
 /*FROM UP METHOD*/
 .slide10{
     transform: translateY(-125px);
     z-index: 0;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 }
 .slide11{
     transform: translateY(-250px);
     z-index: 0;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 }
 .slide12{
     transform: translateY(-375px);
     z-index: 0;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 }
 /*FROM DOWN METHOD*/
 .slide14{
     transform: translateY(125px);
     z-index: 0;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 }
 .slide15{
     transform: translateY(250px);
     z-index: 0;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 }
 .slide16{
     transform: translateY(375px);
     z-index: 0;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 }
