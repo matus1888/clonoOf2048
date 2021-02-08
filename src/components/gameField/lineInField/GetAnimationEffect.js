@@ -17,6 +17,7 @@ const SLIDE_16 = s.slide16
 //FROM ALL
 const MINI=s.mini
 const SLIDE_0=s.slide0
+const APPEARANCE=s.appearance
 export let getAnimationEffect = (value) => {
     switch (value) {
         case 0: {
@@ -113,6 +114,11 @@ export let getAnimationEffect = (value) => {
             return {
                 changed: true,
                 effect: SLIDE_16
+            }
+        }case 44:{
+            return {
+                changed: true,
+                effect: APPEARANCE
             }
         }
         default :

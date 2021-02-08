@@ -66,10 +66,12 @@ class LineInGame extends React.Component {
         let oneState = States.oneState
         let twoState = States.twoState
         this.setNullAnimation()
-        setTimeout(() => this.setCurrentValueAndSlideAnimation(oneState), 50)
+        setTimeout(() => this.setCurrentValueAndSlideAnimation(oneState), 20)
         setTimeout(() => this.setNewStateAndNewAnimation(twoState), 200)
-        setTimeout(() => this.setNullAnimation(), 250)
-        setTimeout(()=>this.setState({...this.state, pressingLock: false}), 250)
+        setTimeout(() => this.setNullAnimation(), 220)
+        setTimeout(() => this.setNewStateAndNewAnimation(twoState), 240)
+        setTimeout(() => this.setNullAnimation(), 320)
+        setTimeout(()=>this.setState({...this.state, pressingLock: false}), 300)
     }
 
     setNullAnimation() {
@@ -121,66 +123,66 @@ class LineInGame extends React.Component {
     }
 
     render() {
-        let problemSituation = () => {
-            this.props.setCurrentState(
-                {
-                    oneRaw: {
-                        one: {value: 0, anime: 0, timeout: false},
-                        two: {value: 2, anime: 2, timeout: false},
-                        three: {value: 0, anime: 0, timeout: false},
-                        four: {value: 0, anime: 0, timeout: false}
-                    },
-                    twoRaw: {
-                        one: {value: 2, anime: null, timeout: false},
-                        two: {value: 2, anime: null, timeout: false},
-                        three: {value: 2, anime: null, timeout: false},
-                        four: {value: 2, anime: null, timeout: false}
-                    },
-                    threeRaw: {
-                        one: {value: 2, anime: null, timeout: false},
-                        two: {value: 2, anime: null, timeout: false},
-                        three: {value: 2, anime: null, timeout: false},
-                        four: {value: 2, anime: null, timeout: false}
-                    },
-                    fourRaw: {
-                        one: {value: 4, anime: null, timeout: false},
-                        two: {value: 4, anime: null, timeout: false},
-                        three: {value: 4, anime: null, timeout: false},
-                        four: {value: 4, anime: null, timeout: false}
-                    },
-                }
-            )
-        }
-        let noProblemSituation = () => {
-            this.props.setCurrentState(
-                {
-                    oneRaw: {
-                        one: {value: 0, anime: 0, timeout: false},
-                        two: {value: 0, anime: 0, timeout: false},
-                        three: {value: 2, anime: 1, timeout: false},
-                        four: {value: 0, anime: 0, timeout: false}
-                    },
-                    twoRaw: {
-                        one: {value: 2, anime: null, timeout: false},
-                        two: {value: 2, anime: null, timeout: false},
-                        three: {value: 2, anime: null, timeout: false},
-                        four: {value: 2, anime: null, timeout: false}
-                    },
-                    threeRaw: {
-                        one: {value: 2, anime: null, timeout: false},
-                        two: {value: 2, anime: null, timeout: false},
-                        three: {value: 2, anime: null, timeout: false},
-                        four: {value: 2, anime: null, timeout: false}
-                    },
-                    fourRaw: {
-                        one: {value: 4, anime: null, timeout: false},
-                        two: {value: 4, anime: null, timeout: false},
-                        three: {value: 4, anime: null, timeout: false},
-                        four: {value: 4, anime: null, timeout: false}
-                    },
-                }
-            )
-        }
+        // let problemSituation = () => {
+        //     this.props.setCurrentState(
+        //         {
+        //             oneRaw: {
+        //                 one: {value: 0, anime: 0, timeout: false},
+        //                 two: {value: 2, anime: 2, timeout: false},
+        //                 three: {value: 0, anime: 0, timeout: false},
+        //                 four: {value: 0, anime: 0, timeout: false}
+        //             },
+        //             twoRaw: {
+        //                 one: {value: 2, anime: null, timeout: false},
+        //                 two: {value: 2, anime: null, timeout: false},
+        //                 three: {value: 2, anime: null, timeout: false},
+        //                 four: {value: 2, anime: null, timeout: false}
+        //             },
+        //             threeRaw: {
+        //                 one: {value: 2, anime: null, timeout: false},
+        //                 two: {value: 2, anime: null, timeout: false},
+        //                 three: {value: 2, anime: null, timeout: false},
+        //                 four: {value: 2, anime: null, timeout: false}
+        //             },
+        //             fourRaw: {
+        //                 one: {value: 4, anime: null, timeout: false},
+        //                 two: {value: 4, anime: null, timeout: false},
+        //                 three: {value: 4, anime: null, timeout: false},
+        //                 four: {value: 4, anime: null, timeout: false}
+        //             },
+        //         }
+        //     )
+        // }
+        // let noProblemSituation = () => {
+        //     this.props.setCurrentState(
+        //         {
+        //             oneRaw: {
+        //                 one: {value: 0, anime: 0, timeout: false},
+        //                 two: {value: 0, anime: 0, timeout: false},
+        //                 three: {value: 2, anime: 1, timeout: false},
+        //                 four: {value: 0, anime: 0, timeout: false}
+        //             },
+        //             twoRaw: {
+        //                 one: {value: 2, anime: null, timeout: false},
+        //                 two: {value: 2, anime: null, timeout: false},
+        //                 three: {value: 2, anime: null, timeout: false},
+        //                 four: {value: 2, anime: null, timeout: false}
+        //             },
+        //             threeRaw: {
+        //                 one: {value: 2, anime: null, timeout: false},
+        //                 two: {value: 2, anime: null, timeout: false},
+        //                 three: {value: 2, anime: null, timeout: false},
+        //                 four: {value: 2, anime: null, timeout: false}
+        //             },
+        //             fourRaw: {
+        //                 one: {value: 4, anime: null, timeout: false},
+        //                 two: {value: 4, anime: null, timeout: false},
+        //                 three: {value: 4, anime: null, timeout: false},
+        //                 four: {value: 4, anime: null, timeout: false}
+        //             },
+        //         }
+        //     )
+        // }
         return (<div>
                 <div className={s.b}>
                     <div className={s.head}>Header

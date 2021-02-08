@@ -29,9 +29,8 @@
 
 }
 .slide0{
-    transform: translate(0px);
     z-index: 0;
-    transition: transform 0s;
+    transition: none;
 
 }
 .slide{
@@ -54,8 +53,13 @@
 
 }
 .mini{
-    margin: -7px;
-    transition: all 0.05s;
+    margin: -14px;
+    transition: all 0.2s;
+
+}
+.appearance{
+    margin: 10px;
+    transition: all 0.2s;
 
 }
 .unSlide{

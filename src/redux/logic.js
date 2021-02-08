@@ -38,6 +38,38 @@ export let getMatrixOnState = (state) => {
     return matrix;
 
 }
+//полчить матрицу анимаций из стейта
+let getAnimationMatrixOnState=(state)=>{
+    let matrix = {
+        oneRaw: {
+            one: state.oneRaw.one.anime,
+            two: state.oneRaw.two.anime,
+            three: state.oneRaw.three.anime,
+            four: state.oneRaw.four.anime
+        },
+        twoRaw: {
+            one: state.twoRaw.one.anime,
+            two: state.twoRaw.two.anime,
+            three: state.twoRaw.three.anime,
+            four: state.twoRaw.four.anime
+        },
+        threeRaw:
+            {
+                one: state.threeRaw.one.anime,
+                two: state.threeRaw.two.anime,
+                three: state.threeRaw.three.anime,
+                four: state.threeRaw.four.anime
+            }
+        , fourRaw:
+            {
+                one: state.fourRaw.one.anime,
+                two: state.fourRaw.two.anime,
+                three: state.fourRaw.three.anime,
+                four: state.fourRaw.four.anime
+            }
+    }
+    return matrix
+}
 //сдвинуть строку
 export let shiftRow = (row) => {
     let thisRow = {
@@ -137,10 +169,10 @@ export let rowSlide = (row) => {
         console.log(returnedRow)
         return returnedRow
     }
-    let rezult = ((thisRow.three !== thisRow.four) && thisRow.two === thisRow.three)
+    let result = ((thisRow.three !== thisRow.four) && thisRow.two === thisRow.three)
         ? comparisonOfCentralMembers(twoAndThree) : pairwiseComparison(oneAndTwo, threeAndFour)
 
-    return rezult
+    return result
 }
 // функция для тестирования   сдвига
 export let testRowSlide = () => {
@@ -403,7 +435,9 @@ export let RIGHT = (state) => {
             four: {value: unRotateMatrix.fourRaw.four, anime: newAnimationMatrix.fourRaw.four}
         }
     }
-    return {oneState: oldMatrixOldAnimation, twoState: newMatrixNewAnimation}
+    let newMatrixNewAnimationPlusNewPlayingPiece=addNewPlayingPiece(newMatrixNewAnimation)
+
+    return {oneState: oldMatrixOldAnimation, twoState: newMatrixNewAnimationPlusNewPlayingPiece}
 }
 export let LEFT = (state) => {
     //1)get matrix  on state:
@@ -448,7 +482,9 @@ export let LEFT = (state) => {
     //получить стейт для ВТОРОЙ ФАЗЫ
     let newAnimationNewMatrix=gluingMatrix(unRotateMatrix, newAnimationMatrix)
 
-    return {oneState: oldMatrixOldAnimation, twoState: newAnimationNewMatrix}
+    let newMatrixNewAnimationPlusNewPlayingPiece=addNewPlayingPiece(newAnimationNewMatrix)
+
+    return {oneState: oldMatrixOldAnimation, twoState: newMatrixNewAnimationPlusNewPlayingPiece}
 }
 export let UP = (state) => {
     //1)get matrix  on state:
@@ -497,9 +533,11 @@ export let UP = (state) => {
     let newValuesMatrix=getUnDownRowsOutMatrix(slideRotateMatrix)
     //Получим стейт для ВТОРОЙ ФАЗЫ
     let newMatrixNewAnimation=gluingMatrix(newValuesMatrix, newAnimationMatrix)
+
+    let newMatrixNewAnimationPlusNewPlayingPiece=addNewPlayingPiece(newMatrixNewAnimation)
     return {
         oneState: oldMatrixOldAnimation,
-        twoState: newMatrixNewAnimation
+        twoState: newMatrixNewAnimationPlusNewPlayingPiece
     }
 }
 export let DOWN = (state) => {
@@ -552,9 +590,11 @@ export let DOWN = (state) => {
     ))
     //получим стей ВТОРОЙ ФАЗЫ
     let newMatrixNewAnimation = gluingMatrix(newValuesMatrix, newAnimationMatrix)
+
+    let newMatrixNewAnimationPlusNewPlayingPiece=addNewPlayingPiece(newMatrixNewAnimation)
     return {
         oneState: oldMatrixOldAnimation,
-        twoState: newMatrixNewAnimation
+        twoState: newMatrixNewAnimationPlusNewPlayingPiece
     }
 }
 //склеиватель матрицы данных и матрицы анимаций
@@ -586,3 +626,83 @@ let gluingMatrix=(valMatrix, animeMatrix)=> {
         }
     }
     }
+//Для одобавлления новых плиток в процессе игры
+// возвращает измененный стейт
+export let addNewPlayingPiece=(state)=>{
+    //получить текущую матрицу
+    let currentMatrix=getMatrixOnState(state);
+    let getMatrixMassive=getMassiveOnMatrix(currentMatrix)
+    let matrixMassive=getMatrixMassive
+    //посчитаем все нули
+    let counter=0;
+    let nullsIndexMassive=[]
+    matrixMassive.forEach((currentValue, index)=>{
+        if(currentValue===0){nullsIndexMassive.push(index)
+            counter=counter+1}
+    })
+    //выберем случайное число от из нулей
+    let rndNull=Math.floor(Math.random() * Math.floor(counter))
+    //получим индекс случайной клетки которую будем увеличивать
+    let nullIndex=nullsIndexMassive[rndNull]
+    // с учетом случайного числа создадим матрицу значений
+    matrixMassive[nullIndex]=matrixMassive[nullIndex]+2
+    let newValuesMatrix=getMatrixOnMassive(matrixMassive)
+    //создание измененной матрицы анимаций объекта
+    let oldAnimations=getAnimationMatrixOnState(state)
+    //полчим массив из матрицы анимаций
+    let animationsMatrixMassive=getMassiveOnMatrix(oldAnimations)
+    //заменим в массиве анимаций необходимое значение для чего
+    animationsMatrixMassive[nullIndex]=44
+//    соберем обратно матрицу из массива
+    let newAnimationMatrix=getMatrixOnMassive(animationsMatrixMassive)
+    let returnedState=gluingMatrix(newValuesMatrix, newAnimationMatrix);
+    return returnedState
+}
+//общий метод получения массива из матрицы
+let getMassiveOnMatrix=(matrix)=>{
+    let massive=[];
+    Object.entries(matrix.oneRaw)
+        .map(([key, value])=>massive.push(value))
+    Object.entries(matrix.twoRaw)
+        .map(([key, value])=>massive.push(value))
+    Object.entries(matrix.threeRaw)
+        .map(([key, value])=>massive.push(value))
+    Object.entries(matrix.fourRaw)
+        .map(([key, value])=>massive.push(value))
+    return massive
+}
+// общий метод для получения матрицы из  массива
+let getMatrixOnMassive=(massive)=>{
+    let oneRaw=[];
+    let twoRaw=[];
+    let threeRaw=[];
+    let fourRaw=[]
+    massive.forEach(
+        (cV, index)=>{
+            if(index<=3){
+                oneRaw.push(cV)
+            }else if(index<=7){
+                twoRaw.push(cV)
+            }else if(index<=11){
+                threeRaw.push(cV)
+            }else{
+                fourRaw.push(cV)
+            }
+        })
+    let shift=(massive)=>{
+        let obj={
+            one: massive[0],
+            two: massive[1],
+            three: massive[2],
+            four: massive[3],
+        }
+        return obj;
+    }
+    let returnedValuesMatrix={
+        oneRaw:shift(oneRaw),
+        twoRaw:shift(twoRaw),
+        threeRaw:shift(threeRaw),
+        fourRaw:shift(fourRaw)
+    }
+    return returnedValuesMatrix
+}
