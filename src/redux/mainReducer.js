@@ -7,28 +7,28 @@ const SET_CURRENT_STATE= 'setCurrentState';
 let initialState = {
 
     oneRaw: {
-        one: {value: 0, anime: null },
-        two: {value: 32, anime: null },
-        three: {value: 0, anime: null},
-        four: {value: 64, anime: null}
+        one: {value: 0, anime: 0 },
+        two: {value: 32, anime: 0 },
+        three: {value: 0, anime: 0},
+        four: {value: 64, anime: 0}
     },
     twoRaw: {
-        one: {value: 2, anime: null},
-        two: {value: 16, anime: null},
-        three: {value: 2, anime: null},
-        four: {value: 2, anime: null}
+        one: {value: 2, anime: 0},
+        two: {value: 16, anime: 0},
+        three: {value: 2, anime: 0},
+        four: {value: 2, anime: 0}
     },
     threeRaw: {
-        one: {value: 2, anime: null},
-        two: {value: 2, anime:  null},
-        three: {value: 8, anime: null},
-        four: {value: 2, anime: null}
+        one: {value: 2, anime: 0},
+        two: {value: 2, anime:  0},
+        three: {value: 8, anime: 0},
+        four: {value: 2, anime: 0}
     },
     fourRaw: {
-        one: {value: 4, anime:  null},
-        two: {value: 4, anime:  null},
-        three: {value: 4, anime: null},
-        four: {value: 4, anime: null}
+        one: {value: 4, anime:  0},
+        two: {value: 4, anime:  0},
+        three: {value: 4, anime: 0},
+        four: {value: 4, anime: 0}
     }
 }
 let mainReducer = (state = initialState, action) => {
@@ -40,26 +40,26 @@ let mainReducer = (state = initialState, action) => {
                 oneRaw: {
                     one: {value: 2, anime: 1},
                     two: {value: 2, anime: 1},
-                    three: {value: 2, anime: null},
-                    four: {value: 4, anime: null}
+                    three: {value: 2, anime: 0},
+                    four: {value: 4, anime: 0}
                 },
                 twoRaw: {
                     one: {value: 32, anime: 1},
                     two: {value: 64, anime: 1},
-                    three: {value: 64, anime: null},
-                    four: {value: 128, anime: null}
+                    three: {value: 64, anime: 0},
+                    four: {value: 128, anime: 0}
                 },
                 threeRaw: {
-                    one: {value: 256, anime: null},
-                    two: {value: 512, anime:  null},
-                    three: {value: 1024, anime: null},
-                    four: {value: 2048, anime: null}
+                    one: {value: 256, anime: 0},
+                    two: {value: 512, anime:  0},
+                    three: {value: 1024, anime: 0},
+                    four: {value: 2048, anime: 0}
                 },
                 fourRaw: {
-                    one: {value: 8192, anime:  null},
-                    two: {value: 16384, anime:  null},
-                    three: {value: 32768, anime: null},
-                    four: {value: 65536, anime: null}
+                    one: {value: 8192, anime:  0},
+                    two: {value: 16384, anime:  0},
+                    three: {value: 32768, anime: 0},
+                    four: {value: 65536, anime: 0}
                 }
             }
         }

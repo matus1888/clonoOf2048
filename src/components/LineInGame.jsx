@@ -5,7 +5,6 @@ import {DOWN, LEFT, RIGHT, rowSlide, UP} from "../redux/logic";
 import testMassive from "./testMassive";
 
 
-//todo   на основе имеющихся данных и logics реализовать полностью рабочие кнопки
 class LineInGame extends React.Component {
     constructor(props) {
         super(props);

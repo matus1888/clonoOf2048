@@ -111,8 +111,8 @@ export let shiftRow = (row) => {
     return thisRow
 }
 export let rowSlide = (row) => {
-    console.log('input raw is')
-    console.log(row)
+    // console.log('input raw is')
+    // console.log(row)
 
 //Сдвиг элементов,  если есть нули
 
@@ -153,20 +153,20 @@ export let rowSlide = (row) => {
                 one: oneAndTwo.a, two: oneAndTwo.b, three: threeAndFour.a, four: threeAndFour.b
             }
         }
-        console.log('парное')
-        console.log(returnedRow)
+        // console.log('парное')
+        // console.log(returnedRow)
         return returnedRow
     }
     //для исключения ситуаций: input row is  {x:0;y:1;z:1;c:2}
     //                         output row is {x:0;y:1;z:1;c:2}
     let comparisonOfCentralMembers = (twoAndThree) => {
-        console.log('по центральным')
+        // console.log('по центральным')
         if (twoAndThree.a === 0) {
             returnedRow = {one: 0, two: thisRow.one, three: twoAndThree.b, four: thisRow.four}
         } else {
             returnedRow = {one: thisRow.one, two: twoAndThree.a, three: twoAndThree.b, four: thisRow.four}
         }
-        console.log(returnedRow)
+        // console.log(returnedRow)
         return returnedRow
     }
     let result = ((thisRow.three !== thisRow.four) && thisRow.two === thisRow.three)
@@ -200,7 +200,7 @@ let getRightRowsOutMatrix = (matrix) => {
     return matrix
 }
 let getLeftRowsOutMatrix = (matrix) => {
-    console.log(matrix)
+    // console.log(matrix)
     let leftMatrix = {
         oneRaw: {
             one: matrix.oneRaw.four,
@@ -408,7 +408,6 @@ export let RIGHT = (state) => {
     let unRotateMatrix = slideRotateMatrix
     //5) return state in parent
     // создать объект новый стейт и новая анимация ВТОРОЙ ОБЪЕКТ
-    //todo  функцию которая склеит матрицу значений и матрицу анимаций в стейт
     let newMatrixNewAnimation = {
         oneRaw: {
             one: {value: unRotateMatrix.oneRaw.one, anime: newAnimationMatrix.oneRaw.one},
@@ -436,8 +435,13 @@ export let RIGHT = (state) => {
         }
     }
     let newMatrixNewAnimationPlusNewPlayingPiece=addNewPlayingPiece(newMatrixNewAnimation)
+    //чтобы не добавлять лишнюю
+    let notAnimations=isNullAnimation(oldAnimationMatrix)
+    // console.log(oldAnimationMatrix)
+    // console.log('notAnimations is = '+ notAnimations)
 
-    return {oneState: oldMatrixOldAnimation, twoState: newMatrixNewAnimationPlusNewPlayingPiece}
+    return {oneState: oldMatrixOldAnimation,
+        twoState: notAnimations?newMatrixNewAnimation:newMatrixNewAnimationPlusNewPlayingPiece}
 }
 export let LEFT = (state) => {
     //1)get matrix  on state:
@@ -483,8 +487,12 @@ export let LEFT = (state) => {
     let newAnimationNewMatrix=gluingMatrix(unRotateMatrix, newAnimationMatrix)
 
     let newMatrixNewAnimationPlusNewPlayingPiece=addNewPlayingPiece(newAnimationNewMatrix)
-
-    return {oneState: oldMatrixOldAnimation, twoState: newMatrixNewAnimationPlusNewPlayingPiece}
+    //чтобы не добавлять лишнюю
+    let notAnimations=isNullAnimation(oldAnimationMatrix)
+    // console.log(oldAnimationMatrix)
+    // console.log('notAnimations is = '+ notAnimations)
+    return {oneState: oldMatrixOldAnimation,
+        twoState:notAnimations?newAnimationNewMatrix:newMatrixNewAnimationPlusNewPlayingPiece}
 }
 export let UP = (state) => {
     //1)get matrix  on state:
@@ -535,9 +543,14 @@ export let UP = (state) => {
     let newMatrixNewAnimation=gluingMatrix(newValuesMatrix, newAnimationMatrix)
 
     let newMatrixNewAnimationPlusNewPlayingPiece=addNewPlayingPiece(newMatrixNewAnimation)
+    //чтобы не добавлять лишнюю
+    let notAnimations=isNullAnimation(oldAnimationMatrix)
+    // console.log(oldAnimationMatrix)
+    // console.log('notAnimations is = '+ notAnimations)
+
     return {
         oneState: oldMatrixOldAnimation,
-        twoState: newMatrixNewAnimationPlusNewPlayingPiece
+        twoState: notAnimations?newMatrixNewAnimation:newMatrixNewAnimationPlusNewPlayingPiece
     }
 }
 export let DOWN = (state) => {
@@ -592,9 +605,14 @@ export let DOWN = (state) => {
     let newMatrixNewAnimation = gluingMatrix(newValuesMatrix, newAnimationMatrix)
 
     let newMatrixNewAnimationPlusNewPlayingPiece=addNewPlayingPiece(newMatrixNewAnimation)
+    // чтобы не добалять лишнюю
+    let notAnimations=isNullAnimation(oldAnimationMatrix)
+    // console.log(oldAnimationMatrix)
+    // console.log('notAnimations is = '+ notAnimations)
+
     return {
         oneState: oldMatrixOldAnimation,
-        twoState: newMatrixNewAnimationPlusNewPlayingPiece
+        twoState: notAnimations?newMatrixNewAnimation:newMatrixNewAnimationPlusNewPlayingPiece
     }
 }
 //склеиватель матрицы данных и матрицы анимаций
@@ -705,4 +723,27 @@ let getMatrixOnMassive=(massive)=>{
         fourRaw:shift(fourRaw)
     }
     return returnedValuesMatrix
+}
+// вспомогательная матрица для проверки на отсутствие анимации
+let isNullAnimation=(animationMatrix)=> {
+    // let rights = {one: 0, two: 0, three: 0, four: 0};
+    // let downs = {one: , two: 0, three: 0, four: 0};
+    let massive= []
+    Object.entries(animationMatrix.oneRaw).map(([key, value])=>
+        massive.push(value))
+    Object.entries(animationMatrix.twoRaw).map(([key, value])=>
+        massive.push(value))
+    Object.entries(animationMatrix.threeRaw).map(([key, value])=>
+        massive.push(value))
+    Object.entries(animationMatrix.fourRaw).map(([key, value])=>
+        massive.push(value))
+   console.log(massive)
+    let result = true
+    massive.forEach(x=>{
+        if(!((x===9)||(x===0)||(x===5)||(x===13))){
+            // console.log('не равно')
+            result=false
+        }
+    })
+    return result
 }
