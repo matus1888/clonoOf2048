@@ -199,7 +199,7 @@ export let testRowSlide = () => {
 let getRightRowsOutMatrix = (matrix) => {
     return matrix
 }
-let getLeftRowsOutMatrix = (matrix) => {
+export let getLeftRowsOutMatrix = (matrix) => {
     // console.log(matrix)
     let leftMatrix = {
         oneRaw: {
@@ -230,7 +230,7 @@ let getLeftRowsOutMatrix = (matrix) => {
     }
     return leftMatrix
 }
-let getDownRowsOutMatrix = (matrix) => {
+export let getDownRowsOutMatrix = (matrix) => {
     let downMatrix = {
         oneRaw: {
             one: matrix.oneRaw.one,
@@ -289,7 +289,7 @@ let getUnDownRowsOutMatrix = (matrix) => {
     }
     return unDownMatrix
 }
-let getUpRowsOutMatrix = (matrix) => {
+export let getUpRowsOutMatrix = (matrix) => {
     let upMatrix = {
         oneRaw: {
             one: matrix.fourRaw.one,
@@ -677,7 +677,7 @@ export let addNewPlayingPiece=(state)=>{
     return returnedState
 }
 //общий метод получения массива из матрицы
-let getMassiveOnMatrix=(matrix)=>{
+export let getMassiveOnMatrix=(matrix)=>{
     let massive=[];
     Object.entries(matrix.oneRaw)
         .map(([key, value])=>massive.push(value))
@@ -737,7 +737,7 @@ let isNullAnimation=(animationMatrix)=> {
         massive.push(value))
     Object.entries(animationMatrix.fourRaw).map(([key, value])=>
         massive.push(value))
-   console.log(massive)
+   // console.log(massive)
     let result = true
     massive.forEach(x=>{
         if(!((x===9)||(x===0)||(x===5)||(x===13))){

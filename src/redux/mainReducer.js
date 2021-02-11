@@ -7,28 +7,28 @@ const SET_CURRENT_STATE= 'setCurrentState';
 let initialState = {
 
     oneRaw: {
-        one: {value: 0, anime: 0 },
-        two: {value: 32, anime: 0 },
-        three: {value: 0, anime: 0},
-        four: {value: 64, anime: 0}
+        one: {value: 2, anime: 0 },
+        two: {value: 4, anime: 0 },
+        three: {value: 8, anime: 0},
+        four: {value: 16, anime: 0}
     },
     twoRaw: {
-        one: {value: 2, anime: 0},
-        two: {value: 16, anime: 0},
-        three: {value: 2, anime: 0},
-        four: {value: 2, anime: 0}
+        one: {value: 32, anime: 0},
+        two: {value: 64, anime: 0},
+        three: {value: 128, anime: 0},
+        four: {value: 256, anime: 0}
     },
     threeRaw: {
-        one: {value: 2, anime: 0},
-        two: {value: 2, anime:  0},
-        three: {value: 8, anime: 0},
-        four: {value: 2, anime: 0}
+        one: {value: 512, anime: 0},
+        two: {value: 1024, anime:  0},
+        three: {value: 2048, anime: 0},
+        four: {value: 1024, anime: 0}
     },
     fourRaw: {
-        one: {value: 4, anime:  0},
-        two: {value: 4, anime:  0},
-        three: {value: 4, anime: 0},
-        four: {value: 4, anime: 0}
+        one: {value: 512, anime:  0},
+        two: {value: 256, anime:  0},
+        three: {value: 128, anime: 0},
+        four: {value: 64, anime: 0}
     }
 }
 let mainReducer = (state = initialState, action) => {

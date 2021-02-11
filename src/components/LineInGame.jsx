@@ -3,6 +3,7 @@ import s from './LineInGame.module.css';
 import GameFieldContainer from "./gameField/GameFieldContainer";
 import {DOWN, LEFT, RIGHT, rowSlide, UP} from "../redux/logic";
 import testMassive from "./testMassive";
+import gameOver from "../redux/gameOver";
 
 
 class LineInGame extends React.Component {
@@ -184,7 +185,9 @@ class LineInGame extends React.Component {
         // }
         return (<div>
                 <div className={s.b}>
+
                     <div className={s.head}>Header
+                        {gameOver(this.props.main)&&<div>gameOver</div>}
                         <button onClick={this.props.reset}>Reset animation</button>
                     </div>
                     <GameFieldContainer/>
