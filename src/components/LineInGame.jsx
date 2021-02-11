@@ -183,6 +183,7 @@ class LineInGame extends React.Component {
         //         }
         //     )
         // }
+
         return (<div>
                 <div className={s.b}>
 

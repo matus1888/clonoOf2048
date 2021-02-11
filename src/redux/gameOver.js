@@ -33,22 +33,26 @@ let gameOver = (state) => {
             return false
         }
     })
-    for (let i=1; i<massiveR.length; i++){
-        if(massiveR[i-1]===massiveR[i])
+    for (let j=1; j<=3; j++){
+    for (let i=1; i<=3; i++){
+            if(massiveR[(i+j*4)-1]===massiveR[(i+j*4)])
+                return false
+        }}
+    for (let j=0; j<3; j++){
+    for (let i=1; i<=3; i++){
+        if(massiveL[(i+j*4)-1]===massiveL[(i+j*4)])
             return false
-    }
-    for (let i=1; i<massiveL.length; i++){
-        if(massiveL[i-1]===massiveL[i])
+    }}
+    for (let j=0; j<3; j++){
+    for (let i=1; i<=3; i++){
+        if(massiveD[(i+j*4)-1]===massiveD[(i+j*4)])
             return false
-    }
-    for (let i=1; i<massiveD.length; i++){
-        if(massiveD[i-1]===massiveD[i])
+    }}
+    for (let j=0; j<3; j++){
+    for (let i=1; i<=3; i++){
+        if(massiveU[(i+j*4)-1]===massiveU[(i+j*4)])
             return false
-    }
-    for (let i=1; i<massiveU.length; i++){
-        if(massiveU[i-1]===massiveU[i])
-            return false
-    }
+    }}
 
     return isGameOver
 }
