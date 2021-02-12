@@ -4,14 +4,14 @@
     margin-left: auto;
     margin-right: auto;
     max-width: 500px;
-    background-color: yellow;
     display: grid;
     grid-template-areas: 'head' 'bodyField' 'leg';
-    grid-template-rows: 20% 80%;
 }
 
 .head {
     grid-area: head;
+    max-width: 500px;
+    height: 100px;
     background-color: pink;
 }
 
@@ -22,6 +22,36 @@
     display: grid;
     grid-template-rows: repeat(4, 1fr);
     background: url('../images/fon.jpg');
+}
+
+.bodyField2 {
+    transition: all 1s;
+    opacity: 100%;
+    background: #a19e9e;
+    z-index: 5555;
+    grid-area: bodyField;
+    width: 500px;
+    height: 500px;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+
+}
+
+.footer {
+    grid-area: leg;
+    opacity: 0%;
+}
+
+.footer2 {
+    transition: all 0.5s;
+    transform: translateY(-300px);
+    text-align: center;
+    font-size: 500%;
+    font-weight: bold;
+    background-color: red;
+    grid-area: leg;
+    z-index: 2000;
+    opacity: 70%;
 }
 
 .rowStyle {
@@ -37,6 +67,17 @@
     margin: 2px;
     font-size: 200%
 }
-.p{
-   margin: auto;
+
+.p {
+    margin: auto;
+}
+.button{
+    margin: 10px;
+    padding: 20px;
+    position: relative;
+    color: #663a0a;
+    left: 50%;
+    font-weight: bolder;
+    font-size: 200% ;
+    transform: translate(-50%,0);
 }
