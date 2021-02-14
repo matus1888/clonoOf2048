@@ -662,8 +662,20 @@ export let addNewPlayingPiece=(state)=>{
     let rndNull=Math.floor(Math.random() * Math.floor(counter))
     //получим индекс случайной клетки которую будем увеличивать
     let nullIndex=nullsIndexMassive[rndNull]
+    //  для того чтобы плитки были не только 2 но и 4  сделаем функуию которая н оснеове  rnd  вернет
+    // 2 или 4  в пропорции 1 к 9
+    let  newX=()=>{
+        let rand = Math.floor(1 + Math.random() * 10);
+        if (rand === 1){
+            return 4
+        }else{
+            return 2
+        }
+    }
+    let x=newX()
+    //
     // с учетом случайного числа создадим матрицу значений
-    matrixMassive[nullIndex]=matrixMassive[nullIndex]+2
+    matrixMassive[nullIndex]=matrixMassive[nullIndex]+x
     let newValuesMatrix=getMatrixOnMassive(matrixMassive)
     //создание измененной матрицы анимаций объекта
     let oldAnimations=getAnimationMatrixOnState(state)
