@@ -5,7 +5,7 @@
     margin-right: auto;
     max-width: 500px;
     display: grid;
-    grid-template-areas: 'head' 'bodyField' 'leg';
+    grid-template-areas: 'head' 'bodyField' 'leg' 'winner';
 }
 
 .head {
@@ -80,4 +80,21 @@
     font-weight: bolder;
     font-size: 200% ;
     transform: translate(-50%,0);
+}
+/*this is winner banner*/
+.winner {
+    grid-area: winner;
+    opacity: 0%;
+}
+
+.winner2 {
+    transition: all 0.5s;
+    transform: translateY(-325px);
+    text-align: center;
+    font-size: 500%;
+    font-weight: bold;
+    background-color: red;
+    grid-area: winner;
+    z-index: 2000;
+    opacity: 70%;
 }

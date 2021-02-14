@@ -6,6 +6,17 @@ import {
     getUpRowsOutMatrix,
 } from "./logic";
 
+export let youWin=(state)=>{
+    let isWinner=false
+    let matrixOnState= getMatrixOnState(state)
+    let massive=getMassiveOnMatrix(matrixOnState)
+    massive.forEach(x=>{
+        if(x===2048){
+            isWinner=true
+        }
+    })
+    return isWinner
+}
 let gameOver = (state) => {
     let  isGameOver=true
     let matrixOfState = getMatrixOnState(state);

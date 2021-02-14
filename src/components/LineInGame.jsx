@@ -3,7 +3,7 @@ import s from './LineInGame.module.css';
 import GameFieldContainer from "./gameField/GameFieldContainer";
 import {DOWN, LEFT, RIGHT, rowSlide, UP} from "../redux/logic";
 import testMassive from "./testMassive";
-import gameOver from "../redux/gameOver";
+import gameOver, {youWin} from "../redux/gameOver";
 
 
 class LineInGame extends React.Component {
@@ -196,6 +196,7 @@ class LineInGame extends React.Component {
                     <GameFieldContainer/>
                     {/*{console.log('gameOver is= '+gameOver(this.props.main))}*/}
                     <div className={gameOver(this.props.main) ? s.footer2 : s.footer}>GAME OVER</div>
+                    <div className={youWin(this.props.main)?s.winner2:s.winner}>YOU WIN!!!</div>
                 </div>
             </div>
         )
