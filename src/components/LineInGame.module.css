@@ -10,9 +10,11 @@
 
 .head {
     grid-area: head;
-    max-width: 500px;
+    width: 500px;
     height: 100px;
     background-color: pink;
+    display: grid;
+    grid-template-areas: 'button score bestScore';
 }
 
 .bodyField {
@@ -75,10 +77,11 @@
     margin: 10px;
     padding: 20px;
     position: relative;
+    grid-area: button;
+    left: 45%;
     color: #663a0a;
-    left: 50%;
     font-weight: bolder;
-    font-size: 200% ;
+    font-size: 150% ;
     transform: translate(-50%,0);
 }
 /*this is winner banner*/
@@ -97,4 +100,12 @@
     grid-area: winner;
     z-index: 2000;
     opacity: 70%;
+}
+
+.input {
+    margin: 20px;
+    padding: 10px;
+    width: 80px;
+    grid-area: score;
+    font-size: 180% ;
 }

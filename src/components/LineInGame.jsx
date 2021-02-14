@@ -68,6 +68,7 @@ class LineInGame extends React.Component {
         let States = twoStates
         let oneState = States.oneState
         let twoState = States.twoState
+        this.props.setScore(twoStates.score)
         this.setNullAnimation()
         setTimeout(() => this.setCurrentValueAndSlideAnimation(oneState), 20)
         setTimeout(() => this.setNewStateAndNewAnimation(twoState), 200)
@@ -191,7 +192,8 @@ class LineInGame extends React.Component {
 
                 <div className={s.b}>
                     <div className={s.head}>
-                        <button className={s.button} onClick={this.props.reset}>START NEW GAME</button>
+                        <span><button className={s.button} onClick={this.props.reset}>START NEW GAME</button></span>
+                        <span><b>SCORE</b><input  className={s.input} readOnly={true} value={this.props.score}/></span>
                     </div>
                     <GameFieldContainer/>
                     {/*{console.log('gameOver is= '+gameOver(this.props.main))}*/}

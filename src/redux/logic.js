@@ -1,4 +1,5 @@
 import {shiftRowGetAnimationOnePhase, shiftRowGetAnimationTwoPhase} from './animationLogic';
+import {getScoreOfMatrixes} from "./getScoreOfMatrixes";
 // основные элементы это 4 функции LEFT RIGHT UP DOWN
 // отдаем стейт, получаем измененный стейт
 export let logicLeft = (matrix) => {
@@ -434,6 +435,9 @@ export let RIGHT = (state) => {
             four: {value: unRotateMatrix.fourRaw.four, anime: newAnimationMatrix.fourRaw.four}
         }
     }
+    // todo   засетать с стейт Score
+    let score=getScoreOfMatrixes(newAnimationMatrix, matrixOnState)
+    //
     let newMatrixNewAnimationPlusNewPlayingPiece=addNewPlayingPiece(newMatrixNewAnimation)
     //чтобы не добавлять лишнюю
     let notAnimations=isNullAnimation(oldAnimationMatrix)
@@ -441,7 +445,9 @@ export let RIGHT = (state) => {
     // console.log('notAnimations is = '+ notAnimations)
 
     return {oneState: oldMatrixOldAnimation,
-        twoState: notAnimations?newMatrixNewAnimation:newMatrixNewAnimationPlusNewPlayingPiece}
+        twoState: notAnimations?newMatrixNewAnimation:newMatrixNewAnimationPlusNewPlayingPiece,
+        score:score
+    }
 }
 export let LEFT = (state) => {
     //1)get matrix  on state:

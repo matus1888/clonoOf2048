@@ -2,6 +2,7 @@ import LineInGame from "./LineInGame";
 import {connect} from "react-redux";
 import {ACResetAnimation, ACResetState, ACSetCurrentState} from "../redux/mainReducer";
 import {
+    actionCreatorAddScore,
     actionCreatorDown,
     actionCreatorLeft,
     actionCreatorNull,
@@ -12,7 +13,8 @@ import {
 let mapStateToProps=(state)=>{
     return{
         main: state.main,
-        keys: state.keysState.key
+        keys: state.keysState.key,
+        score: state.keysState.score
     }
 }
 let mapDispatchToProps=(dispatch)=>{
@@ -24,7 +26,8 @@ let mapDispatchToProps=(dispatch)=>{
         right:()=>dispatch(actionCreatorRight()),
         up:()=>dispatch(actionCreatorUP()),
         down:()=>dispatch(actionCreatorDown()),
-        setNull:()=>dispatch(actionCreatorNull())
+        setNull:()=>dispatch(actionCreatorNull()),
+        setScore:(score)=>dispatch(actionCreatorAddScore(score))
     }
 }
 
