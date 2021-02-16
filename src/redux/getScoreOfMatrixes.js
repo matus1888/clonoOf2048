@@ -2,6 +2,7 @@
 // возвращает количество очков, которое нужно прибавить к новому стейту
 import {getMassiveOnMatrix} from "./logic";
 
+
 export let getScoreOfMatrixes=(newAnimationMatrix, oldMatrixValue)=> {
     let massiveOldAnimation=getMassiveOnMatrix(newAnimationMatrix);
     let massiveOldMatrixValue=getMassiveOnMatrix(oldMatrixValue);
@@ -19,6 +20,6 @@ export let getScoreOfMatrixes=(newAnimationMatrix, oldMatrixValue)=> {
                     }
                 })
     })
-    console.log('score='+score)
+    // console.log('score='+score)
     return score
 }

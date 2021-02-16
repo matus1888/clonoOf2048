@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './LineInGame.module.css';
 import GameFieldContainer from "./gameField/GameFieldContainer";
-import {DOWN, LEFT, RIGHT, rowSlide, UP} from "../redux/logic";
+import {DOWN, LEFT, RIGHT, UP} from "../redux/logic";
 import testMassive from "./testMassive";
 import gameOver, {youWin} from "../redux/gameOver";
 
@@ -12,9 +12,9 @@ class LineInGame extends React.Component {
         this.startTicker = this.startTicker.bind(this);
         this.magic = this.magic.bind(this);
         this.setNewStateAndNewAnimation = this.setNewStateAndNewAnimation.bind(this)
-        this.setNewStateAndNullAnimation = this.setNewStateAndNullAnimation.bind(this)
         this.setNullAnimation = this.setNullAnimation.bind(this)
         this.keyFunction = this.keyFunction.bind(this);
+        this.setNewScore = this.setNewScore.bind(this);
         this.state = {massive: testMassive(), step: true, pressingLock: false}
         this.keyFunction = this.keyFunction.bind(this)
     }
@@ -51,6 +51,7 @@ class LineInGame extends React.Component {
         document.title = "2048";
         document.addEventListener("keydown", this.keyFunction, false);
 
+
         // console.log(this.props)
     }
 
@@ -68,7 +69,7 @@ class LineInGame extends React.Component {
         let States = twoStates
         let oneState = States.oneState
         let twoState = States.twoState
-        this.props.setScore(twoStates.score)
+        let score = States.score
         this.setNullAnimation()
         setTimeout(() => this.setCurrentValueAndSlideAnimation(oneState), 20)
         setTimeout(() => this.setNewStateAndNewAnimation(twoState), 200)
@@ -76,10 +77,16 @@ class LineInGame extends React.Component {
         setTimeout(() => this.setNewStateAndNewAnimation(twoState), 240)
         setTimeout(() => this.setNullAnimation(), 320)
         setTimeout(() => this.setState({...this.state, pressingLock: false}), 300)
+        setTimeout(()=>this.setNewScore(score), 300)
     }
 
     setNullAnimation() {
         this.props.resetAnimation()
+    }
+
+    setNewScore(score) {
+        let nS= {...this.props.main,score: this.props.main.score+score}
+        this.props.setCurrentState(nS)
     }
 
     setCurrentValueAndSlideAnimation(next) {
@@ -94,111 +101,19 @@ class LineInGame extends React.Component {
         )
     }
 
-    setNewStateAndNullAnimation(next) {
-        console.log('setNewStateAndNewAnimation')
-        let newStateRow = rowSlide(next);
-        this.props.setCurrentState(
-            {
-                ...this.props.main, oneRaw: {
-                    one: {
-                        value: newStateRow.one,
-                        anime: 0,
-                        timeout: this.props.main.oneRaw.one.timeout
-                    },
-                    two: {
-                        value: newStateRow.two,
-                        anime: 0,
-                        timeout: this.props.main.oneRaw.two.timeout
-                    },
-                    three: {
-                        value: newStateRow.three,
-                        anime: 0,
-                        timeout: this.props.main.oneRaw.three.timeout
-                    },
-                    four: {
-                        value: newStateRow.four,
-                        anime: 0,
-                        timeout: this.props.main.oneRaw.four.timeout
-                    },
-                }
-            }
-        )
-
-    }
 
     render() {
-        // let problemSituation = () => {
-        //     this.props.setCurrentState(
-        //         {
-        //             oneRaw: {
-        //                 one: {value: 0, anime: 0, timeout: false},
-        //                 two: {value: 2, anime: 2, timeout: false},
-        //                 three: {value: 0, anime: 0, timeout: false},
-        //                 four: {value: 0, anime: 0, timeout: false}
-        //             },
-        //             twoRaw: {
-        //                 one: {value: 2, anime: null, timeout: false},
-        //                 two: {value: 2, anime: null, timeout: false},
-        //                 three: {value: 2, anime: null, timeout: false},
-        //                 four: {value: 2, anime: null, timeout: false}
-        //             },
-        //             threeRaw: {
-        //                 one: {value: 2, anime: null, timeout: false},
-        //                 two: {value: 2, anime: null, timeout: false},
-        //                 three: {value: 2, anime: null, timeout: false},
-        //                 four: {value: 2, anime: null, timeout: false}
-        //             },
-        //             fourRaw: {
-        //                 one: {value: 4, anime: null, timeout: false},
-        //                 two: {value: 4, anime: null, timeout: false},
-        //                 three: {value: 4, anime: null, timeout: false},
-        //                 four: {value: 4, anime: null, timeout: false}
-        //             },
-        //         }
-        //     )
-        // }
-        // let noProblemSituation = () => {
-        //     this.props.setCurrentState(
-        //         {
-        //             oneRaw: {
-        //                 one: {value: 0, anime: 0, timeout: false},
-        //                 two: {value: 0, anime: 0, timeout: false},
-        //                 three: {value: 2, anime: 1, timeout: false},
-        //                 four: {value: 0, anime: 0, timeout: false}
-        //             },
-        //             twoRaw: {
-        //                 one: {value: 2, anime: null, timeout: false},
-        //                 two: {value: 2, anime: null, timeout: false},
-        //                 three: {value: 2, anime: null, timeout: false},
-        //                 four: {value: 2, anime: null, timeout: false}
-        //             },
-        //             threeRaw: {
-        //                 one: {value: 2, anime: null, timeout: false},
-        //                 two: {value: 2, anime: null, timeout: false},
-        //                 three: {value: 2, anime: null, timeout: false},
-        //                 four: {value: 2, anime: null, timeout: false}
-        //             },
-        //             fourRaw: {
-        //                 one: {value: 4, anime: null, timeout: false},
-        //                 two: {value: 4, anime: null, timeout: false},
-        //                 three: {value: 4, anime: null, timeout: false},
-        //                 four: {value: 4, anime: null, timeout: false}
-        //             },
-        //         }
-        //     )
-        // }
-
         return (<div>
 
                 <div className={s.b}>
                     <div className={s.head}>
                         <span><button className={s.button} onClick={this.props.reset}>START NEW GAME</button></span>
-                        <span><b>SCORE</b><input  className={s.input} readOnly={true} value={this.props.score}/></span>
+                        <span><b>SCORE</b><input className={s.input} readOnly={true} value={this.props.main.score}/></span>
                     </div>
                     <GameFieldContainer/>
                     {/*{console.log('gameOver is= '+gameOver(this.props.main))}*/}
                     <div className={gameOver(this.props.main) ? s.footer2 : s.footer}>GAME OVER</div>
-                    <div className={youWin(this.props.main)?s.winner2:s.winner}>YOU WIN!!!</div>
+                    <div className={youWin(this.props.main) ? s.winner2 : s.winner}>YOU WIN!!!</div>
                 </div>
             </div>
         )
