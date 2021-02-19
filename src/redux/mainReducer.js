@@ -30,7 +30,8 @@ let initialState = {
         three: {value: 0, anime: 0},
         four: {value: 0, anime: 0}
     },
-    score:0
+    score:0,
+    bestScore: localStorage.getItem('bestScore')?localStorage.getItem('bestScore'):0
 }
 let mainReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -65,7 +66,7 @@ let mainReducer = (state = initialState, action) => {
             }
         }
         case RESET_ALL: {
-            return initialState
+            return {...initialState, bestScore: localStorage.getItem('bestScore')?localStorage.getItem('bestScore'):0}
         }
         case ANIME_RESET_EFFECT: {
             return {
@@ -120,7 +121,8 @@ let mainReducer = (state = initialState, action) => {
                     three:{value: action.newState.fourRaw.three.value, anime: action.newState.fourRaw.three.anime},
                     four: {value: action.newState.fourRaw.four.value, anime:action.newState.fourRaw.four.anime}
                 },
-                score: action.newState.score
+                score: action.newState.score,
+                bestScore: action.newState.bestScore
             }
         }
 

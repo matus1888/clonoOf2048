@@ -81,7 +81,7 @@
     left: 45%;
     color: #663a0a;
     font-weight: bolder;
-    font-size: 150% ;
+    font-size: 100% ;
     transform: translate(-50%,0);
 }
 /*this is winner banner*/
@@ -108,4 +108,9 @@
     width: 80px;
     grid-area: score;
     font-size: 180% ;
+}
+.bb{
+    padding: 10px;
+    margin: 20px;
+    font-size: 100% ;
 }

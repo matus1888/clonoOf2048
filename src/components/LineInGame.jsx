@@ -15,10 +15,10 @@ class LineInGame extends React.Component {
         this.setNullAnimation = this.setNullAnimation.bind(this)
         this.keyFunction = this.keyFunction.bind(this);
         this.setNewScore = this.setNewScore.bind(this);
+        this.setNewBestScore = this.setNewBestScore.bind(this);
         this.state = {massive: testMassive(), step: true, pressingLock: false}
         this.keyFunction = this.keyFunction.bind(this)
     }
-
     keyFunction(event) {
         if (!this.state.pressingLock) {
             if (event.keyCode === 40) {
@@ -78,6 +78,7 @@ class LineInGame extends React.Component {
         setTimeout(() => this.setNullAnimation(), 320)
         setTimeout(() => this.setState({...this.state, pressingLock: false}), 300)
         setTimeout(()=>this.setNewScore(score), 300)
+        setTimeout(()=>this.setNewBestScore(score), 290)
     }
 
     setNullAnimation() {
@@ -88,7 +89,15 @@ class LineInGame extends React.Component {
         let nS= {...this.props.main,score: this.props.main.score+score}
         this.props.setCurrentState(nS)
     }
+    setNewBestScore(score) {
+        if (this.props.main.bestScore<this.props.main.score+score){
+            localStorage.setItem('bestScore', this.props.main.score+score)
+            console.log(localStorage)
+            this.props.setCurrentState({...this.props.main, bestScore: this.props.main.score+score})
 
+        }
+
+    }
     setCurrentValueAndSlideAnimation(next) {
         this.props.setCurrentState(
             {...this.props.main, ...next}
@@ -107,8 +116,9 @@ class LineInGame extends React.Component {
 
                 <div className={s.b}>
                     <div className={s.head}>
-                        <span><button className={s.button} onClick={this.props.reset}>START NEW GAME</button></span>
-                        <span><b>SCORE</b><input className={s.input} readOnly={true} value={this.props.main.score}/></span>
+                        <span><button className={s.button} onClick={this.props.reset}>NEW GAME</button></span>
+                        <span><b className={s.bb}>score</b><input className={s.input} readOnly={true} value={this.props.main.score}/></span>
+                        <span><b className={s.bb}>best score</b><input className={s.input} readOnly={true} value={this.props.main.bestScore}/></span>
                     </div>
                     <GameFieldContainer/>
                     {/*{console.log('gameOver is= '+gameOver(this.props.main))}*/}
