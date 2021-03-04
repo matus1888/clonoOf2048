@@ -19,6 +19,17 @@ class LineInGame extends React.Component {
         this.state = {massive: testMassive(), step: true, pressingLock: false}
         this.keyFunction = this.keyFunction.bind(this)
     }
+    magicFunction(){
+        if (this.props.keys === 'left') {
+            this.magic(LEFT(this.props.main))
+        } else if (this.props.keys === 'right') {
+            this.magic(RIGHT(this.props.main))
+        } else if (this.props.keys === 'up') {
+            this.magic(UP(this.props.main))
+        } else if (this.props.keys === 'down') {
+            this.magic(DOWN(this.props.main))
+        }
+    }
     keyFunction(event) {
         if (!this.state.pressingLock) {
             if (event.keyCode === 40) {
@@ -29,20 +40,13 @@ class LineInGame extends React.Component {
                 this.props.up()
             } else if (event.keyCode === 37) {
                 this.setState({...this.state, pressingLock: true})
+                console.log(Date.now()+'props.left()')
                 this.props.left()
             } else if (event.keyCode === 39) {
                 this.setState({...this.state, pressingLock: true})
                 this.props.right()
             }
-            if (this.props.keys === 'left') {
-                this.magic(LEFT(this.props.main))
-            } else if (this.props.keys === 'right') {
-                this.magic(RIGHT(this.props.main))
-            } else if (this.props.keys === 'up') {
-                this.magic(UP(this.props.main))
-            } else if (this.props.keys === 'down') {
-                this.magic(DOWN(this.props.main))
-            }
+
         }
     }
 
@@ -51,13 +55,13 @@ class LineInGame extends React.Component {
         document.title = "2048";
         document.addEventListener("keydown", this.keyFunction, false);
 
-
         // console.log(this.props)
     }
 
     componentWillUnmount() {
         document.removeEventListener("keydown", this.keyFunction, false);
         this.props.setNull()
+
     }
 
     //1)  в порядке отработки
@@ -112,8 +116,9 @@ class LineInGame extends React.Component {
 
 
     render() {
-        return (<div>
 
+        return (<div>
+                {this.magicFunction()}
                 <div className={s.b}>
                     <div className={s.head}>
                         <span><button className={s.button} onClick={this.props.reset}>NEW GAME</button></span>

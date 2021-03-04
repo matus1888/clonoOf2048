@@ -1,13 +1,14 @@
 import {useEffect, useRef} from "react";
 import LineInGameContainer from "./components/LineInGameContainer";
-import s from './App.module.css'
+import s from './App.module.css';
+import React from 'react'
 
 
 const App = (props) => {
     const canvasRef = useRef(null);
     const msgBoxRef = useRef(null);
     useEffect(() => {
-            const canvas = canvasRef.current
+
 
 //Чувствительность — количество пикселей, после которого жест будет считаться свайпом
             const sensitivity = 20;
@@ -36,17 +37,20 @@ const App = (props) => {
 
             function TouchStart(e) {
                 //Получаем текущую позицию касания
+                // console.log('touchstart')
                 touchStart = {x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY};
                 touchPosition = {x: touchStart.x, y: touchStart.y};
             }
 
             function TouchMove(e) {
                 //Получаем новую позицию
+                // console.log('touchmove')
                 touchPosition = {x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY};
             }
 
             function TouchEnd(e, color) {
 
+                // console.log('touchend')
                 CheckAction(); //Определяем, какой жест совершил пользователь
 
                 //Очищаем позиции
@@ -55,6 +59,7 @@ const App = (props) => {
             }
 
             function CheckAction() {
+                // console.log('checkAction')
                 let d = //Получаем расстояния от начальной до конечной точек по обеим осям
                     {
                         x: touchStart.x - touchPosition.x,
@@ -72,8 +77,9 @@ const App = (props) => {
                             msg = "Swipe Left";
                             props.left()
                         } else //Иначе он двигал им слева направо
-             sgi           {
+                        {
                             msg = "Swipe Right";
+                            props.right()
                         }
                     }
                 } else //Аналогичные проверки для вертикальной оси
@@ -82,9 +88,11 @@ const App = (props) => {
                         if (d.y > 0) //Свайп вверх
                         {
                             msg = "Swipe up";
+                            props.up()
                         } else //Свайп вниз
                         {
                             msg = "Swipe down";
+                            props.down()
                         }
                     }
                 }
@@ -96,11 +104,13 @@ const App = (props) => {
             let ret = () => {
                 document.removeEventListener("touchstart", function (e) {
                     TouchStart(e);
-                }); //Начало касания
+                });
+                //Начало касания
                 document.removeEventListener("touchmove", function (e) {
                     TouchMove(e);
-                }); //Движение пальцем по экрану
-            //Пользователь отпустил экран
+                });
+                //Движение пальцем по экрану
+                //Пользователь отпустил экран
                 document.removeEventListener("touchend", function (e) {
                     TouchEnd(e);
                 });

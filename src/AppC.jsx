@@ -1,7 +1,6 @@
 import App from "./App";
 import {connect} from "react-redux";
 import {actionCreatorDown, actionCreatorLeft, actionCreatorRight, actionCreatorUP} from "./redux/keyPressReducer";
-import {ACSetSwipe} from "./redux/mainReducer";
 
 
 let mapStateToProps=(state)=>{
@@ -14,7 +13,6 @@ let mapDispatchToProps=(dispatch)=>{
         right:()=>dispatch(actionCreatorRight()),
         up:()=>dispatch(actionCreatorUP()),
         down:()=>dispatch(actionCreatorDown()),
-        swipe:()=>dispatch(ACSetSwipe())
     }
 }
 

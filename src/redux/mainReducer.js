@@ -2,7 +2,6 @@ const ANIME = 'anime';
 const RESET_ALL = 'reset';
 const ANIME_RESET_EFFECT = 'resetEffect';
 const SET_CURRENT_STATE = 'setCurrentState';
-const SET_SWIPE = 'setSwipe';
 
 
 let initialState = {
@@ -33,7 +32,6 @@ let initialState = {
     },
     score: 0,
     bestScore: localStorage.getItem('bestScore') ? localStorage.getItem('bestScore') : 0,
-    swipe: null
 }
 let mainReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -130,9 +128,7 @@ let mainReducer = (state = initialState, action) => {
                 bestScore: action.newState.bestScore
             }
         }
-        case SET_SWIPE:{
-            return {...state,swipe: action.swipe}
-        }
+
         default :
             return state
 
@@ -142,6 +138,5 @@ export const ACSetAnimation = () => ({type: ANIME})
 export const ACResetState = () => ({type: RESET_ALL})
 export const ACResetAnimation = () => ({type: ANIME_RESET_EFFECT})
 export const ACSetCurrentState = (newState) => ({type: SET_CURRENT_STATE, newState: newState})
-export const ACSetSwipe = (swipe) => ({type: SET_SWIPE, swipe: swipe})
 
 export default mainReducer;
