@@ -60,19 +60,25 @@ const App = (props) => {
 
             function CheckAction() {
                 // console.log('checkAction')
-                let d = //Получаем расстояния от начальной до конечной точек по обеим осям
-                    {
-                        x: touchStart.x - touchPosition.x,
-                        y: touchStart.y - touchPosition.y
-                    };
-
+                let d = ()=> {//Получаем расстояния от начальной до конечной точек по обеим осям
+                    if (touchStart && touchPosition) {
+                       return {
+                           x: touchStart.x - touchPosition.x,
+                           y:touchStart.y - touchPosition.y
+                       }
+                    }else{
+                        return {
+                            x:0, y: 0
+                        }
+                    }
+                }
                 let msg = ""; //Сообщение
 
-                if (Math.abs(d.x) > Math.abs(d.y)) //Проверяем, движение по какой оси было длиннее
+                if (Math.abs(d().x) > Math.abs(d().y)) //Проверяем, движение по какой оси было длиннее
                 {
-                    if (Math.abs(d.x) > sensitivity) //Проверяем, было ли движение достаточно длинным
+                    if (Math.abs(d().x) > sensitivity) //Проверяем, было ли движение достаточно длинным
                     {
-                        if (d.x > 0) //Если значение больше нуля, значит пользователь двигал пальцем справа налево
+                        if (d().x > 0) //Если значение больше нуля, значит пользователь двигал пальцем справа налево
                         {
                             msg = "Swipe Left";
                             props.left()
@@ -84,8 +90,8 @@ const App = (props) => {
                     }
                 } else //Аналогичные проверки для вертикальной оси
                 {
-                    if (Math.abs(d.y) > sensitivity) {
-                        if (d.y > 0) //Свайп вверх
+                    if (Math.abs(d().y) > sensitivity) {
+                        if (d().y > 0) //Свайп вверх
                         {
                             msg = "Swipe up";
                             props.up()
@@ -119,7 +125,7 @@ const App = (props) => {
         }
     )
     return (<div>
-        <canvas ref={canvasRef} className={s.canvas}></canvas>
+        <canvas ref={canvasRef} className={s.canvas} style={{overflowY: 'hidden' }}></canvas>
         <LineInGameContainer/>
         <span ref={msgBoxRef}></span>
     </div>);
