@@ -3,34 +3,34 @@ const RESET_ALL = 'reset';
 const ANIME_RESET_EFFECT = 'resetEffect';
 const SET_CURRENT_STATE = 'setCurrentState';
 
-// {
-//     oneRaw: {
-//         one: {value: 2, anime: 0},
-//         two: {value: 0, anime: 0},
-//         three: {value: 0, anime: 0},
-//         four: {value: 0, anime: 0}
-//     },
-//     twoRaw: {
-//         one: {value: 0, anime: 0},
-//         two: {value: 0, anime: 0},
-//         three: {value: 0, anime: 0},
-//         four: {value: 0, anime: 0}
-//     },
-//     threeRaw: {
-//         one: {value: 0, anime: 0},
-//         two: {value: 0, anime: 0},
-//         three: {value: 0, anime: 0},
-//         four: {value: 0, anime: 0}
-//     },
-//     fourRaw: {
-//         one: {value: 0, anime: 0},
-//         two: {value: 0, anime: 0},
-//         three: {value: 0, anime: 0},
-//         four: {value: 0, anime: 0}
-//     },
-//     score: 0,
-//     bestScore: localStorage.getItem('bestScore') ? localStorage.getItem('bestScore') : 0,
-// }
+let newGameState={
+    oneRaw: {
+        one: {value: 2, anime: 0},
+        two: {value: 0, anime: 0},
+        three: {value: 0, anime: 0},
+        four: {value: 0, anime: 0}
+    },
+    twoRaw: {
+        one: {value: 0, anime: 0},
+        two: {value: 0, anime: 0},
+        three: {value: 0, anime: 0},
+        four: {value: 0, anime: 0}
+    },
+    threeRaw: {
+        one: {value: 0, anime: 0},
+        two: {value: 0, anime: 0},
+        three: {value: 0, anime: 0},
+        four: {value: 0, anime: 0}
+    },
+    fourRaw: {
+        one: {value: 0, anime: 0},
+        two: {value: 0, anime: 0},
+        three: {value: 0, anime: 0},
+        four: {value: 0, anime: 0}
+    },
+    score: 0,
+    bestScore: localStorage.getItem('bestScore') ? localStorage.getItem('bestScore') : 0,
+}
 let initialState=JSON.parse(localStorage.getItem('main'))
 
 let mainReducer = (state = initialState, action) => {
@@ -67,7 +67,7 @@ let mainReducer = (state = initialState, action) => {
         }
         case RESET_ALL: {
             return {
-                ...initialState,
+                ...newGameState,
                 bestScore: localStorage.getItem('bestScore') ? localStorage.getItem('bestScore') : 0
             }
         }

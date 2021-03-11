@@ -100,12 +100,10 @@ class LineInGame extends React.Component {
     }
     setNewBestScore(score) {
         if(score){
-            console.log('обновляй локал')
             localStorage.setItem('main',JSON.stringify(this.props.main))
         }
         if (this.props.main.bestScore<this.props.main.score+score){
             localStorage.setItem('bestScore', this.props.main.score+score)
-            console.log(localStorage)
             this.props.setCurrentState({...this.props.main, bestScore: this.props.main.score+score})
 
         }
