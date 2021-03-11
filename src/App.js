@@ -45,6 +45,7 @@ const App = (props) => {
             function TouchMove(e) {
                 //Получаем новую позицию
                 // console.log('touchmove')
+                e.preventDefault()
                 touchPosition = {x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY};
             }
 

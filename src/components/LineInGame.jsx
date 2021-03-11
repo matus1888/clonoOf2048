@@ -60,7 +60,6 @@ class LineInGame extends React.Component {
     componentDidMount() {
         document.title = "2048";
         document.addEventListener("keydown", this.keyFunction, false);
-
         // console.log(this.props)
     }
 
@@ -100,6 +99,10 @@ class LineInGame extends React.Component {
         this.props.setCurrentState(nS)
     }
     setNewBestScore(score) {
+        if(score){
+            console.log('обновляй локал')
+            localStorage.setItem('main',JSON.stringify(this.props.main))
+        }
         if (this.props.main.bestScore<this.props.main.score+score){
             localStorage.setItem('bestScore', this.props.main.score+score)
             console.log(localStorage)
