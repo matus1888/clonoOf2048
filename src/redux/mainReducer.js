@@ -31,7 +31,7 @@ let newGameState={
     score: 0,
     bestScore: localStorage.getItem('bestScore') ? localStorage.getItem('bestScore') : 0,
 }
-let initialState=JSON.parse(localStorage.getItem('main'))
+let initialState=JSON.parse(localStorage.getItem('main'))?JSON.parse(localStorage.getItem('main')):newGameState
 
 let mainReducer = (state = initialState, action) => {
     switch (action.type) {
