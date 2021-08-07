@@ -1,4 +1,3 @@
-//todo  сделай по принципу logic.js LEFT, RIGHT, UP, DOWN
 //Возвращает строку анимаций полученную из того что дали
 export let shiftRowGetAnimationOnePhase=(row)=> {
 
