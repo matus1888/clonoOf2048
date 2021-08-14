@@ -2,7 +2,8 @@
 ## _2048 on js with React_
 
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+![logo](https://github.com/matus1888/clonoOf2048/blob/main/screen2048.jpg)
+________________________________
 
 This is my second project. His goal was to understand in detail the timeouts and animations when using React.
 
