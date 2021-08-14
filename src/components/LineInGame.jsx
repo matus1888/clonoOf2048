@@ -86,8 +86,8 @@ class LineInGame extends React.Component {
         setTimeout(() => this.setNewStateAndNewAnimation(twoState), 240)
         setTimeout(() => this.setNullAnimation(), 320)
         setTimeout(() => this.setState({...this.state, pressingLock: false}), 300)
-        setTimeout(()=>this.setNewScore(score), 300)
-        setTimeout(()=>this.setNewBestScore(score), 290)
+        setTimeout(() =>this.setNewScore(score), 300)
+        setTimeout(() =>this.setNewBestScore(score), 290)
     }
 
     setNullAnimation() {

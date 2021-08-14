@@ -18,7 +18,7 @@ class Cell extends React.Component {
                 styleOfCell.eleven, styleOfCell.twelve,
                 styleOfCell.thirteen, styleOfCell.fourteen,
                 styleOfCell.fifteen, styleOfCell.sixteen];
-            console.log('value= ' + val + ' getColor return a:' + cellStyles[Math.log2(val)])
+            // console.log('value= ' + val + ' getColor return a:' + cellStyles[Math.log2(val)])
             return cellStyles[Math.log2(val)];
         }
         let an = getAnimationEffect(this.props.animation)
